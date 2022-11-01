@@ -1,12 +1,12 @@
 import { RegisterStyles } from "../styles/register";
-import RegisterLogo from "../assets/RegisterLogo.svg" ;
+import  RegisterLogo  from "../assets/RegisterLogo2.svg" ;
 import RegisterBtnIco from "../assets/RegisterBtnIco.svg";
 
-export const Register = () => {
+export const RegisterProfessional = () => {
   return (
     <RegisterStyles>
       <main>
-        <figure>
+        <figure className="Register-logo">
           <img src={RegisterLogo} alt="Logo" />
         </figure>
         <form>

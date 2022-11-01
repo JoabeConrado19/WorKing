@@ -18,7 +18,7 @@ time, mark, audio, video {
 	padding: 0;
 	border: 0;
 	font-size: 100%;
-	font: inherit;
+	font-family: 'Roboto Mono', monospace;
 	vertical-align: baseline;
 	
 }
@@ -46,7 +46,7 @@ table {
 	border-spacing: 0;
 }
 body{
-    background-color: #F5F5F5;
+    background-color: #D9D9D9;
     font-family: 'Inter', sans-serif;
 }
 `;
