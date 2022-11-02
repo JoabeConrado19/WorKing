@@ -57,6 +57,12 @@ export const RegisterStyles = styled.div`
         border-radius: 5px;
         border: none;
         cursor: pointer;
+        transition: all 1s ease;
+        border: 2px solid transparent;
+    }
+    button: hover{
+        background: transparent;
+        border: 2px solid #FFA800;
     }
 
     p{

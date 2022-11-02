@@ -6,6 +6,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import api from "../services/api";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
 
 export const Register = () => {
   const navigate = useNavigate();
@@ -55,7 +57,11 @@ export const Register = () => {
       .then((response: any) => {
         console.log(response);
         if (response.status == 201) {
-          navigate("/login");
+          toast.success("Sucesso, Redirecionando!", { autoClose: 3000 });
+          setTimeout(() => {
+            navigate("/login");
+          }, 3000);
+        
         }
       })
       .catch(function (error) {
