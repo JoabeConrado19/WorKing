@@ -46,8 +46,6 @@ export const RegisterStyles = styled.div`
 
     figure > img{
         width: 232px;
-
-
     }
 
     button{
@@ -76,4 +74,10 @@ export const RegisterStyles = styled.div`
         margin-bottom: 20px;
         margin-top: 15px;
     }
+
+    .divBtsNavigate {
+        width: 200px ;
+        display: flex;
+    }
+    
 `;
