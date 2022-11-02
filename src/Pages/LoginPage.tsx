@@ -21,7 +21,7 @@ export const LoginPage = () => {
                 </label>
                 <button id="btEntrar"><img src={entrarIcon} alt="" /></button>    
             </div>
-            <span className="spanJaRegistrado">Ainda não possui registro ? Clique abaixo</span>
+            <span className="spanJaRegistrado">Ainda não possui registro? Clique abaixo</span>
             
             
             <div className="divBtsNavigate">
