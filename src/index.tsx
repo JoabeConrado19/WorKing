@@ -8,6 +8,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
