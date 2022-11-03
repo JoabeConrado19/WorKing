@@ -4,6 +4,8 @@ import { FaWallet } from 'react-icons/fa'
 import { FiEdit2, FiMapPin, FiUsers } from 'react-icons/fi'
 import { HiOutlineUserCircle } from 'react-icons/hi'
 import { ImExit } from 'react-icons/im'
+import { AsideComponent } from "../components/AboutUsPage/aside";
+
 import { StyledAside, StyledBody, StyledClientDash, StyledForm } from '../styles/StyledClientDash'
 export const DashboardClient = () => {
 
@@ -122,21 +124,7 @@ export const DashboardClient = () => {
                 </main>
             </StyledClientDash>
 
-            <StyledAside>
-
-                <HiOutlineUserCircle />
-                <AiOutlineHome />
-                <AiOutlineUser />
-                <FiMapPin />
-                <FaWallet />
-                <AiOutlineClockCircle />
-                <ImExit />
-                <FiUsers />
-
-
-
-
-            </StyledAside>
+           <AsideComponent/>
         </StyledBody>
 
 
