@@ -5,6 +5,8 @@ import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import { GlobalStyle } from './styles/global';
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -15,6 +17,7 @@ root.render(
     <GlobalStyle/>
     <GoogleOAuthProvider clientId='410594899869-69sd1n6fm1156pj0mf7rc99sskgsu2ub.apps.googleusercontent.com'> 
         <App />
+        <ToastContainer autoClose={5000} />
     </GoogleOAuthProvider>
     </BrowserRouter>
   </React.StrictMode>
