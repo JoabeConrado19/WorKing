@@ -8,7 +8,7 @@ export const StyledLoginPage = styled.div`
     flex-direction: column;
     
     figure > img{
-        width: 270px;
+        width: 250px;
     }
 
     form {
@@ -49,7 +49,7 @@ export const StyledLoginPage = styled.div`
 
     form > input{
         width: 90%;
-        height: 38px;
+        height: 48px;
         background-color: rgba(255, 168, 0, 0.5);
         border: 2px solid #000000;
         border-radius: 10px;
@@ -80,11 +80,34 @@ export const StyledLoginPage = styled.div`
         cursor: pointer;
     }
 
+    .divContainer{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        padding: 15px;
+    }
+
     .divLabelBt {
         display: flex;
         flex-direction: column;
         align-items: center;
         margin-top: 35px;
         gap: 10px;
+    }
+
+    @media (min-width: 700px) {
+        .divContainer {
+            background-color: rgba(173, 173, 173, 0.37);
+            padding: 15px;
+            width: 450px;
+        }
+
+        .divBtsNavigate{
+            display: flex;
+            justify-content: center;
+            gap: 200px;
+        }
     }
 `
