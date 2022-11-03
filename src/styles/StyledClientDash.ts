@@ -289,6 +289,22 @@ export const StyledForm = styled.form`
         }
 
 
+        .publish{
+
+
+            border: 1px solid  #3B925F;
+            background-color:  #3B925F;
+            color: black;
+            padding: 8px;
+
+        }
+
+        .description-div{
+            display: flex;
+            flex-direction: column;
+        }
+
+
     }
     `
 

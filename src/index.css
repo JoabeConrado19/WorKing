@@ -1,4 +1,4 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -7,6 +7,21 @@
   color: black;
   font-family: 'Roboto Mono', monospace;
 }
-button{
+
+button {
   cursor: pointer;
+}
+
+
+.publicar {
+
+
+  border: 1px solid #3B925F;
+  background-color: #3B925F;
+  color: #ffffff;
+  border-radius: 10px;
+  width: 80%;
+  margin: 0 auto;
+  padding: 8px;
+
 }
