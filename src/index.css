@@ -12,16 +12,12 @@ button {
   cursor: pointer;
 }
 
-
-.publicar {
-
-
-  border: 1px solid #3B925F;
-  background-color: #3B925F;
-  color: #ffffff;
-  border-radius: 10px;
-  width: 80%;
+.description {
+  display: flex;
+  height: 60%;
+  width: 95% !important;
   margin: 0 auto;
-  padding: 8px;
-
+  border-radius: 8px;
+  background-color: #A1A1A1;
+  flex-direction: column;
 }
