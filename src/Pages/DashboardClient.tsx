@@ -4,7 +4,6 @@ import { FaWallet } from 'react-icons/fa'
 import { FiMapPin, FiUsers } from 'react-icons/fi'
 import { HiOutlineUserCircle } from 'react-icons/hi'
 import { ImExit } from 'react-icons/im'
-
 import { StyledAside, StyledBody, StyledClientDash, StyledForm } from '../styles/StyledClientDash'
 export const DashboardClient = () => {
 
