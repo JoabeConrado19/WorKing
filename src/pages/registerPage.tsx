@@ -18,6 +18,7 @@ export const Register = () => {
           <input type="text" placeholder="Link da Foto" />
           <input type="text" placeholder="Contato" />
           <p>Registrar</p>
+      
           <button><img src={RegisterBtnIco} alt="" /></button>
         </form>
       </main>

@@ -1,16 +1,20 @@
 import { StyledLoginPage } from "../styles/StyledLoginPage"
 import logo from '../assets/logo.png'
 
-import GoogleLogin from "react-google-login"
+
 
 import { CgProfile } from "react-icons/cg"
 import { MdWorkOutline } from "react-icons/md"
 import { BiLogIn } from "react-icons/bi"
 
+import {GoogleLogin} from "@react-oauth/google"
+import jwt_decode from "jwt-decode"
+
+import { useNavigate } from "react-router-dom";
 
 export const LoginPage = () => {
 
- 
+    const navigate = useNavigate();
 
     return (
         <StyledLoginPage>
@@ -28,9 +32,18 @@ export const LoginPage = () => {
                 </label>
                 <button id="btEntrar"><BiLogIn/></button>
                 <GoogleLogin 
-                clientId="410594899869-69sd1n6fm1156pj0mf7rc99sskgsu2ub.apps.googleusercontent.com"
-                buttonText="Login com Google"
-                />    
+                onSuccess={(credentialResponse) => {
+
+                    const decode: any = jwt_decode(`${credentialResponse.credential}`)
+                    console.log(decode.email)
+                    
+                }}
+                onError={() => {
+                    console.log("login failed")
+                }}
+                />  
+
+            
               </div>
             <span className="spanJaRegistrado">Ainda não possui registro? Clique abaixo</span>
             
