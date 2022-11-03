@@ -1,9 +1,10 @@
-import { AiOutlineClockCircle, AiOutlineHome, AiOutlineMenu, AiOutlineUser } from 'react-icons/ai'
+import { AiFillDelete, AiOutlineClockCircle, AiOutlineHome, AiOutlineMenu, AiOutlineUser } from 'react-icons/ai'
 import { BsPinMapFill } from 'react-icons/bs'
 import { FaWallet } from 'react-icons/fa'
-import { FiMapPin, FiUsers } from 'react-icons/fi'
+import { FiEdit2, FiMapPin, FiUsers } from 'react-icons/fi'
 import { HiOutlineUserCircle } from 'react-icons/hi'
 import { ImExit } from 'react-icons/im'
+
 
 import { StyledAside, StyledBody, StyledClientDash, StyledForm } from '../styles/StyledClientDash'
 export const DashboardClient = () => {
@@ -40,16 +41,17 @@ export const DashboardClient = () => {
                     <ul>
                         <li className='conteiner'>
                             <div className='top-conteiner' >
-                                <HiOutlineUserCircle />
-                                <h3>Nome do Profissional</h3>
+                                <h3>Titulo do serviço</h3>
+                                <span>Categoria</span>
                             </div>
-                            <div>
+                            <div className='conteudo'>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure laboriosam, tenetur voluptas sed illum quidem eveniet dolore veniam eligendi non error libero, laborum quae ipsam atque quod rerum aliquam cum?</p>
                                 <BsPinMapFill />
 
                                 <div className='div-categoria'>
-                                    <button>Editar</button>
-                                    <button className='delete'>Deletar</button>
+
+                                    <button><FiEdit2 />Editar</button>
+                                    <button className='delete'> <AiFillDelete />Deletar</button>
                                 </div>
 
 
@@ -60,16 +62,17 @@ export const DashboardClient = () => {
                         </li>
                         <li className='conteiner'>
                             <div className='top-conteiner' >
-                                <HiOutlineUserCircle />
-                                <h3>Nome do Profissional</h3>
+                                <h3>Titulo do serviço</h3>
+                                <span>Categoria</span>
                             </div>
-                            <div>
+                            <div className='conteudo'>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure laboriosam, tenetur voluptas sed illum quidem eveniet dolore veniam eligendi non error libero, laborum quae ipsam atque quod rerum aliquam cum?</p>
                                 <BsPinMapFill />
 
                                 <div className='div-categoria'>
-                                    <button>Editar</button>
-                                    <button className='delete'>Deletar</button>
+
+                                    <button><FiEdit2 />Editar</button>
+                                    <button className='delete'> <AiFillDelete />Deletar</button>
                                 </div>
 
 
@@ -80,36 +83,34 @@ export const DashboardClient = () => {
                         </li>
                         <li className='conteiner'>
                             <div className='top-conteiner' >
-                                <HiOutlineUserCircle />
-                                <h3>Nome do Profissional</h3>
+                                <h3>Titulo do serviço</h3>
+                                <span>Categoria</span>
                             </div>
-                            <div>
+                            <div className='conteudo'>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure laboriosam, tenetur voluptas sed illum quidem eveniet dolore veniam eligendi non error libero, laborum quae ipsam atque quod rerum aliquam cum?</p>
                                 <BsPinMapFill />
 
                                 <div className='div-categoria'>
-                                    <button>Editar</button>
-                                    <button className='delete'>Deletar</button>
+                                    <button><FiEdit2 /> Editar</button>
+                                    <button className='delete'> <AiFillDelete />Deletar</button>
                                 </div>
-
-
-
-
 
                             </div>
                         </li>
                         <li className='conteiner'>
                             <div className='top-conteiner' >
-                                <HiOutlineUserCircle />
-                                <h3>Nome do Profissional</h3>
+
+                                <h3>Titulo do serviço</h3>
+                                <span>Categoria</span>
                             </div>
-                            <div>
+                            <div className='conteudo'>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure laboriosam, tenetur voluptas sed illum quidem eveniet dolore veniam eligendi non error libero, laborum quae ipsam atque quod rerum aliquam cum?</p>
                                 <BsPinMapFill />
 
                                 <div className='div-categoria'>
-                                    <button>Editar</button>
-                                    <button className='delete'>Deletar</button>
+
+                                    <button><FiEdit2 />Editar</button>
+                                    <button className='delete'> <AiFillDelete />Deletar</button>
                                 </div>
 
 
