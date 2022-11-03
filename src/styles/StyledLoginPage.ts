@@ -11,9 +11,17 @@ export const StyledLoginPage = styled.div`
         width: 250px;
     }
 
+    .iconEntrar {
+        width: 30px;
+        height: 30px;
+    }
+
     form {
-        margin-left: 25px;
-        margin-top: 15px;
+       display: flex;
+        align-items: center;
+        flex-direction: column;
+       justify-content: center;
+       width: 100%;
     }
     
     .divBtsNavigate{
@@ -35,7 +43,15 @@ export const StyledLoginPage = styled.div`
         }
     }
 
-    
+    .maletaIcon {
+        width: 30px;
+        height: 30px;
+    }
+
+    .clienteIcon{
+        width: 30px;
+        height: 30px;
+    }
 
     .spanJaRegistrado {
         margin-top: 45px;
@@ -48,7 +64,7 @@ export const StyledLoginPage = styled.div`
     }
 
     form > input{
-        width: 90%;
+        width: 95%;
         height: 48px;
         background-color: rgba(255, 168, 0, 0.5);
         border: 2px solid #000000;
@@ -86,7 +102,7 @@ export const StyledLoginPage = styled.div`
         align-items: center;
         justify-content: center;
         border-radius: 10px;
-        padding: 15px;
+        padding: 5px;
     }
 
     .divLabelBt {
@@ -97,10 +113,10 @@ export const StyledLoginPage = styled.div`
         gap: 10px;
     }
 
-    @media (min-width: 700px) {
+    @media (min-width: 600px) {
         .divContainer {
             background-color: rgba(173, 173, 173, 0.37);
-            padding: 15px;
+            padding: 5px;
             width: 450px;
         }
 
