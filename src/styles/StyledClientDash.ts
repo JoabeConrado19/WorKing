@@ -23,9 +23,6 @@ export const StyledClientDash = styled.div`
         height: 100%;
         margin: 0 auto;
 
-
-
-
     header{
 
         padding: 10px 0;
@@ -53,7 +50,7 @@ export const StyledClientDash = styled.div`
 
 
         h2{
-    padding: 8px;
+        padding: 8px;
         font-size: 20px;
         text-align: center;
         margin-top: 10px;
@@ -92,8 +89,65 @@ export const StyledClientDash = styled.div`
         max-width: 430px;
 
     .top-conteiner{
+        display: flex;
+        justify-content: space-around;
+        flex-direction: row;
         border-bottom: 1px solid;
         width: 100%;
+
+        h3{
+            font-size: 14px;
+        }
+
+        span{
+        font-size: 12px;
+        border: 2px solid;
+        border-radius: 10px;
+        font-weight: 700;
+        padding: 5px;
+        margin-bottom: 3px;
+        background-color: transparent;
+
+
+    }
+
+
+    }
+
+    .conteudo{
+        row-gap: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+    .div-categoria{
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        flex-direction: row;
+
+
+
+    button{
+        display: flex;
+        width: 100px;
+        justify-content: space-around;
+        padding: 5px;
+        border-radius: 8px;
+        background-color: #FFA800;
+
+
+
+        svg{
+            font-size: 13px;
+        }
+    }
+
+    .delete{
+        background-color: red;
+    }
+
     }
 
     div{
@@ -105,8 +159,6 @@ export const StyledClientDash = styled.div`
     p{
         font-size: 13px;
     }
-
-
 
     }
 
@@ -195,7 +247,7 @@ margin-top: 10px;
     @media(min-width: 1260px){
         ul{
             margin: 0 auto;
-            max-width: 95%;
+            max-width: 93.6%;
         }
     }
 
@@ -207,7 +259,7 @@ margin-top: 10px;
             ul{
                 column-gap: 20px;
                 .conteiner{
-                    min-width: 564px;
+                    min-width: 570px;
                     width: 50%;
 
                 }
@@ -227,7 +279,7 @@ export const StyledAside = styled.aside`
     display: flex;
     position: fixed;
     background-color: #FFA800;
-    width: 4%;
+    width: 60px;
     height: 100vh;
     flex-direction: column;
     align-items: center;
