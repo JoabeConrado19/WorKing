@@ -16,10 +16,7 @@ const RoutesMain = () => {
     <Route path='/login' element={<h1>Login</h1>} />
     <Route path='/register' element={<h1>Register</h1>} />
    
-    <Route path='/dashboard' element={
-      <DashboardWorker />
-      //  <h1>Dashboard</h1> 
-    } />
+    <Route path='/dashboard-worker' element={<DashboardWorker />} />
     <Route path='/contacts' element={<h1>Fale conosco</h1>} />
     <Route path='/about-us' element={<h1>Sobre nós</h1>} />
     
