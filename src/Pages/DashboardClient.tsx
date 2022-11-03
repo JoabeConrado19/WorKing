@@ -31,7 +31,10 @@ export const DashboardClient = () => {
                                     <option value="mecanico">Área de mecânica</option>
                                 </select>
                             </div>
-                            <textarea name="" id="" placeholder='Digite aqui a descrição'></textarea>
+                            <div className='description'>
+                                <textarea name="" id="" placeholder='Digite aqui a descrição do serviço à solicitar'></textarea>
+                                <button className='publish'>Publicar</button>
+                            </div>
                         </StyledForm>
                     </section>
                     <ul>

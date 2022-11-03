@@ -1,4 +1,4 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -7,6 +7,17 @@
   color: black;
   font-family: 'Roboto Mono', monospace;
 }
-button{
+
+button {
   cursor: pointer;
+}
+
+.description {
+  display: flex;
+  height: 60%;
+  width: 95% !important;
+  margin: 0 auto;
+  border-radius: 8px;
+  background-color: #A1A1A1;
+  flex-direction: column;
 }

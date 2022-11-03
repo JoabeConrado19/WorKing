@@ -258,10 +258,12 @@ export const StyledForm = styled.form`
             width: 95%;
             margin: 0 auto;
             border-radius: 8px;
-            text-align: center;
+            text-align: left;
             background-color: #A1A1A1;
             color: black;
             font-weight: 700;
+            outline: 0;
+            height: 180px;
             padding: 10px;
         }
 
@@ -287,6 +289,32 @@ export const StyledForm = styled.form`
             font-weight: 700;
             background-color: #A1A1A1;
         }
+
+
+        .publish{
+
+
+            border: 1px solid  #3B925F;
+            background-color:  #3B925F;
+            color: white;
+            border-radius: 10px;
+            width: 100px;
+            margin: 0px 3px 4px 0px  ;
+            align-self:flex-end;
+            padding: 4px;
+
+        }
+
+            .description {
+            display: flex;
+            height: 50%;
+            width: 90% !important;
+            margin: 0 auto;
+            border-radius: 8px;
+            background-color: #A1A1A1;
+            flex-direction: column;
+}
+
 
 
     }
