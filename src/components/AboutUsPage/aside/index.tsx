@@ -1,4 +1,4 @@
-import { Aside } from "./style";
+
 import { HiOutlineUserCircle } from "react-icons/hi";
 import {
   AiOutlineClockCircle,
@@ -9,6 +9,7 @@ import { FiMapPin, FiUsers } from "react-icons/fi";
 import { FaWallet } from "react-icons/fa";
 import { ImExit } from "react-icons/im";
 import { Link, useNavigate } from "react-router-dom";
+import { Aside } from "./style";
 
 export const AsideComponent = () => {
   const navigate = useNavigate();
