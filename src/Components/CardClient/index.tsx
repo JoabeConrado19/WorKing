@@ -1,28 +1,69 @@
-import React from "react";
-import { ButtomContact } from "../ButtomContact";
-import { ButtomRoute } from "../ButtomRoute/";
-import { CardStyled } from "./style";
+import React, { useContext, useEffect } from "react";
 
-export const CardClient = () => {
+import { CardStyled } from "./style";
+import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
+import { DashboardContext } from "../../contexts/dashboard";
+
+
+export const CardClient = (props:any) => {
+
+  const { findMyLat, setMapLocation , lat, lng, zoom }:any = useContext(DashboardContext)
+
+
+  
+  useEffect(()=>{
+    setMapLocation()
+    findMyLat()
+  
+
+  }, [])
+
+  const { isLoaded } = useJsApiLoader({
+    id: "google-map-script",
+    googleMapsApiKey: "AIzaSyDwAZ-IpVNt4hxGz48rXzLiebXbHKRm6ZA",
+  });
+
+  
+
+  const position = {
+    lat: lat,
+    lng: lng,
+  };
+
   return (
     <CardStyled>
       <div className="card">
         <figure>
-          <img src={require("../../assets/gps-mapa.jpg")} alt="mapa" />
+        {isLoaded ? (
+            <GoogleMap
+              mapContainerStyle={{ width: "100%", height: "100%" }}
+              center={position}
+              zoom={zoom}
+            >
+              <Marker
+                position={position}
+                options={{
+                  label: {
+                    text: `${props.Name}`,
+                    className: "map-marker",
+                  },
+                }}
+              />
+            </GoogleMap>
+          ) : (
+            <></>
+          )}
         </figure>
         <div>
           <div className="cardProfile">
             <div>
-              <h3>Nome do cliente</h3>
+              <h3>{props.Name}</h3>
             </div>
-            <span> Categoria </span>
+            <span> {props.Categoty} </span>
           </div>
         </div>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam
-          nesciunt, ipsa consequatur accusamus omnis unde at sunt cum error
-          pariatur rem nobis, iusto aliquid magnam dignissimos, eveniet quia vel
-          est.
+          {props.Description}
         </p>
         <div className="cardButtons">
           {/* <ButtomContact />

@@ -152,6 +152,7 @@ export const DashboardClient = () => {
               </li>
             </ul>
           </main>
+
         </StyledClientDash>
       </StyledBody>
     </>

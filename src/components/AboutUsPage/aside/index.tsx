@@ -1,4 +1,3 @@
-import { Aside } from "./style";
 import { HiOutlineUserCircle } from "react-icons/hi";
 import {
   AiOutlineClockCircle,
@@ -8,7 +7,8 @@ import {
 import { FiMapPin, FiUsers } from "react-icons/fi";
 import { FaWallet, FaWindowClose } from "react-icons/fa";
 import { ImExit } from "react-icons/im";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { Aside } from "./style";
 
 interface IAsideComponent {
   setMenu?: any;

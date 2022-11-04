@@ -1,17 +1,28 @@
 import { StyledLocation, LocationMain } from "../styles/StyledLocation";
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AsideComponent } from "../Components/AboutUsPage/aside";
+import { DashboardContext } from "../contexts/dashboard";
+
 
 export const Location = () => {
+  const { findMyLat, setMapLocation , lat, lng, zoom }:any = useContext(DashboardContext)
+
+
+  
+  useEffect(()=>{
+    setMapLocation()
+    findMyLat()
+  
+
+  }, [])
+
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: "AIzaSyDwAZ-IpVNt4hxGz48rXzLiebXbHKRm6ZA",
   });
 
-  const [lat, setLat] = useState(-3.0306345);
-  const [lng, setLng] = useState(-59.93555);
-  const [zoom, setZoom] = useState(15);
+  
 
   const position = {
     lat: lat,
