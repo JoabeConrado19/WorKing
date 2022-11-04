@@ -11,6 +11,7 @@ import jwt_decode from "jwt-decode"
 import { useNavigate } from "react-router-dom";
 import api from "../services/api"
 
+
 import { useForm } from "react-hook-form"
 import * as yup from "yup" 
 import { yupResolver } from "@hookform/resolvers/yup" 
@@ -40,7 +41,7 @@ export const LoginPage = () => {
           .post("/login", data)
           .then((response: any) => {
     
-            if (response.status === 200) {
+            if (response.status == 200) {
               toast.success("Logado com sucesso!", { autoClose: 3000 });
               setTimeout(() => {
                 navigate("/dashboard");
@@ -49,7 +50,7 @@ export const LoginPage = () => {
         })
         .catch(function (error) {
             console.log(error);
-            if ( error.response.status === 400){
+            if ( error.response.status == 400){
                 toast.error("Email ou senha Incorreto", { autoClose: 3000 });
             }
           });
@@ -73,8 +74,8 @@ export const LoginPage = () => {
                 <label htmlFor="btEntrar">
                     Entrar
                 </label>
-                    <button type="submit" id="btEntrar"><BiLogIn className="iconEntrar"/></button>
-                    <GoogleLogin 
+                <button><BiLogIn className="iconEntrar"/></button>
+                <GoogleLogin 
                     onSuccess={(credentialResponse: any) => {
 
                         const decode: any = jwt_decode(`${credentialResponse.credential}`)
@@ -94,11 +95,11 @@ export const LoginPage = () => {
             <div className="divBtsNavigate">
                 <div className="divRegistros">
                      <span className="spanRegistroProf">Profissional</span>
-                    <button><MdWorkOutline className="maletaIcon"/></button>
+                    <button onClick={() => navigate("/worker-register")}><MdWorkOutline className="maletaIcon"/></button>
                 </div>
                 <div className="divRegistros">
                   <span className="spanRegistroCliente">Cliente</span>
-                     <button><CgProfile className="clienteIcon"/></button> 
+                     <button onClick={() => navigate("/client-register")}><CgProfile className="clienteIcon"/></button> 
                 </div>
                 
             </div>

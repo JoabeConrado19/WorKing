@@ -21,6 +21,9 @@ export const AsideComponent = ({ setMenu, menu }: IAsideComponent) => {
       <Aside rigth={menu ? "auto" : "-300px"}>
         <div className="userName">
           <HiOutlineUserCircle />
+<<<<<<< HEAD
+          <h2>Nome</h2>
+=======
           <h2>Name</h2>
           <button
             onClick={(event) => {
@@ -30,6 +33,7 @@ export const AsideComponent = ({ setMenu, menu }: IAsideComponent) => {
           >
             <FaWindowClose />
           </button>
+>>>>>>> 5500a297461c179cf71d388a90025095ffff6bf3
         </div>
         <div className="container__menu">
           <ul className="menu">
