@@ -74,9 +74,9 @@ export const LoginPage = () => {
                 <label htmlFor="btEntrar">
                     Entrar
                 </label>
-                    <button type="submit" id="btEntrar"><BiLogIn className="iconEntrar"/></button>
-                    <GoogleLogin 
-                    onSuccess={(credentialResponse) => {
+                <button><BiLogIn className="iconEntrar"/></button>
+                <GoogleLogin 
+                    onSuccess={(credentialResponse: any) => {
 
                         const decode: any = jwt_decode(`${credentialResponse.credential}`)
                         console.log(decode.email)
@@ -95,11 +95,11 @@ export const LoginPage = () => {
             <div className="divBtsNavigate">
                 <div className="divRegistros">
                      <span className="spanRegistroProf">Profissional</span>
-                    <button><MdWorkOutline className="maletaIcon"/></button>
+                    <button onClick={() => navigate("/worker-register")}><MdWorkOutline className="maletaIcon"/></button>
                 </div>
                 <div className="divRegistros">
                   <span className="spanRegistroCliente">Cliente</span>
-                     <button><CgProfile className="clienteIcon"/></button> 
+                     <button onClick={() => navigate("/client-register")}><CgProfile className="clienteIcon"/></button> 
                 </div>
                 
             </div>
