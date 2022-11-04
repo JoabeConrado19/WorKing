@@ -16,9 +16,13 @@ import { useForm } from "react-hook-form"
 import * as yup from "yup" 
 import { yupResolver } from "@hookform/resolvers/yup" 
 import { toast } from "react-toastify"
+import { useContext } from "react"
+import { DashboardContext } from "../contexts/dashboard"
 
 export const LoginPage = () => {
     const navigate = useNavigate();
+    const { findMyLat }:any = useContext(DashboardContext)
+
 
     
     const formSchema = yup.object().shape({
@@ -45,6 +49,8 @@ export const LoginPage = () => {
               toast.success("Logado com sucesso!", { autoClose: 3000 });
               setTimeout(() => {
                 navigate("/dashboard");
+                findMyLat()
+                
               }, 2000);
             }
         })
