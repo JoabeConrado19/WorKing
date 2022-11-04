@@ -58,7 +58,7 @@ export const Register = () => {
       .post("/users", data)
       .then((response: any) => {
         console.log(response);
-        if (response.status == 201) {
+        if (response.status === 201) {
           toast.success("Sucesso, Redirecionando!", { autoClose: 3000 });
           setTimeout(() => {
             navigate("/login");

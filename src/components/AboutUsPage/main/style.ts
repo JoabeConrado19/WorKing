@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Div = styled.div`
   width: 100%;
   height: 100%;
-  padding-left: 70px;
+  padding-left: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,22 +17,38 @@ export const Div = styled.div`
     border-radius: 10px;
     padding: 10px;
     box-sizing: border-box;
+    overflow: auto;
   }
 
   .container__informacoes {
     width: 100%;
     margin-bottom: 20px;
 
-    h2 {
-      font-size: 24px;
-      color: #ffa800;
-      text-align: center;
-      padding: 20px 0;
+    .container__informacoes__header {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      button {
+        width: auto;
+        padding: 0 5px;
+        font-size: 24px;
+        border-radius: 5px;
+      }
+
+      h2 {
+        font-size: 24px;
+        padding-left: 10px;
+        color: #ffa800;
+        text-align: center;
+      }
     }
 
     p {
       font-size: 16px;
       padding: 10px 0;
+      text-align: justify;
+      line-height: initial;
     }
   }
 
@@ -46,13 +62,12 @@ export const Div = styled.div`
     }
 
     > div {
-      width: 87vw;
+      width: 100%;
       overflow: hidden;
     }
 
     .listaDeUsuarios {
       height: 100%;
-      padding: 10px;
       display: flex;
       flex-direction: row;
       flex-wrap: nowrap;
@@ -63,41 +78,25 @@ export const Div = styled.div`
       min-width: 200px;
       padding: 10px;
       border-radius: 10px;
-      margin: 10px;
+      margin: 10px 10px 10px 0;
       background-color: #d9d9d9;
 
       div {
         width: 100%;
         height: 200px;
-        align-items: center;
-        display: inline-flex;
         border-radius: 10px;
+        display: inline-flex;
+        flex-wrap: wrap;
+        align-items: center;
 
         img {
           width: 100%;
-          z-index: 1;
         }
 
         a {
-          width: 0px;
-          height: 0px;
-          font-size: 0px;
-        }
-
-        :hover {
-          img {
-            width: 0px;
-            visibility: hidden;
-          }
-
-          a {
-            width: 50%;
-            height: 50%;
-            font-size: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: space-around;
-          }
+          width: 50%;
+          text-align: center;
+          font-size: 30px;
         }
       }
 
@@ -118,6 +117,53 @@ export const Div = styled.div`
         justify-content: center;
         align-items: center;
         color: #ffa800;
+      }
+    }
+  }
+
+  @media (min-width: 720px) {
+    padding-left: 70px;
+
+    .container__lista__criadores {
+      .card {
+        div {
+          a {
+            width: 0px;
+            height: 0px;
+            font-size: 0px;
+          }
+
+          :hover {
+            img {
+              width: 0px;
+              visibility: hidden;
+            }
+
+            a {
+              width: 50%;
+              height: 50%;
+              font-size: 50px;
+              display: flex;
+              align-items: center;
+              justify-content: space-around;
+            }
+          }
+        }
+      }
+    }
+
+    .container__informacoes {
+      .container__informacoes__header {
+        button {
+          width: 0;
+          visibility: hidden;
+        }
+
+        h2 {
+          width: 100%;
+          font-weight: bold;
+          text-align: center;
+        }
       }
     }
   }

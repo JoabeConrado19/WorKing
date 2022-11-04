@@ -6,4 +6,5 @@ export const DivBody = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  cursor: default;
 `;

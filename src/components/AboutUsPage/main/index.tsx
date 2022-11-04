@@ -1,5 +1,7 @@
 import { Div } from "./style";
 import { AiFillGithub, AiFillLinkedin } from "react-icons/ai";
+import { MdMenuOpen } from "react-icons/md";
+
 import imgEduardo from "../../../assets/team/eduardo.png";
 import imgLeonardo from "../../../assets/team/leonardo.png";
 import imgJoabe from "../../../assets/team/joabe.png";
@@ -8,13 +10,28 @@ import imgAnibal from "../../../assets/team/anibal.png";
 import imgGabriel from "../../../assets/team/gabriel.png";
 import imgFilipe from "../../../assets/team/filipe.png";
 
-export const Main = () => {
+interface IMain {
+  setMenu: any;
+  menu: boolean;
+}
+
+export const Main = ({ setMenu, menu }: IMain) => {
   return (
     <>
       <Div>
         <div>
           <div className="container__informacoes">
-            <h2>Sobre</h2>
+            <div className="container__informacoes__header">
+              <button
+                onClick={(event) => {
+                  event.preventDefault();
+                  setMenu(!menu);
+                }}
+              >
+                <MdMenuOpen />
+              </button>
+              <h2>Sobre</h2>
+            </div>
             <p>
               Bem vindo á WorKing. Uma plataforma desenvolvida para atender
               tanto a demanda quanto a oferta de mão de obra.
