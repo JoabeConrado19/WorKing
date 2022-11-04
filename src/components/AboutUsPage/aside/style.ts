@@ -27,6 +27,11 @@ export const Aside = styled.aside<IAside>`
       height: 100%;
     }
 
+    img{
+      width: 50px;
+      border-radius: 100%;
+    }
+
     h2 {
       width: 70%;
       height: 100%;

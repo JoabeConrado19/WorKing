@@ -43,8 +43,17 @@ export const LoginPage = () => {
     
             if (response.status == 200) {
               toast.success("Logado com sucesso!", { autoClose: 3000 });
+              console.log(response)
+              window.localStorage.setItem('@WorkingUser_Token', `${response.data.accessToken}`);
+              window.localStorage.setItem('@WorkingUser_Id', `${response.data.user.id}`);
+
+
               setTimeout(() => {
-                navigate("/dashboard");
+                if(response.data.user.user_type !== "worker"){
+                navigate("/dashboard")}
+                else{
+                  navigate("/dashboard-worker")}
+                
               }, 2000);
             }
         })

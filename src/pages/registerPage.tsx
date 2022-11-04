@@ -53,6 +53,7 @@ export const Register = () => {
 
   const onSubmitFunction = (data: any) => {
     delete data.password2;
+    data['user_type'] = 'client';
 
     api
       .post("/users", data)

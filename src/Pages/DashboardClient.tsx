@@ -1,7 +1,9 @@
+import { useContext, useEffect } from "react";
 import { AiFillDelete, AiOutlineMenu } from "react-icons/ai";
 import { BsPinMapFill } from "react-icons/bs";
 import { FiEdit2 } from "react-icons/fi";
 import { AsideComponent } from "../Components/AboutUsPage/aside";
+import { DashboardContext } from "../contexts/dashboard";
 
 import {
   StyledBody,
@@ -9,6 +11,10 @@ import {
   StyledForm,
 } from "../styles/StyledClientDash";
 export const DashboardClient = () => {
+
+ 
+
+
   return (
     <>
       <StyledBody>
