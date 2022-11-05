@@ -15,7 +15,7 @@ export const AsideComponent = () => {
       <Aside>
         <div className="userName">
           <HiOutlineUserCircle />
-          <h2>Name</h2>
+          <h2>Nome</h2>
         </div>
         <div className="container__menu">
           <ul className="menu">
