@@ -116,6 +116,7 @@ export const Aside = styled.aside<IAside>`
       }
     }
 
+<<<<<<< HEAD
     .menu {
       li {
         padding: 10px 10px 10px 20px;
@@ -123,6 +124,12 @@ export const Aside = styled.aside<IAside>`
         border: none;
         border-radius: 0;
         background-color: transparent;
+=======
+
+
+    .container__menu {
+      height: 80%;
+>>>>>>> 04e90912bede871abde157d98b7221b905890274
 
         p {
           visibility: hidden;

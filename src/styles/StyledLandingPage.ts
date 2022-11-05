@@ -86,6 +86,7 @@ export const StyledLandingPage = styled.div`
         }
     }
 
+   
     @media (max-width: 900px){
         main{
             .landingPageTexts{

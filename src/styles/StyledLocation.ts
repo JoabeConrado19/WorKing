@@ -1,10 +1,12 @@
 import styled from "styled-components";
 
 
-export const StyledBody = styled.body`
+export const LocationMain = styled.div`
 display: flex;
 flex-direction: column;
 background-color: #A1A1A1;
+width: 100vw;
+height: 100vh;
 
 @media (min-width: 768px) {
 
@@ -14,14 +16,17 @@ background-color: #A1A1A1;
 `
 
 
-export const StyledClientDash = styled.div`
+export const StyledLocation = styled.div`
 
         background-color: #A1A1A1;
         display: flex;
         flex-direction: column;
-        width: 90%;
+        width: 100%;
         height: 100%;
         margin: 0 auto;
+
+
+
 
     header{
 
@@ -50,7 +55,7 @@ export const StyledClientDash = styled.div`
 
 
         h2{
-        padding: 8px;
+    padding: 8px;
         font-size: 20px;
         text-align: center;
         margin-top: 10px;
@@ -63,6 +68,8 @@ export const StyledClientDash = styled.div`
         width: 90%;
         margin: 0 auto;
     }
+
+    
     }
 
     ul{
@@ -70,6 +77,10 @@ export const StyledClientDash = styled.div`
         flex-direction: column;
         overflow-y: auto;
 
+    }
+    main{
+        width: 100%;
+        height: 100%;
     }
 
     .conteiner{
@@ -89,65 +100,8 @@ export const StyledClientDash = styled.div`
         max-width: 430px;
 
     .top-conteiner{
-        display: flex;
-        justify-content: space-around;
-        flex-direction: row;
         border-bottom: 1px solid;
         width: 100%;
-
-        h3{
-            font-size: 14px;
-        }
-
-        span{
-        font-size: 12px;
-        border: 2px solid;
-        border-radius: 10px;
-        font-weight: 700;
-        padding: 5px;
-        margin-bottom: 3px;
-        background-color: transparent;
-
-
-    }
-
-
-    }
-
-    .conteudo{
-        row-gap: 20px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-    }
-
-    .div-categoria{
-        width: 100%;
-        display: flex;
-        justify-content: space-around;
-        flex-direction: row;
-
-
-
-    button{
-        display: flex;
-        width: 100px;
-        justify-content: space-around;
-        padding: 5px;
-        border-radius: 8px;
-        background-color: #FFA800;
-
-
-
-        svg{
-            font-size: 13px;
-        }
-    }
-
-    .delete{
-        background-color: red;
-    }
-
     }
 
     div{
@@ -159,6 +113,8 @@ export const StyledClientDash = styled.div`
     p{
         font-size: 13px;
     }
+
+
 
     }
 
@@ -247,7 +203,7 @@ margin-top: 10px;
     @media(min-width: 1260px){
         ul{
             margin: 0 auto;
-            max-width: 93.6%;
+            max-width: 95%;
         }
     }
 
@@ -259,7 +215,7 @@ margin-top: 10px;
             ul{
                 column-gap: 20px;
                 .conteiner{
-                    min-width: 570px;
+                    min-width: 564px;
                     width: 50%;
 
                 }
@@ -279,7 +235,7 @@ export const StyledAside = styled.aside`
     display: flex;
     position: fixed;
     background-color: #FFA800;
-    width: 60px;
+    width: 4%;
     height: 100vh;
     flex-direction: column;
     align-items: center;
@@ -310,12 +266,10 @@ export const StyledForm = styled.form`
             width: 95%;
             margin: 0 auto;
             border-radius: 8px;
-            text-align: left;
+            text-align: center;
             background-color: #A1A1A1;
             color: black;
             font-weight: 700;
-            outline: 0;
-            height: 180px;
             padding: 10px;
         }
 
@@ -341,32 +295,6 @@ export const StyledForm = styled.form`
             font-weight: 700;
             background-color: #A1A1A1;
         }
-
-
-        .publish{
-
-
-            border: 1px solid  #3B925F;
-            background-color:  #3B925F;
-            color: white;
-            border-radius: 10px;
-            width: 100px;
-            margin: 0px 3px 4px 0px  ;
-            align-self:flex-end;
-            padding: 4px;
-
-        }
-
-            .description {
-            display: flex;
-            height: 50%;
-            width: 90% !important;
-            margin: 0 auto;
-            border-radius: 8px;
-            background-color: #A1A1A1;
-            flex-direction: column;
-}
-
 
 
     }

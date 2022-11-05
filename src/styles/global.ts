@@ -85,5 +85,7 @@ body{
 *::-webkit-scrollbar-thumb:active {
   background-color: #070C05;
 }
+
+
 `;
 
