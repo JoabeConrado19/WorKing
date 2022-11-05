@@ -13,10 +13,18 @@ height: 100vh;
     flex-direction: row;
 }
 
+.map-marker{
+
+  margin-bottom: 37px;
+  font-weight: 700;
+}
+
 `
 
 
 export const StyledLocation = styled.div`
+
+
 
         background-color: #A1A1A1;
         display: flex;

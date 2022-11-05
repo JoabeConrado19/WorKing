@@ -4,10 +4,7 @@ import { BsPinMapFill } from "react-icons/bs";
 import { FiEdit2 } from "react-icons/fi";
 // import { number } from "yup/lib/locale";
 import { AsideComponent } from "../Components/AboutUsPage/aside";
-<<<<<<< HEAD
 // import { DashboardContext } from "../contexts/dashboard";
-=======
->>>>>>> fd4a5544274f297515ccea7b61c678e2809586c9
 import api from "../services/api";
 import { useForm } from "react-hook-form";
 
@@ -99,6 +96,8 @@ export const DashboardClient = () => {
     } catch (error) {
       console.log(error);
     } finally {
+      getJobsUser(localStorage.getItem("@WorkingUser_Id"));
+
     }
   };
 
