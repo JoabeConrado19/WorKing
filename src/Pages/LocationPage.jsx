@@ -1,8 +1,7 @@
 import { StyledLocation, LocationMain } from "../styles/StyledLocation";
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 import { useState } from "react";
-import { AsideComponent } from "../components/AboutUsPage/aside";
-
+import { AsideComponent } from "../Components/AboutUsPage/aside";
 
 export const Location = () => {
   const { isLoaded } = useJsApiLoader({
@@ -45,7 +44,7 @@ export const Location = () => {
         </main>
       </StyledLocation>
 
-        <AsideComponent/>
+      <AsideComponent />
      
     </LocationMain>
   );

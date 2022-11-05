@@ -1,12 +1,9 @@
-import { AiFillDelete, AiOutlineClockCircle, AiOutlineHome, AiOutlineMenu, AiOutlineUser } from 'react-icons/ai'
+import { AiFillDelete, AiOutlineMenu } from 'react-icons/ai'
 import { BsPinMapFill } from 'react-icons/bs'
-import { FaWallet } from 'react-icons/fa'
-import { FiEdit2, FiMapPin, FiUsers } from 'react-icons/fi'
-import { HiOutlineUserCircle } from 'react-icons/hi'
-import { ImExit } from 'react-icons/im'
-import { AsideComponent } from "../components/AboutUsPage/aside";
+import { FiEdit2 } from 'react-icons/fi'
+import { AsideComponent } from "../Components/AboutUsPage/aside";
 
-import { StyledAside, StyledBody, StyledClientDash, StyledForm } from '../styles/StyledClientDash'
+import { StyledBody, StyledClientDash, StyledForm } from '../styles/StyledClientDash'
 export const DashboardClient = () => {
 
     return (
@@ -124,7 +121,7 @@ export const DashboardClient = () => {
                 </main>
             </StyledClientDash>
 
-           <AsideComponent/>
+           <AsideComponent />
         </StyledBody>
 
 
