@@ -1,14 +1,14 @@
-import { CardClient } from "../components/CardClient/index"
+import { CardClient } from "../Components/CardClient/index"
 import { StyledDashboard } from "../styles/dashboardWorker"
-import { Header } from "../components/Header/index"
-import { AsideComponent } from '../components/AboutUsPage/aside'
+import { Header } from "../Components/Header/index"
+import { AsideComponent } from '../Components/AboutUsPage/aside'
 
 
 export const DashboardWorker = () => {
 
     return (
         <>
-        <AsideComponent/>
+        <AsideComponent />
         <Header/>
          <StyledDashboard>
                     <div className= "headerMain">
