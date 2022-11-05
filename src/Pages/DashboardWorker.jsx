@@ -9,8 +9,8 @@ import { CardStyled } from "../Components/CardClient/style";
 export const DashboardWorker = () => {
   const [jobs, setJobs] = useState([]);
 
-  useEffect(() => {
-    api.get("/jobs").then((response) => {
+  useEffect( () => {
+     api.get("/jobs").then((response) => {
       
       setJobs(response.data);
       console.log(response.data)

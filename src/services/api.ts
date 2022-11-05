@@ -1,10 +1,6 @@
 import axios from "axios";
 
-
 const api = axios.create({
-    baseURL: "https://workingapi.herokuapp.com/",
-    timeout: 5000,
+  baseURL: "https://workingapi.herokuapp.com/",
 });
 export default api;
-
-
