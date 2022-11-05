@@ -22,7 +22,7 @@ export const DashboardProvider = ({children}) => {
             const latitude = position.coords.latitude;
             const longitude = position.coords.longitude;
             const positionlat = latitude + " " + longitude
-
+            console.log(positionlat)
             return positionlat
         }
 
