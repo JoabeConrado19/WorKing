@@ -6,6 +6,7 @@ import { RegisterProfessional } from '../Pages/registerProfessional';
 import { LoginPage } from '../Pages/LoginPage';
 import { AboutUsPage } from '../Pages/AboutUsPage';
 import { Location } from '../Pages/LocationPage';
+import { DashboardWorker } from '../Pages/DashboardWorker';
 
 
 const RoutesMain = () => {
@@ -16,6 +17,7 @@ const RoutesMain = () => {
       <Route path="/worker-register" element={<RegisterProfessional />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/dashboard" element={<DashboardClient />} />
+      <Route path="/dashboard-worker" element={<DashboardWorker />} />
       <Route path="/location" element={<Location />} />
       <Route path="/contacts" element={<h1>Fale conosco</h1>} />
       <Route path="/about-us" element={<AboutUsPage />} />

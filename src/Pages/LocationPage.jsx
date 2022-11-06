@@ -1,18 +1,7 @@
-import {
-  AiOutlineClockCircle,
-  AiOutlineHome,
-  AiOutlineMenu,
-  AiOutlineUser,
-} from "react-icons/ai";
-import { BsPinMapFill } from "react-icons/bs";
-import { FaWallet } from "react-icons/fa";
-import { FiMapPin, FiUsers } from "react-icons/fi";
-import { HiOutlineUserCircle } from "react-icons/hi";
-import { ImExit } from "react-icons/im";
-import { StyledAside, StyledBody } from "../styles/StyledClientDash";
 import { StyledLocation, LocationMain } from "../styles/StyledLocation";
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 import { useState } from "react";
+import { AsideComponent } from "../Components/AboutUsPage/aside";
 
 export const Location = () => {
   const { isLoaded } = useJsApiLoader({
@@ -55,16 +44,8 @@ export const Location = () => {
         </main>
       </StyledLocation>
 
-      <StyledAside>
-        <HiOutlineUserCircle />
-        <AiOutlineHome />
-        <AiOutlineUser />
-        <FiMapPin />
-        <FaWallet />
-        <AiOutlineClockCircle />
-        <ImExit />
-        <FiUsers />
-      </StyledAside>
+      <AsideComponent />
+     
     </LocationMain>
   );
 };

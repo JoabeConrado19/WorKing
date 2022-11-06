@@ -6,46 +6,83 @@ import {
   AiOutlineUser,
 } from "react-icons/ai";
 import { FiMapPin, FiUsers } from "react-icons/fi";
-import { FaWallet } from "react-icons/fa";
+import { FaWallet, FaWindowClose } from "react-icons/fa";
 import { ImExit } from "react-icons/im";
+import { Link } from "react-router-dom";
 
-export const AsideComponent = () => {
+interface IAsideComponent {
+  setMenu?: any;
+  menu?: boolean;
+}
+
+export const AsideComponent = ({ setMenu, menu }: IAsideComponent) => {
   return (
     <>
-      <Aside>
+      <Aside rigth={menu ? "auto" : "-300px"}>
         <div className="userName">
           <HiOutlineUserCircle />
+<<<<<<< HEAD
           <h2>Nome</h2>
+=======
+          <h2>Name</h2>
+          <button
+            onClick={(event) => {
+              event.preventDefault();
+              setMenu(!menu);
+            }}
+          >
+            <FaWindowClose />
+          </button>
+>>>>>>> 5500a297461c179cf71d388a90025095ffff6bf3
         </div>
         <div className="container__menu">
           <ul className="menu">
             <li>
-              <AiOutlineHome />
-              <p>Home</p>
+              <Link to="/dashboard">
+                <AiOutlineHome />
+                <p>Home</p>
+              </Link>
             </li>
             <li>
-              <AiOutlineUser />
-              <p>Perfil</p>
+              {/* Alterar redirecionamento */}
+              <Link to="/dashboard">
+                <AiOutlineUser />
+                <p>Perfil</p>
+              </Link>
             </li>
             <li>
-              <FiMapPin />
-              <p>Localização</p>
+              {/* Alterar redirecionamento */}
+              <Link to="/location">
+                <FiMapPin />
+                <p>Localização</p>
+              </Link>
             </li>
             <li>
-              <FaWallet />
-              <p>Carteira</p>
+              {/* Alterar redirecionamento */}
+              <Link to="/dashboard">
+                <FaWallet />
+                <p>Carteira</p>
+              </Link>
+            </li>
+
+            <li>
+              {/* Alterar redirecionamento */}
+              <Link to="/dashboard">
+                <AiOutlineClockCircle />
+                <p>Histórico</p>
+              </Link>
             </li>
             <li>
-              <AiOutlineClockCircle />
-              <p>Histórico</p>
+              <Link to="/">
+                <ImExit />
+                <p>Logout</p>
+              </Link>
             </li>
             <li>
-              <ImExit />
-              <p>Logout</p>
-            </li>
-            <li>
-              <FiUsers />
-              <p>Sobre nós</p>
+              <Link to="/about-us">
+                <FiUsers />
+                <p>Sobre nós</p>
+              </Link>
             </li>
           </ul>
         </div>
