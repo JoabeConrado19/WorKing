@@ -33,7 +33,9 @@ export const Wallet = () => {
               <h1>Carteira</h1>
               <div className="divSaldo_Transferencia">
                   <h3>Saldo: Em breve</h3>
+                  <div>
                   <button className="btTransferir"><BiTransfer/>Transferir</button>
+                  </div>
               </div>
               <div className="Transacoes">
                 <h1>Transações</h1>

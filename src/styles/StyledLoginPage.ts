@@ -22,11 +22,13 @@ export const StyledLoginPage = styled.div`
         animation: bounce-in-top  1s;
     }
 
-   
+   button{
+        border: 1px solid transparent;
+   }
 
     button {
         :hover{
-            transition: 0.2s;
+        transition: 0.4s;
         background-color: transparent;
         border: 1px solid #FFA800;
         color: #FFA800;
@@ -74,6 +76,7 @@ export const StyledLoginPage = styled.div`
         width: 30px;
         height: 30px;
     }
+
 
     .spanJaRegistrado {
         margin-top: 45px;

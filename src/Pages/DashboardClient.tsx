@@ -1,7 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 import { AiFillDelete } from "react-icons/ai";
 import { FiEdit2 } from "react-icons/fi";
+
 import { AsideComponent } from "../Components/AboutUsPage/aside";
+
 import { useForm } from "react-hook-form";
 import { MdMenuOpen } from "react-icons/md";
 import EditJobModal from "../Components/EditJobModal";
@@ -74,7 +76,7 @@ export const DashboardClient = () => {
       });
       console.log(data);
       reset()
-      setJobsUser([...jobsUser, data]);
+      setJobsUser([data, ...jobsUser ]);
     } catch (error) {
       console.log(error);
     } finally {
@@ -144,6 +146,7 @@ export const DashboardClient = () => {
             <h1>Home</h1>
           </header>
           <main>
+
             <div className="input-div">
               <InputSearch />
             </div>
