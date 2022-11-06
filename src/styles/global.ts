@@ -10,8 +10,8 @@ b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
 	margin: 0;
@@ -20,10 +20,10 @@ time, mark, audio, video {
 	font-size: 100%;
 	font-family: 'Roboto Mono', monospace;
 	vertical-align: baseline;
-	
+
 }
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
+article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
@@ -46,7 +46,52 @@ table {
 	border-spacing: 0;
 }
 body{
-    background-color: #D9D9D9;
+    background-color: transparent;
     font-family: 'Inter', sans-serif;
 }
+
+*{
+  scrollbar-width: thin;
+  scrollbar-color: #0D1A08 #FFA800;
+}
+
+/* Chrome, Edge and Safari */
+*::-webkit-scrollbar {
+  width: 8px;
+  width: 8px;
+}
+*::-webkit-scrollbar-track {
+  border-radius: 6px;
+  background-color: #FFA800;
+}
+
+*::-webkit-scrollbar-track:hover {
+  background-color: #FFA800;
+}
+
+*::-webkit-scrollbar-track:active {
+  background-color: #FFA800;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: #0D1A08;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #010201;
+}
+
+*::-webkit-scrollbar-thumb:active {
+  background-color: #070C05;
+}
+
+.btMenuOpen{
+  font-size: 50px;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+}
+
 `;
+

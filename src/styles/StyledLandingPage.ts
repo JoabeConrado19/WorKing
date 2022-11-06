@@ -1,10 +1,12 @@
 import styled from "styled-components";
 
+
 export const StyledLandingPage = styled.div`
     width: 100%;
     min-height: 100vh;
 
-    background-color: #D9D9D9;
+    background-color: #F4F4F4;
+
     .divMobile{
         display: none;
     }
@@ -31,9 +33,10 @@ export const StyledLandingPage = styled.div`
             font-size: 16px;
             width: 30%;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
             text-align: center;
+        
             a{
                 margin-right: 5px;
             }
@@ -76,7 +79,7 @@ export const StyledLandingPage = styled.div`
         }
         
         figure{
-            height: 60%;
+            height: 50%;
             display: flex;
             align-items: flex-end;
             img{
@@ -86,6 +89,7 @@ export const StyledLandingPage = styled.div`
         }
     }
 
+   
     @media (max-width: 900px){
         main{
             .landingPageTexts{
