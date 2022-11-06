@@ -78,7 +78,7 @@ export const AsideComponent = () => {
               </Link>
             </li>
             <li >
-              <Link to="/" >
+              <Link to="/">
                 <ImExit />
                 <p>Logout</p>
               </Link>

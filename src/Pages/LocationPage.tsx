@@ -7,7 +7,7 @@ import api from "../services/api";
 import { MdMenuOpen } from "react-icons/md";
 
 export const Location = () => {
-  const { setMapLocation, lat, lng, menu, setMenu, findMyLat }: any = useContext(DashboardContext)
+  const { setMapLocation, lat, lng, menu, setMenu, findMyLat, verifyToken }: any = useContext(DashboardContext)
 
   const [jobsMarkers, setJobsMarkers] = useState<any>([]);
 
@@ -16,6 +16,10 @@ export const Location = () => {
       setJobsMarkers(response.data);
     });
   }, []);
+
+  useEffect(()=>{
+    verifyToken()
+  },[])
 
   useEffect(() => {
     setMapLocation();

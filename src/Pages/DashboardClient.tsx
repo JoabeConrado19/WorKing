@@ -47,7 +47,9 @@ interface IJobsUser {
 
 export const DashboardClient = () => {
 
-  const { setMapLocation, lat, lng, setOpenModal, menu, setMenu, jobsUser, search, filteredProducts, setJobsUser }: any = useContext(DashboardContext)
+ 
+
+  const { setMapLocation, lat, lng, setOpenModal, menu, setMenu, jobsUser, search, filteredProducts, setJobsUser, verifyToken }: any = useContext(DashboardContext)
 
   const [jobId, setJobId] = useState<null | number>(null);
 
@@ -80,6 +82,10 @@ export const DashboardClient = () => {
     }
   };
 
+  useEffect(()=>{
+    verifyToken()
+  },[])
+
   const deleteJob = async (event: any) => {
     try {
       const jobId = Number(event.target.id.slice(6))
@@ -98,6 +104,8 @@ export const DashboardClient = () => {
       console.log(error)
     }
   }
+
+  
 
 
 
