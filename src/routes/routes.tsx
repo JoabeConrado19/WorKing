@@ -1,10 +1,4 @@
-<<<<<<< HEAD
-import { Routes, Route, Navigate } from 'react-router-dom';
-import { Register } from '../pages/registerPage';
-import { RegisterProfessional } from '../pages/registerProfessional';
-import { LandingPage } from '../pages/LandingPage';
-=======
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate} from 'react-router-dom';
 import { DashboardClient } from '../Pages/DashboardClient';
 import { LandingPage } from '../Pages/LandingPage';
 import { Register } from '../Pages/registerPage';
@@ -14,7 +8,6 @@ import { AboutUsPage } from '../Pages/AboutUsPage';
 import { Location } from '../Pages/LocationPage';
 import { DashboardWorker } from '../Pages/DashboardWorker';
 import { Wallet } from '../Pages/Wallet';
->>>>>>> develop
 
 
 const RoutesMain = () => {
