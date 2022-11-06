@@ -4,6 +4,7 @@ import { Register } from '../Pages/registerPage';
 import { RegisterProfessional } from '../Pages/registerProfessional';
 import { LandingPage } from '../Pages/LandingPage';
 import { DashboardWorker } from '../Pages/DashboardWorker';
+import { Historic } from '../Pages/Historic';
 
 
 const RoutesMain = () => {
@@ -20,6 +21,7 @@ const RoutesMain = () => {
       <DashboardWorker />
       //  <h1>Dashboard</h1> 
     } />
+    <Route path='/historic' element={<Historic />} />
     <Route path='/contacts' element={<h1>Fale conosco</h1>} />
     <Route path='/about-us' element={<h1>Sobre nós</h1>} />
     
