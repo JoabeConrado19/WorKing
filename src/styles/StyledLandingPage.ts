@@ -31,9 +31,10 @@ export const StyledLandingPage = styled.div`
             font-size: 16px;
             width: 30%;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
             text-align: center;
+        
             a{
                 margin-right: 5px;
             }

@@ -12,6 +12,9 @@ export const Aside = styled.aside<IAside>`
   right: ${({ rigth }) => rigth};
   z-index: 2;
   cursor: default;
+  border-radius: 15px;
+  animation: bounceInLeft 2s;
+
 
   .userName {
     height: 12%;
@@ -21,6 +24,12 @@ export const Aside = styled.aside<IAside>`
     justify-content: flex-start;
     align-items: center;
 
+
+    img:hover {
+        border: solid 2px #ffffff;
+        cursor: pointer;
+      }
+
     svg {
       width: 15%;
       font-size: 30px;
@@ -28,7 +37,7 @@ export const Aside = styled.aside<IAside>`
     }
 
     img {
-      width: 50px;
+      width: 60px;
       border-radius: 100%;
     }
 
@@ -94,7 +103,9 @@ export const Aside = styled.aside<IAside>`
       }
 
       :hover {
+        transition: 1s;
         background-color: #ffffff;
+        animation: slide-right 1.8s;
       }
     }
   }
@@ -107,6 +118,8 @@ export const Aside = styled.aside<IAside>`
     .userName {
       padding: 0;
       justify-content: center;
+
+    
 
       h2 {
         width: 0px;
@@ -123,11 +136,12 @@ export const Aside = styled.aside<IAside>`
 
     .menu {
       li {
-        padding: 10px 10px 10px 20px;
+        padding: 10px 10px 10px 30px;
         margin: 0;
         border: none;
         border-radius: 0;
         background-color: transparent;
+       
 
         p {
           visibility: hidden;
@@ -137,8 +151,10 @@ export const Aside = styled.aside<IAside>`
 
     :hover {
       width: 200px;
-      position: absolute;
+      position: fixed;
       z-index: 2;
+      transition: 0.5s ease;
+      
 
       .userName {
         width: 100%;
@@ -150,7 +166,7 @@ export const Aside = styled.aside<IAside>`
         svg {
           width: 100%;
           height: 50%;
-          /* font-size: 70px; */
+          font-size: 70px;
         }
 
         h2 {
@@ -176,4 +192,99 @@ export const Aside = styled.aside<IAside>`
       }
     }
   }
+
+.slide-right {
+	        -webkit-animation: slide-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: slide-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@-webkit-keyframes slide-right {
+  0% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  100% {
+    -webkit-transform: translateX(10px);
+            transform: translateX(10px);
+  }
+}
+@keyframes slide-right {
+  0% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  100% {
+    -webkit-transform: translateX(10px);
+            transform: translateX(10px);
+  }
+}
+
+
+
+
+    //ANIMAÇÃO MENU AO INCIAR A APLICAÇÃO
+  .bounceInLeft {
+  -webkit-animation-name: bounceInLeft;
+  animation-name: bounceInLeft;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  }
+  @-webkit-keyframes bounceInLeft {
+  0%, 60%, 75%, 90%, 100% {
+  -webkit-transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  }
+  0% {
+  opacity: 0;
+  -webkit-transform: translate3d(-3000px, 0, 0);
+  transform: translate3d(-3000px, 0, 0);
+  }
+  60% {
+  opacity: 1;
+  -webkit-transform: translate3d(25px, 0, 0);
+  transform: translate3d(25px, 0, 0);
+  }
+  75% {
+  -webkit-transform: translate3d(-10px, 0, 0);
+  transform: translate3d(-10px, 0, 0);
+  }
+  90% {
+  -webkit-transform: translate3d(5px, 0, 0);
+  transform: translate3d(5px, 0, 0);
+  }
+  100% {
+  -webkit-transform: none;
+  transform: none;
+  }
+  }
+  @keyframes bounceInLeft {
+  0%, 60%, 75%, 90%, 100% {
+  -webkit-transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  }
+  0% {
+  opacity: 0;
+  -webkit-transform: translate3d(-3000px, 0, 0);
+  transform: translate3d(-3000px, 0, 0);
+  }
+  60% {
+  opacity: 1;
+  -webkit-transform: translate3d(25px, 0, 0);
+  transform: translate3d(25px, 0, 0);
+  }
+  75% {
+  -webkit-transform: translate3d(-10px, 0, 0);
+  transform: translate3d(-10px, 0, 0);
+  }
+  90% {
+  -webkit-transform: translate3d(5px, 0, 0);
+  transform: translate3d(5px, 0, 0);
+  }
+  100% {
+  -webkit-transform: none;
+  transform: none;
+  }
+  } 
 `;

@@ -2,9 +2,9 @@ import { useContext, useEffect, useState } from "react";
 import { AiFillDelete, AiOutlineMenu } from "react-icons/ai";
 import { BsPinMapFill } from "react-icons/bs";
 import { FiEdit2 } from "react-icons/fi";
-import { number } from "yup/lib/locale";
+// import { number } from "yup/lib/locale";
 import { AsideComponent } from "../Components/AboutUsPage/aside";
-import { DashboardContext } from "../contexts/dashboard";
+// import { DashboardContext } from "../contexts/dashboard";
 import api from "../services/api";
 import { useForm } from "react-hook-form";
 
@@ -87,7 +87,7 @@ export const DashboardClient = () => {
         },
       });
       console.log(data);
-      setJobsUser([...jobsUser, data])
+      // setJobsUser([...jobsUser, data])
       reset()
     } catch (error) {
       console.log(error);
@@ -119,9 +119,10 @@ export const DashboardClient = () => {
                   <input
                     type="text"
                     placeholder="Titulo da solicitação"
+                    required
                     {...register("Job_Name")}
                   />
-                  <select {...register("Category")}>
+                  <select {...register("Category")} required>
                     <option value="">Categoria </option>
                     <option value="Agronegócios">Agronegócios </option>
                     <option value="Assistência técnica">
@@ -165,11 +166,12 @@ export const DashboardClient = () => {
                   </select>
                 </div>
                 <div className="description">
-                  <textarea
+                  <input
                     id=""
                     placeholder="Digite aqui a descrição do serviço à solicitar"
+                    required
                     {...register("Description")}
-                  ></textarea>
+                  ></input>
                   <button className="publish" type="submit">
                     Publicar
                   </button>
@@ -205,7 +207,7 @@ export const DashboardClient = () => {
                           <p>{Description}</p>
                           <BsPinMapFill />
                           <div className="div-categoria">
-                            <button>
+                            <button className="btedit">
                               <FiEdit2 />
                               Editar
                             </button>

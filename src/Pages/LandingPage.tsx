@@ -28,7 +28,6 @@ export const LandingPage = () => {
             </figure>
             <div className='headerLinks'>
                 <Link to={'/about-us'}>Sobre Nós</Link>
-                <Link to={'/contacts'}>Contato</Link>
             </div>
             <Link to='/login'><StyledButton>Entrar</StyledButton></Link>
            
