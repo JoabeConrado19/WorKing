@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AiFillDelete, AiOutlineMenu } from "react-icons/ai";
 import { BsPinMapFill } from "react-icons/bs";
@@ -6,6 +6,7 @@ import { FiEdit2 } from "react-icons/fi";
 import { AsideComponent } from "../Components/AboutUsPage/aside";
 import api from "../services/api";
 
+import { DashboardContext } from "../contexts/dashboard";
 import {
     StyledBody,
     StyledClientDash,
@@ -44,6 +45,8 @@ interface IJobsUser {
 }
 
 export const DashboardClient = () => {
+    const { setMapLocation, lat, lng }: any = useContext(DashboardContext)
+
     const [jobsUser, setJobsUser] = useState<IJobsUser[]>([] as IJobsUser[]);
 
     const { register, handleSubmit, reset } = useForm<iJobForm>();
@@ -68,13 +71,14 @@ export const DashboardClient = () => {
     // 	}
     // }
     const createJob = async (job: iJobForm) => {
+        setMapLocation()
         try {
             const dataCorrectFormat: iDataCreateJob = {
                 userId: Number(localStorage.getItem("@WorkingUser_Id")),
                 Job: {
                     ...job,
-                    lat: 0,
-                    lnt: 0,
+                    lat: lat,
+                    lnt: lng,
                 },
             };
             console.log(dataCorrectFormat);
