@@ -6,6 +6,8 @@ import { number } from "yup/lib/locale";
 import { AsideComponent } from "../Components/AboutUsPage/aside";
 import { DashboardContext } from "../contexts/dashboard";
 import api from "../services/api";
+import { useForm } from "react-hook-form";
+
 
 import {
   StyledBody,
@@ -13,11 +15,23 @@ import {
   StyledForm,
 } from "../styles/StyledClientDash";
 
+interface iJobForm {
+    Job_Name: string,
+    Description: string,
+    Category: string,
+    lat?: number | undefined,
+    lnt?: number | undefined
+}
+interface iDataCreateJob {
+    userId: number,
+    Job: iJobForm
+}
+
 interface IJobsUser {
   map<T>(
     arg0: ({
       userId,
-      Job: { Job_Name, Description, Lat, Int, Category },
+      Job: { Job_Name, Description, lat, lnt, Category },
       id
     }: IJobsUser) => JSX.Element
   ): import("react").ReactNode;
@@ -25,8 +39,8 @@ interface IJobsUser {
   Job: {
     Job_Name: string;
     Description: string;
-    Lat: number;
-    Int: number;
+    lat: number;
+    lnt: number;
     Category: string;
   };
   id: number;
@@ -35,8 +49,13 @@ interface IJobsUser {
 export const DashboardClient = () => {
   const [jobsUser, setJobsUser] = useState<IJobsUser | null>(null);
 
+  const {
+    register,
+    handleSubmit,
+} = useForm<iJobForm>();
+
   const getJobsUser = async (id: any) => {
-    await api(`/jobs?userId=${id}`)
+    await api(`jobs?userId=${id}`)
       .then((resp) => {
         console.log(resp.data);
         resp.data.length < 1 ? setJobsUser(null) : setJobsUser(resp.data);
@@ -44,8 +63,45 @@ export const DashboardClient = () => {
       .catch((err) => console.log(err));
   };
 
+
+// {
+// 	"userId": 4,
+// 	"Job": {
+// 		"Job_Name": "Consertar pc",
+// 		"Description": "pc quebrou hj de manha e preciso de alguem para arrumar ele, pago 100 pila moro?",
+// 		"lat": "-3.0264",
+// 		"lnt": "-60.0149",
+// 		"Categoty": "Tech"
+// 	}
+// }
+const createJob = async (data:iJobForm) => {
+    try {
+        const dataCorrectFormat:iDataCreateJob = {
+            userId: Number(localStorage.getItem('@WorkingUser_Id')),
+            Job: {
+                ...data,
+                lat: 0,
+                lnt: 0
+            }
+        }
+        console.log(dataCorrectFormat)
+        // api.defaults.headers.authorization = `Bearer ${localStorage.getItem('@WorkingUser_Token')}`;
+        const response = await api.post('jobs', {
+            dataCorrectFormat,
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('@WorkingUser_Token')}`
+            }
+        });
+        console.log(response);
+    } catch (error) {
+        console.log(error);
+    } finally{
+
+    }
+}
+
   useEffect(() => {
-    getJobsUser(window.localStorage.getItem("@WorkingUser_Id"));
+    getJobsUser(localStorage.getItem("@WorkingUser_Id"));
   }, []);
 
   return (
@@ -63,10 +119,10 @@ export const DashboardClient = () => {
               <h2>Lista de oportunidades </h2>
             </div>
             <section>
-              <StyledForm>
+              <StyledForm onSubmit={handleSubmit(createJob)}>
                 <div>
-                  <input type="text" placeholder="Titulo da solicitação" />
-                  <select name="" id="">
+                  <input type="text" placeholder="Titulo da solicitação" {...register("Job_Name")}/>
+                  <select id="" {...register("Category")}>
                     <option value=""                           >Categoria               </option>
                     <option value="Agronegócios"               >Agronegócios            </option>
                     <option value="Assistência técnica"        >Assistência técnica     </option>
@@ -95,11 +151,11 @@ export const DashboardClient = () => {
                 </div>
                 <div className="description">
                   <textarea
-                    name=""
                     id=""
                     placeholder="Digite aqui a descrição do serviço à solicitar"
+                    {...register("Description")}
                   ></textarea>
-                  <button className="publish">Publicar</button>
+                  <button className="publish" type="submit">Publicar</button>
                 </div>
               </StyledForm>
             </section>
@@ -119,7 +175,7 @@ export const DashboardClient = () => {
                 jobsUser.map(
                   ({
                     userId,
-                    Job: { Job_Name, Description, Lat, Int, Category },
+                    Job: { Job_Name, Description, lat, lnt, Category },
                     id
                   }: IJobsUser) => {
                     return (
