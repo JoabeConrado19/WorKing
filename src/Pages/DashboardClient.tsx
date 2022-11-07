@@ -4,7 +4,10 @@ import { BsPinMapFill } from "react-icons/bs";
 import { FiEdit2 } from "react-icons/fi";
 // import { number } from "yup/lib/locale";
 import { AsideComponent } from "../Components/AboutUsPage/aside";
+<<<<<<< HEAD
 // import { DashboardContext } from "../contexts/dashboard";
+=======
+>>>>>>> fd4a5544274f297515ccea7b61c678e2809586c9
 import api from "../services/api";
 import { useForm } from "react-hook-form";
 
@@ -13,6 +16,7 @@ import {
   StyledClientDash,
   StyledForm,
 } from "../styles/StyledClientDash";
+import { DashboardContext } from "../contexts/dashboard";
 
 interface iJobForm {
   Job_Name: string;
@@ -46,7 +50,9 @@ interface IJobsUser {
 }
 
 export const DashboardClient = () => {
-  const [jobsUser, setJobsUser] = useState<IJobsUser | null>(null);
+  const {setMapLocation, lat, lng }:any = useContext(DashboardContext)
+
+  const [jobsUser, setJobsUser] = useState<IJobsUser[]>([] as IJobsUser[]);
 
   const { register, handleSubmit, reset } = useForm<iJobForm>();
 
@@ -54,7 +60,7 @@ export const DashboardClient = () => {
     await api(`jobs?userId=${id}`)
       .then((resp) => {
         console.log(resp.data);
-        resp.data.length < 1 ? setJobsUser(null) : setJobsUser(resp.data);
+        resp.data.length > 1 && setJobsUser(resp.data);
       })
       .catch((err) => console.log(err));
   };
@@ -70,13 +76,14 @@ export const DashboardClient = () => {
   // 	}
   // }
   const createJob = async (job: iJobForm) => {
+    setMapLocation()
     try {
       const dataCorrectFormat: iDataCreateJob = {
         userId: Number(localStorage.getItem("@WorkingUser_Id")),
         Job: {
           ...job,
-          lat: 0,
-          lnt: 0,
+          lat: lat,
+          lnt: lng,
         },
       };
       console.log(dataCorrectFormat);

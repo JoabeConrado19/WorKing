@@ -9,11 +9,11 @@ import { CardStyled } from "../Components/CardClient/style";
 export const DashboardWorker = () => {
   const [jobs, setJobs] = useState([]);
 
-  useEffect(async () => {
-    await api.get("/jobs").then((response) => {
+  useEffect( () => {
+     api.get("/jobs").then((response) => {
       
       setJobs(response.data);
-      console.log(jobs)
+      console.log(response.data)
     });
   },[]);
   return (
@@ -37,12 +37,12 @@ export const DashboardWorker = () => {
 
           {
            
+
+           
             jobs.map(element => (
-              <CardClient key={element.Job.job_name} Name = {element.Job.Job_Name} Description={element.Job.Description} Categoty = {element.Job.Categoty}/>
-            )
-              
-              
-            )
+              <CardClient Id={element.id} key={element.id} Name = {element.Job.Job_Name} Description={element.Job.Description} Categoty = {element.Job.Categoty} lat = {element.Job.lat} lng = {element.Job.lnt}/>
+            ))
+
           }
 
         </div>
