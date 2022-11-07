@@ -28,9 +28,30 @@ export const DashboardClient = () => {
                 <div>
                   <input type="text" placeholder="Titulo da solicitação" />
                   <select name="" id="">
-                    <option value="">Categoria</option>
-                    <option value="TI">Área de TI</option>
-                    <option value="mecanico">Área de mecânica</option>
+                    <option value=""                           >Categoria               </option>
+                    <option value="Agronegócios"               >Agronegócios            </option>
+                    <option value="Assistência técnica"        >Assistência técnica     </option>
+                    <option value="Automotivo"                 >Automotivo              </option>
+                    <option value="Construção"                 >Construção              </option>
+                    <option value="Consultoria"                >Consultoria             </option>
+                    <option value="Design"                     >Design                  </option>
+                    <option value="Educação"                   >Educação                </option>
+                    <option value="Energias"                   >Energias                </option>
+                    <option value="Entretenimento"             >Entretenimento          </option>
+                    <option value="Eventos"                    >Eventos                 </option>
+                    <option value="Hotelaria"                  >Hotelaria               </option>
+                    <option value="Logística e Transporte"     >Logística e Transporte  </option>
+                    <option value="Manufatura Industrial"      >Manufatura Industrial   </option>
+                    <option value="Mercado Imobiliário"        >Mercado Imobiliário     </option>
+                    <option value="Mídia"                      >Mídia                   </option>
+                    <option value="Moda e beleza"              >Moda e beleza           </option>
+                    <option value="Saúde"                      >Saúde                   </option>
+                    <option value="Serviços ao Consumidor"     >Serviços ao Consumidor  </option>
+                    <option value="Serviços Domésticos"        >Serviços Domésticos     </option>
+                    <option value="Serviços Financeiros"       >Serviços Financeiros    </option>
+                    <option value="Serviços para Empresas"     >Serviços para Empresas  </option>
+                    <option value="Tecnologia"                 >Tecnologia              </option>
+                    <option value="Telecomunicações"           >Telecomunicações        </option>
                   </select>
                 </div>
                 <div className="description">
