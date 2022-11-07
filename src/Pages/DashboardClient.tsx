@@ -8,7 +8,6 @@ import { DashboardContext } from "../contexts/dashboard";
 import api from "../services/api";
 import { useForm } from "react-hook-form";
 
-
 import {
   StyledBody,
   StyledClientDash,
@@ -16,15 +15,15 @@ import {
 } from "../styles/StyledClientDash";
 
 interface iJobForm {
-    Job_Name: string,
-    Description: string,
-    Category: string,
-    lat?: number | undefined,
-    lnt?: number | undefined
+  Job_Name: string;
+  Description: string;
+  Category: string;
+  lat?: number | undefined;
+  lnt?: number | undefined;
 }
 interface iDataCreateJob {
-    userId: number,
-    Job: iJobForm
+  userId: number;
+  Job: iJobForm;
 }
 
 interface IJobsUser {
@@ -32,7 +31,7 @@ interface IJobsUser {
     arg0: ({
       userId,
       Job: { Job_Name, Description, lat, lnt, Category },
-      id
+      id,
     }: IJobsUser) => JSX.Element
   ): import("react").ReactNode;
   userId: number;
@@ -49,10 +48,7 @@ interface IJobsUser {
 export const DashboardClient = () => {
   const [jobsUser, setJobsUser] = useState<IJobsUser | null>(null);
 
-  const {
-    register,
-    handleSubmit,
-} = useForm<iJobForm>();
+  const { register, handleSubmit } = useForm<iJobForm>();
 
   const getJobsUser = async (id: any) => {
     await api(`jobs?userId=${id}`)
@@ -63,42 +59,39 @@ export const DashboardClient = () => {
       .catch((err) => console.log(err));
   };
 
-
-// {
-// 	"userId": 4,
-// 	"Job": {
-// 		"Job_Name": "Consertar pc",
-// 		"Description": "pc quebrou hj de manha e preciso de alguem para arrumar ele, pago 100 pila moro?",
-// 		"lat": "-3.0264",
-// 		"lnt": "-60.0149",
-// 		"Categoty": "Tech"
-// 	}
-// }
-const createJob = async (data:iJobForm) => {
+  // {
+  // 	"userId": 4,
+  // 	"Job": {
+  // 		"Job_Name": "Consertar pc",
+  // 		"Description": "pc quebrou hj de manha e preciso de alguem para arrumar ele, pago 100 pila moro?",
+  // 		"lat": "-3.0264",
+  // 		"lnt": "-60.0149",
+  // 		"Categoty": "Tech"
+  // 	}
+  // }
+  const createJob = async (data: iJobForm) => {
     try {
-        const dataCorrectFormat:iDataCreateJob = {
-            userId: Number(localStorage.getItem('@WorkingUser_Id')),
-            Job: {
-                ...data,
-                lat: 0,
-                lnt: 0
-            }
-        }
-        console.log(dataCorrectFormat)
-        // api.defaults.headers.authorization = `Bearer ${localStorage.getItem('@WorkingUser_Token')}`;
-        const response = await api.post('jobs', {
-            dataCorrectFormat,
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('@WorkingUser_Token')}`
-            }
-        });
-        console.log(response);
+      const dataCorrectFormat: iDataCreateJob = {
+        userId: Number(localStorage.getItem("@WorkingUser_Id")),
+        Job: {
+          ...data,
+          lat: 0,
+          lnt: 0,
+        },
+      };
+      console.log(dataCorrectFormat);
+      // api.defaults.headers.authorization = `Bearer ${localStorage.getItem('@WorkingUser_Token')}`;
+      const response = await api.post("jobs", dataCorrectFormat, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("@WorkingUser_Token")}`,
+        },
+      });
+      console.log(response);
     } catch (error) {
-        console.log(error);
-    } finally{
-
+      console.log(error);
+    } finally {
     }
-}
+  };
 
   useEffect(() => {
     getJobsUser(localStorage.getItem("@WorkingUser_Id"));
@@ -121,32 +114,52 @@ const createJob = async (data:iJobForm) => {
             <section>
               <StyledForm onSubmit={handleSubmit(createJob)}>
                 <div>
-                  <input type="text" placeholder="Titulo da solicitação" {...register("Job_Name")}/>
+                  <input
+                    type="text"
+                    placeholder="Titulo da solicitação"
+                    {...register("Job_Name")}
+                  />
                   <select id="" {...register("Category")}>
-                    <option value=""                           >Categoria               </option>
-                    <option value="Agronegócios"               >Agronegócios            </option>
-                    <option value="Assistência técnica"        >Assistência técnica     </option>
-                    <option value="Automotivo"                 >Automotivo              </option>
-                    <option value="Construção"                 >Construção              </option>
-                    <option value="Consultoria"                >Consultoria             </option>
-                    <option value="Design"                     >Design                  </option>
-                    <option value="Educação"                   >Educação                </option>
-                    <option value="Energias"                   >Energias                </option>
-                    <option value="Entretenimento"             >Entretenimento          </option>
-                    <option value="Eventos"                    >Eventos                 </option>
-                    <option value="Hotelaria"                  >Hotelaria               </option>
-                    <option value="Logística e Transporte"     >Logística e Transporte  </option>
-                    <option value="Manufatura Industrial"      >Manufatura Industrial   </option>
-                    <option value="Mercado Imobiliário"        >Mercado Imobiliário     </option>
-                    <option value="Mídia"                      >Mídia                   </option>
-                    <option value="Moda e beleza"              >Moda e beleza           </option>
-                    <option value="Saúde"                      >Saúde                   </option>
-                    <option value="Serviços ao Consumidor"     >Serviços ao Consumidor  </option>
-                    <option value="Serviços Domésticos"        >Serviços Domésticos     </option>
-                    <option value="Serviços Financeiros"       >Serviços Financeiros    </option>
-                    <option value="Serviços para Empresas"     >Serviços para Empresas  </option>
-                    <option value="Tecnologia"                 >Tecnologia              </option>
-                    <option value="Telecomunicações"           >Telecomunicações        </option>
+                    <option value="">Categoria </option>
+                    <option value="Agronegócios">Agronegócios </option>
+                    <option value="Assistência técnica">
+                      Assistência técnica{" "}
+                    </option>
+                    <option value="Automotivo">Automotivo </option>
+                    <option value="Construção">Construção </option>
+                    <option value="Consultoria">Consultoria </option>
+                    <option value="Design">Design </option>
+                    <option value="Educação">Educação </option>
+                    <option value="Energias">Energias </option>
+                    <option value="Entretenimento">Entretenimento </option>
+                    <option value="Eventos">Eventos </option>
+                    <option value="Hotelaria">Hotelaria </option>
+                    <option value="Logística e Transporte">
+                      Logística e Transporte{" "}
+                    </option>
+                    <option value="Manufatura Industrial">
+                      Manufatura Industrial{" "}
+                    </option>
+                    <option value="Mercado Imobiliário">
+                      Mercado Imobiliário{" "}
+                    </option>
+                    <option value="Mídia">Mídia </option>
+                    <option value="Moda e beleza">Moda e beleza </option>
+                    <option value="Saúde">Saúde </option>
+                    <option value="Serviços ao Consumidor">
+                      Serviços ao Consumidor{" "}
+                    </option>
+                    <option value="Serviços Domésticos">
+                      Serviços Domésticos{" "}
+                    </option>
+                    <option value="Serviços Financeiros">
+                      Serviços Financeiros{" "}
+                    </option>
+                    <option value="Serviços para Empresas">
+                      Serviços para Empresas{" "}
+                    </option>
+                    <option value="Tecnologia">Tecnologia </option>
+                    <option value="Telecomunicações">Telecomunicações </option>
                   </select>
                 </div>
                 <div className="description">
@@ -155,7 +168,9 @@ const createJob = async (data:iJobForm) => {
                     placeholder="Digite aqui a descrição do serviço à solicitar"
                     {...register("Description")}
                   ></textarea>
-                  <button className="publish" type="submit">Publicar</button>
+                  <button className="publish" type="submit">
+                    Publicar
+                  </button>
                 </div>
               </StyledForm>
             </section>
@@ -176,7 +191,7 @@ const createJob = async (data:iJobForm) => {
                   ({
                     userId,
                     Job: { Job_Name, Description, lat, lnt, Category },
-                    id
+                    id,
                   }: IJobsUser) => {
                     return (
                       <li key={id} className="conteiner">
