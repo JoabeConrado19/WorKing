@@ -7,10 +7,13 @@ import { useContext, useEffect, useState } from "react";
 import { CardStyled } from "../Components/CardClient/style";
 import ContactModal from "../Components/ContactModal";
 import { DashboardContext } from "../contexts/dashboard";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+
 
 export const DashboardWorker = () => {
+  const Navigate = useNavigate()
   const [jobs, setJobs] = useState([]);
-  const { verifyToken } = useContext(DashboardContext)
 
 
   const { clientId} = useContext(DashboardContext)
@@ -24,9 +27,34 @@ export const DashboardWorker = () => {
     });
   },[]);
 
+
+
   useEffect(()=>{
-    verifyToken()
+    let Token = window.localStorage.getItem("@WorkingUser_Token")
+    let Id = window.localStorage.getItem("@WorkingUser_Id")
+    api
+    .get(`/users/${Id}`, {
+
+        headers: {
+            Authorization: `Bearer ${Token}`
+        }
+
+    })
+    .then((response) => {
+        if(response.status !== 200){
+            toast.error("Limite de tempo expirado, faça o login novamente!", { autoClose: 3000 })
+            Navigate("/login")
+        }
+        else if(response.data.user_type === "client"){
+          Navigate("/dashboard")
+
+
+        }
+        
+    })
+    .catch((err) => Navigate("/login"));
   },[])
+
 
   return (
     <>
