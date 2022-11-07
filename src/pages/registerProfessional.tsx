@@ -51,6 +51,7 @@ export const RegisterProfessional = () => {
 
   const onSubmitFunction = (data: any) => {
     delete data.password2;
+    data['user_type'] = 'worker';
 
     api
       .post("/users", data)

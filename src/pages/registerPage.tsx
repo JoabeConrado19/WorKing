@@ -9,7 +9,9 @@ import api from "../services/api";
 import { RegisterStyles } from "../styles/register";
 
 
+
 export const Register = () => {
+  
   const navigate = useNavigate();
 
   const formSchema = yup.object().shape({
@@ -51,6 +53,7 @@ export const Register = () => {
 
   const onSubmitFunction = (data: any) => {
     delete data.password2;
+    data['user_type'] = 'client';
 
     api
       .post("/users", data)

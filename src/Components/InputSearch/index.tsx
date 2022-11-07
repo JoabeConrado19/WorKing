@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import api from "../../services/api";
 
 export interface iData {
@@ -23,40 +23,38 @@ export interface iSearch {
 
 export const InputSearch = () => {
 
-    const [products, setProducts] = useState<iData>({} as iData)
-    const [filteredProducts, setFilteredProducts] = useState<iData>({} as iData)
-
-    useEffect(() => {
-        async function renderize() {
-
-            await api.get('jobs')
-                .then(res => setProducts(res.data))
-                .then(res => console.log(filteredProducts))
-                .catch(error => console.error(error));
-        }
-
-        function pesquisa(event: iData) {
-
-            let array = []
-            products.forEach(element => {
-
-                if (element.name.toUpperCase().includes(event.target.value.toUpperCase())) {
-                    array.push(element)
-                }
-                setFilteredProducts(array)
-            })
+    const [products, setProducts] = useState<iData[]>([] as iData[])
+    const [search, setSearch] = useState('')
+    const [filteredProducts, setFilteredProducts] = useState<iData[]>([] as iData[])
 
 
+    async function renderize() {
 
-        }
+        await api.get('jobs')
+            .then(res => setProducts(res.data))
+            .then(res => console.log(products))
+            .catch(error => console.error(error));
+    }
+    renderize()
 
-        renderize()
-    }, [])
+    // function pesquisa(event: string) {
+
+    //     // let array = []
+    //     // products.forEach(element => {
+
+    //     //     if (element.name.toUpperCase().includes(event.toUpperCase())) {
+    //     //         array.push(element)
+    //     //     }
+    //     //     setFilteredProducts(array)
+    //     // })
+    // }
+    const searchResult = products.filter((element) => element.Job.Job_Name === search)
 
 
     return (
         <div className='input-div'>
-            <input placeholder='Digite aqui sua pesquisa' />
+            <input onChange={(event) => setSearch(event.target.value)}
+                placeholder='Digite aqui sua pesquisa' />
             <h2>Lista de oportunidades </h2>
         </div>
     )
