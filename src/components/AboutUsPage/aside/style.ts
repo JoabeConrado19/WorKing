@@ -99,6 +99,14 @@ export const Aside = styled.aside<IAside>`
         font-size: 30px;
       }
 
+      button{
+        background-color: transparent;
+        display: flex;
+        align-items: center;
+        font-size: 18px;
+        text-align: start;
+      }
+
       p {
         width: 0px;
         margin-left: 10px;
