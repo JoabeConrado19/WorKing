@@ -11,7 +11,7 @@ import { RegisterStyles } from "../styles/register";
 
 
 export const Register = () => {
-  
+
   const navigate = useNavigate();
 
   const formSchema = yup.object().shape({
@@ -51,25 +51,20 @@ export const Register = () => {
     resolver: yupResolver(formSchema),
   });
 
-  const onSubmitFunction = (data: any) => {
+  const onSubmitFunction = async (data: any) => {
     delete data.password2;
     data['user_type'] = 'client';
 
-    api
+    await api
       .post("/users", data)
       .then((response: any) => {
         console.log(response);
         if (response.status === 201) {
           toast.success("Sucesso, Redirecionando!", { autoClose: 3000 });
-          setTimeout(() => {
-            navigate("/login");
-          }, 3000);
-
+          navigate("/login");
         }
       })
-      .catch(function (error) {
-        console.log(error);
-      });
+      .catch((error) => console.log(error));
   };
   console.log(errors);
 

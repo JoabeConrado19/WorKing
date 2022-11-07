@@ -23,7 +23,6 @@ export const AsideComponent = ({ setMenu, menu }: IAsideComponent) => {
 
   useEffect(()=>{
     getUserInfo()
-    console.log("a")
   }, [])
 
   return (

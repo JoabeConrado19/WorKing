@@ -5,7 +5,10 @@ export interface iData {
     userId: string;
     Job: {
         Job_Name: string;
-        Experience_Time: string;
+        Category: string
+        Description: string
+        lat: number
+        lnt: number
     };
     id: string;
 
@@ -48,8 +51,9 @@ export const InputSearch = () => {
     //     //     setFilteredProducts(array)
     //     // })
     // }
-    const searchResult = products.filter((element) => element.Job.Job_Name === search)
+    const searchResult = products.filter((element) => element.Job.Category === search)
 
+    searchResult.length > 0 && setFilteredProducts(searchResult)
 
     return (
         <div className='input-div'>

@@ -3,13 +3,16 @@ import api from "../services/api";
 
 export const DashboardContext = createContext({})
 
-export const DashboardProvider = ({children}) => {
-    
+export const DashboardProvider = ({ children }) => {
+
     const Token = window.localStorage.getItem('@WorkingUser_Token');
     const Id = window.localStorage.getItem('@WorkingUser_Id');
 
 
 
+    const [products, setProducts] = useState < iData[] > ([] as iData[])
+    const [search, setSearch] = useState('')
+    const [filteredProducts, setFilteredProducts] = useState < iData[] > ([] as iData[])
 
     const [lat, setLat] = useState(-3.0306345);
     const [lng, setLng] = useState(-59.93555);
@@ -17,7 +20,7 @@ export const DashboardProvider = ({children}) => {
     const [userImg, setUserImg] = useState("");
     const [userName, setUserName] = useState("");
 
-    const findMyLat = () =>{
+    const findMyLat = () => {
         const success = (position) => {
             const latitude = position.coords.latitude;
             const longitude = position.coords.longitude;
@@ -31,7 +34,7 @@ export const DashboardProvider = ({children}) => {
         navigator.geolocation.getCurrentPosition(success, error)
     }
 
-    const setMapLocation = () =>{
+    const setMapLocation = () => {
         const success = (position) => {
             const latitude = position.coords.latitude;
             const longitude = position.coords.longitude;
@@ -46,28 +49,28 @@ export const DashboardProvider = ({children}) => {
 
     const getUserInfo = () => {
         api
-        .get(`/users/${Id}`, {
+            .get(`/users/${Id}`, {
 
-            headers: {
-                "Authorization": `Bearer ${Token}`
-              }
+                headers: {
+                    "Authorization": `Bearer ${Token}`
+                }
 
-        })
-        .then((response) => {
-  
-          if (response.status == 200) {
-           console.log(response)
-           setUserImg(`${response.data.profile_pic}`)
-           setUserName(`${response.data.name}`)
-            
-          }
-      })
-      
+            })
+            .then((response) => {
+
+                if (response.status == 200) {
+                    console.log(response)
+                    setUserImg(`${response.data.profile_pic}`)
+                    setUserName(`${response.data.name}`)
+
+                }
+            })
+
     }
 
 
-    return(
-        <DashboardContext.Provider value={{findMyLat , setMapLocation, lat, lng, zoom, getUserInfo, userImg, userName }}>
+    return (
+        <DashboardContext.Provider value={{ findMyLat, setMapLocation, lat, lng, zoom, getUserInfo, userImg, userName }}>
             {children}
         </DashboardContext.Provider>
     )
