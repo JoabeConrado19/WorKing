@@ -1,4 +1,3 @@
-import { Aside } from "./style";
 import { HiOutlineUserCircle } from "react-icons/hi";
 import {
   AiOutlineClockCircle,
@@ -8,7 +7,10 @@ import {
 import { FiMapPin, FiUsers } from "react-icons/fi";
 import { FaWallet, FaWindowClose } from "react-icons/fa";
 import { ImExit } from "react-icons/im";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { Aside } from "./style";
+import { useContext, useEffect } from "react";
+import { DashboardContext } from "../../../contexts/dashboard";
 
 interface IAsideComponent {
   setMenu?: any;
@@ -16,12 +18,19 @@ interface IAsideComponent {
 }
 
 export const AsideComponent = ({ setMenu, menu }: IAsideComponent) => {
+
+  const { getUserInfo, userImg, userName}:any = useContext(DashboardContext)
+
+  useEffect(()=>{
+    getUserInfo()
+  }, [])
+
   return (
     <>
       <Aside rigth={menu ? "auto" : "-300px"}>
         <div className="userName">
-          <HiOutlineUserCircle />
-          <h2>Name</h2>
+          <img src={userImg} alt="" />
+          <h2>{userName}</h2>
           <button
             onClick={(event) => {
               event.preventDefault();
@@ -68,8 +77,8 @@ export const AsideComponent = ({ setMenu, menu }: IAsideComponent) => {
                 <p>Histórico</p>
               </Link>
             </li>
-            <li>
-              <Link to="/">
+            <li >
+              <Link to="/" >
                 <ImExit />
                 <p>Logout</p>
               </Link>

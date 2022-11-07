@@ -5,7 +5,7 @@ import { CgProfile } from "react-icons/cg";
 import { MdWorkOutline } from "react-icons/md";
 import { BiLogIn } from "react-icons/bi";
 
-import {GoogleLogin} from "@react-oauth/google"
+import { GoogleLogin } from "@react-oauth/google";
 import jwt_decode from "jwt-decode";
 
 import { useNavigate } from "react-router-dom";
@@ -32,21 +32,33 @@ export const LoginPage = () => {
     resolver: yupResolver(formSchema),
   });
 
-  const onSubmitFunction = (data: any) => {
+  const onSubmitFunction = async (data: any) => {
     console.log(data);
-    api
+    await api
       .post("/login", data)
       .then((response: any) => {
-        if (response.status === 200) {
+        if (response.status == 200) {
           toast.success("Logado com sucesso!", { autoClose: 3000 });
-          setTimeout(() => {
+          console.log(response);
+          window.localStorage.setItem(
+            "@WorkingUser_Token",
+            `${response.data.accessToken}`
+          );
+          window.localStorage.setItem(
+            "@WorkingUser_Id",
+            `${response.data.user.id}`
+          );
+
+          if (response.data.user.user_type !== "worker") {
             navigate("/dashboard");
-          }, 2000);
+          } else {
+            navigate("/dashboard-worker");
+          }
         }
       })
       .catch(function (error) {
         console.log(error);
-        if (error.response.status === 400) {
+        if (error.response.status == 400) {
           toast.error("Email ou senha Incorreto", { autoClose: 3000 });
         }
       });
@@ -71,7 +83,7 @@ export const LoginPage = () => {
           </>
           <div className="divLabelBt">
             <label htmlFor="btEntrar">Entrar</label>
-            <button type="submit" id="btEntrar">
+            <button>
               <BiLogIn className="iconEntrar" />
             </button>
             <GoogleLogin
@@ -95,13 +107,13 @@ export const LoginPage = () => {
         <div className="divBtsNavigate">
           <div className="divRegistros">
             <span className="spanRegistroProf">Profissional</span>
-            <button>
+            <button onClick={() => navigate("/worker-register")}>
               <MdWorkOutline className="maletaIcon" />
             </button>
           </div>
           <div className="divRegistros">
             <span className="spanRegistroCliente">Cliente</span>
-            <button>
+            <button onClick={() => navigate("/client-register")}>
               <CgProfile className="clienteIcon" />
             </button>
           </div>

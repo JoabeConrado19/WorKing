@@ -1,14 +1,53 @@
+import { useContext, useEffect, useState } from "react";
 import { AiFillDelete, AiOutlineMenu } from "react-icons/ai";
 import { BsPinMapFill } from "react-icons/bs";
 import { FiEdit2 } from "react-icons/fi";
+import { number } from "yup/lib/locale";
 import { AsideComponent } from "../Components/AboutUsPage/aside";
+import { DashboardContext } from "../contexts/dashboard";
+import api from "../services/api";
 
 import {
   StyledBody,
   StyledClientDash,
   StyledForm,
 } from "../styles/StyledClientDash";
+
+interface IJobsUser {
+  map<T>(
+    arg0: ({
+      userId,
+      Job: { Job_Name, Description, Lat, Int, Category },
+      id
+    }: IJobsUser) => JSX.Element
+  ): import("react").ReactNode;
+  userId: number;
+  Job: {
+    Job_Name: string;
+    Description: string;
+    Lat: number;
+    Int: number;
+    Category: string;
+  };
+  id: number;
+}
+
 export const DashboardClient = () => {
+  const [jobsUser, setJobsUser] = useState<IJobsUser | null>(null);
+
+  const getJobsUser = async (id: any) => {
+    await api(`/jobs?userId=${id}`)
+      .then((resp) => {
+        console.log(resp.data);
+        resp.data.length < 1 ? setJobsUser(null) : setJobsUser(resp.data);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    getJobsUser(window.localStorage.getItem("@WorkingUser_Id"));
+  }, []);
+
   return (
     <>
       <StyledBody>
@@ -65,112 +104,49 @@ export const DashboardClient = () => {
               </StyledForm>
             </section>
             <ul>
-              <li className="conteiner">
-                <div className="top-conteiner">
-                  <h3>Titulo do serviço</h3>
-                  <span>Categoria</span>
-                </div>
-                <div className="conteudo">
+              {!jobsUser ? (
+                <>
+                  <h2>
+                    Que pena! Você não solicitou nenhum serviço em nossa
+                    plataforma.
+                  </h2>
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Iure laboriosam, tenetur voluptas sed illum quidem eveniet
-                    dolore veniam eligendi non error libero, laborum quae ipsam
-                    atque quod rerum aliquam cum?
+                    Não perca tempo e solicite agora mesmo serviço com um de
+                    nossos profissionais cadastrados!
                   </p>
-                  <BsPinMapFill />
-                  <div className="div-categoria">
-                    <button>
-                      <FiEdit2 />
-                      Editar
-                    </button>
-                    <button className="delete">
-                      {" "}
-                      <AiFillDelete />
-                      Deletar
-                    </button>
-                  </div>
-                </div>
-              </li>
-              <li className="conteiner">
-                <div className="top-conteiner">
-                  <h3>Titulo do serviço</h3>
-                  <span>Categoria</span>
-                </div>
-                <div className="conteudo">
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Iure laboriosam, tenetur voluptas sed illum quidem eveniet
-                    dolore veniam eligendi non error libero, laborum quae ipsam
-                    atque quod rerum aliquam cum?
-                  </p>
-                  <BsPinMapFill />
-
-                  <div className="div-categoria">
-                    <button>
-                      <FiEdit2 />
-                      Editar
-                    </button>
-                    <button className="delete">
-                      {" "}
-                      <AiFillDelete />
-                      Deletar
-                    </button>
-                  </div>
-                </div>
-              </li>
-              <li className="conteiner">
-                <div className="top-conteiner">
-                  <h3>Titulo do serviço</h3>
-                  <span>Categoria</span>
-                </div>
-                <div className="conteudo">
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Iure laboriosam, tenetur voluptas sed illum quidem eveniet
-                    dolore veniam eligendi non error libero, laborum quae ipsam
-                    atque quod rerum aliquam cum?
-                  </p>
-                  <BsPinMapFill />
-
-                  <div className="div-categoria">
-                    <button>
-                      <FiEdit2 /> Editar
-                    </button>
-                    <button className="delete">
-                      {" "}
-                      <AiFillDelete />
-                      Deletar
-                    </button>
-                  </div>
-                </div>
-              </li>
-              <li className="conteiner">
-                <div className="top-conteiner">
-                  <h3>Titulo do serviço</h3>
-                  <span>Categoria</span>
-                </div>
-                <div className="conteudo">
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Iure laboriosam, tenetur voluptas sed illum quidem eveniet
-                    dolore veniam eligendi non error libero, laborum quae ipsam
-                    atque quod rerum aliquam cum?
-                  </p>
-                  <BsPinMapFill />
-
-                  <div className="div-categoria">
-                    <button>
-                      <FiEdit2 />
-                      Editar
-                    </button>
-                    <button className="delete">
-                      {" "}
-                      <AiFillDelete />
-                      Deletar
-                    </button>
-                  </div>
-                </div>
-              </li>
+                </>
+              ) : (
+                jobsUser.map(
+                  ({
+                    userId,
+                    Job: { Job_Name, Description, Lat, Int, Category },
+                    id
+                  }: IJobsUser) => {
+                    return (
+                      <li key={id} className="conteiner">
+                        <div className="top-conteiner">
+                          <h3>{Job_Name}</h3>
+                          <span>{Category}</span>
+                        </div>
+                        <div className="conteudo">
+                          <p>{Description}</p>
+                          <BsPinMapFill />
+                          <div className="div-categoria">
+                            <button>
+                              <FiEdit2 />
+                              Editar
+                            </button>
+                            <button className="delete">
+                              <AiFillDelete />
+                              Deletar
+                            </button>
+                          </div>
+                        </div>
+                      </li>
+                    );
+                  }
+                )
+              )}
             </ul>
           </main>
         </StyledClientDash>
