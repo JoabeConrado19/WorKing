@@ -7,10 +7,11 @@ import {
 import { FiMapPin, FiUsers } from "react-icons/fi";
 import { FaWallet, FaWindowClose } from "react-icons/fa";
 import { ImExit } from "react-icons/im";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { Aside } from "./style";
 import { useContext, useEffect } from "react";
 import { DashboardContext } from "../../../contexts/dashboard";
+import api from "../../../services/api";
 
 export interface IAsideComponent {
   setMenu?: any;
@@ -24,6 +25,8 @@ export const AsideComponent = () => {
   useEffect(()=>{
     getUserInfo()
   }, [])
+
+  const navigate = useNavigate()
 
   return (
     <>
@@ -43,10 +46,30 @@ export const AsideComponent = () => {
         <div className="container__menu">
           <ul className="menu">
             <li>
-              <Link to="/dashboard">
+              <button onClick={async ()=>{
+                 let Token = window.localStorage.getItem("@WorkingUser_Token")
+                 let Id = window.localStorage.getItem("@WorkingUser_Id")
+                 api
+                 .get(`/users/${Id}`, {
+         
+                     headers: {
+                         Authorization: `Bearer ${Token}`
+                     }
+         
+                 })
+                 .then((response) => {
+                     if(response.data.user_type === "worker"){
+                      navigate("/dashboard-worker")
+                     }
+                     else{
+                      navigate("/dashboard")
+                     }
+                     
+                 })
+              }}>
                 <AiOutlineHome className="iconMenu"/>
                 <p>Home</p>
-              </Link>
+              </button>
             </li>
             <li>
               {/* Alterar redirecionamento */}
@@ -77,11 +100,15 @@ export const AsideComponent = () => {
                 <p>Histórico</p>
               </Link>
             </li>
-            <li >
-              <Link to="/">
+            <li>
+              <button onClick={()=>{
+                window.localStorage.clear()
+                navigate("/")
+
+              }}>
                 <ImExit />
                 <p>Logout</p>
-              </Link>
+              </button>
             </li>
             <li>
               <Link to="/about-us">
