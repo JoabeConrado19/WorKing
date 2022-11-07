@@ -4,6 +4,7 @@ import { FaWallet } from 'react-icons/fa'
 import { FiEdit2, FiMapPin, FiUsers } from 'react-icons/fi'
 import { HiOutlineUserCircle } from 'react-icons/hi'
 import { ImExit } from 'react-icons/im'
+import { InputSearch } from '../Components/InputSearch'
 
 
 import { StyledAside, StyledBody, StyledClientDash, StyledForm } from '../styles/StyledClientDash'
@@ -17,11 +18,7 @@ export const DashboardClient = () => {
                     <h1>Home</h1>
                 </header>
                 <main>
-                    <div className='input-div'>
-                        <input placeholder='Digite aqui sua pesquisa' />
-                        <h2>Lista de oportunidades </h2>
-                    </div>
-
+                    <InputSearch />
                     <section>
                         <StyledForm>
                             <div>

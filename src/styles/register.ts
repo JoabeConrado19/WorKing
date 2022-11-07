@@ -46,8 +46,6 @@ export const RegisterStyles = styled.div`
 
     figure > img{
         width: 232px;
-
-
     }
 
     button{
@@ -57,6 +55,12 @@ export const RegisterStyles = styled.div`
         border-radius: 5px;
         border: none;
         cursor: pointer;
+        transition: all 1s ease;
+        border: 2px solid transparent;
+    }
+    button: hover{
+        background: transparent;
+        border: 2px solid #FFA800;
     }
 
     p{
@@ -70,4 +74,10 @@ export const RegisterStyles = styled.div`
         margin-bottom: 20px;
         margin-top: 15px;
     }
+
+    .divBtsNavigate {
+        width: 200px ;
+        display: flex;
+    }
+    
 `;
