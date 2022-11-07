@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 import { AiFillDelete } from "react-icons/ai";
 import { FiEdit2 } from "react-icons/fi";
-// import { number } from "yup/lib/locale";
+
 import { AsideComponent } from "../Components/AboutUsPage/aside";
-// import { DashboardContext } from "../contexts/dashboard";
+
 import { useForm } from "react-hook-form";
 import { MdMenuOpen } from "react-icons/md";
 import EditJobModal from "../Components/EditJobModal";
@@ -49,7 +49,9 @@ interface IJobsUser {
 
 export const DashboardClient = () => {
 
-  const { setMapLocation, lat, lng, setOpenModal, menu, setMenu, workers, jobsUser, search, setFilteredProducts, filteredProducts, setJobsUser, searchFilter }: any = useContext(DashboardContext)
+ 
+
+  const { setMapLocation, lat, lng, setOpenModal, menu, setMenu, jobsUser, search, filteredProducts, setJobsUser, verifyToken }: any = useContext(DashboardContext)
 
   const [jobId, setJobId] = useState<null | number>(null);
 
@@ -74,13 +76,17 @@ export const DashboardClient = () => {
       });
       console.log(data);
       reset()
-      setJobsUser([...jobsUser, data]);
+      setJobsUser([data, ...jobsUser ]);
     } catch (error) {
       console.log(error);
     } finally {
 
     }
   };
+
+  useEffect(()=>{
+    verifyToken()
+  },[])
 
   const deleteJob = async (event: any) => {
     try {
@@ -101,18 +107,20 @@ export const DashboardClient = () => {
     }
   }
 
+  
+
 
 
 
   useEffect(() => {
     const getJobsUser = async (id: any) => {
       await api(`jobs?userId=${id}`)
-        .then((resp) => {
+        .then((resp: any) => {
 
           resp.data?.length > 0 && setJobsUser(resp.data);
           // setFilteredProducts([...jobsUser])
         })
-        .catch((err) => console.log(err));
+        .catch((err: any) => console.log(err));
     };
 
     getJobsUser(localStorage.getItem("@WorkingUser_Id"));
@@ -138,6 +146,7 @@ export const DashboardClient = () => {
             <h1>Home</h1>
           </header>
           <main>
+
             <div className="input-div">
               <InputSearch />
             </div>
@@ -271,10 +280,6 @@ export const DashboardClient = () => {
                       );
                     }
                   )
-
-
-
-
               }
             </ul>
           </main>

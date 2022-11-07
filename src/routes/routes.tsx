@@ -20,10 +20,9 @@ const RoutesMain = () => {
       <Route path="/dashboard" element={<DashboardClient />} />
       <Route path="/dashboard-worker" element={<DashboardWorker />} />
       <Route path="/location" element={<Location />} />
-      <Route path="/contacts" element={<h1>Fale conosco</h1>} />
+      <Route path="/manual" element={<h1>Manual aqui</h1>} />
       <Route path="/about-us" element={<AboutUsPage />} />
       <Route path="/wallet" element={<Wallet />} /> 
-      <Route path="/register" element={<h1>Register</h1>} />
       <Route path="*" element={<h2>Not Found</h2>} />
     </Routes>
   );

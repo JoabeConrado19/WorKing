@@ -3,11 +3,14 @@ import { StyledDashboard } from "../styles/dashboardWorker";
 import { Header } from "../Components/Header/index";
 import { AsideComponent } from "../Components/AboutUsPage/aside";
 import api from "../services/api";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CardStyled } from "../Components/CardClient/style";
+import { DashboardContext } from "../contexts/dashboard";
 
 export const DashboardWorker = () => {
   const [jobs, setJobs] = useState([]);
+  const { verifyToken } = useContext(DashboardContext)
+
 
   useEffect( () => {
      api.get("/jobs").then((response) => {
@@ -16,6 +19,11 @@ export const DashboardWorker = () => {
       console.log(response.data)
     });
   },[]);
+
+  useEffect(()=>{
+    verifyToken()
+  },[])
+
   return (
     <>
       <AsideComponent />

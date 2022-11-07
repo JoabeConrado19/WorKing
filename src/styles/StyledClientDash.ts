@@ -4,7 +4,7 @@ import backgroundOne from "../assets/1.png"
 export const StyledBody = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: #a1a1a1;
+  height: 100vh;
 
   @media (min-width: 768px) {
     flex-direction: row;
@@ -16,7 +16,7 @@ export const StyledClientDash = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   
   .conteiner div p {
     font-size: 16px;

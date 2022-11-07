@@ -83,7 +83,7 @@ export const RegisterStyles = styled.div`
         display: flex;
     }
 
-    .bounce-in-top {
+.bounce-in-top {
 	-webkit-animation: bounce-in-top 1.1s both;
 	        animation: bounce-in-top 1.1s both;
 }
