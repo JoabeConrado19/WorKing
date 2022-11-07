@@ -48,7 +48,7 @@ interface IJobsUser {
 export const DashboardClient = () => {
   const [jobsUser, setJobsUser] = useState<IJobsUser | null>(null);
 
-  const { register, handleSubmit } = useForm<iJobForm>();
+  const { register, handleSubmit, reset } = useForm<iJobForm>();
 
   const getJobsUser = async (id: any) => {
     await api(`jobs?userId=${id}`)
@@ -69,24 +69,26 @@ export const DashboardClient = () => {
   // 		"Categoty": "Tech"
   // 	}
   // }
-  const createJob = async (data: iJobForm) => {
+  const createJob = async (job: iJobForm) => {
     try {
       const dataCorrectFormat: iDataCreateJob = {
         userId: Number(localStorage.getItem("@WorkingUser_Id")),
         Job: {
-          ...data,
+          ...job,
           lat: 0,
           lnt: 0,
         },
       };
       console.log(dataCorrectFormat);
       // api.defaults.headers.authorization = `Bearer ${localStorage.getItem('@WorkingUser_Token')}`;
-      const response = await api.post("jobs", dataCorrectFormat, {
+      const {data} = await api.post("jobs", dataCorrectFormat, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("@WorkingUser_Token")}`,
         },
       });
-      console.log(response);
+      console.log(data);
+      setJobsUser([...jobsUser, data])
+      reset()
     } catch (error) {
       console.log(error);
     } finally {
@@ -119,7 +121,7 @@ export const DashboardClient = () => {
                     placeholder="Titulo da solicitação"
                     {...register("Job_Name")}
                   />
-                  <select id="" {...register("Category")}>
+                  <select {...register("Category")}>
                     <option value="">Categoria </option>
                     <option value="Agronegócios">Agronegócios </option>
                     <option value="Assistência técnica">
