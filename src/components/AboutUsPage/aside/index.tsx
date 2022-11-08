@@ -44,7 +44,7 @@ export const AsideComponent = ({ setMenu, menu }: IAsideComponent) => {
           <ul className="menu">
             <li>
               <Link to="/dashboard">
-                <AiOutlineHome />
+                <AiOutlineHome className="iconMenu"/>
                 <p>Home</p>
               </Link>
             </li>

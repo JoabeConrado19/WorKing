@@ -23,14 +23,6 @@ export const DashboardWorker = () => {
       <StyledDashboard>
         <div className="headerMain">
           <h3>Lista de oportunidades</h3>
-          <button
-            className="btnFilter"
-            onClick={(event) => {
-              event.preventDefault();
-            }}
-          >
-            Filtrar Categoria
-          </button>
         </div>
         <div className="listCard">
           

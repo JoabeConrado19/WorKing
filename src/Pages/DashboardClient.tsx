@@ -211,7 +211,7 @@ export const DashboardClient = () => {
                         </div>
                         <div className="conteudo">
                           <p>{Description}</p>
-                          <BsPinMapFill />
+                       
                           <div className="div-categoria">
                             <button className="btedit">
                               <FiEdit2 />

@@ -38,7 +38,7 @@ export const Main = ({ setMenu, menu }: IMain) => {
             </p>
             <p>
               Voltada para facilitar o dia a dia de quem precisa de serviços
-              domésticos, na contrução civil ou até mesmo uma acessoria.
+              domésticos, na contrução civil entre outros..
             </p>
           </div>
           <div className="container__lista__criadores">

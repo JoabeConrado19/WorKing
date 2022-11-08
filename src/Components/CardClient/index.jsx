@@ -116,7 +116,7 @@ export const CardClient = (props) => {
               event.preventDefault();
             }}
           >
-            Entrar em contato
+           Contato
           </button>
 
           <button
@@ -137,7 +137,7 @@ export const CardClient = (props) => {
 
             }}
           >
-            Gerar rota
+            Rota
           </button>
         </div>
       </div>
