@@ -1,15 +1,15 @@
-
-import './App.css';
 import Routes from "./routes/routes";
-import { GlobalStyle } from './styles/global';
+import "./App.css";
+
+import { GlobalStyle } from "./styles/global";
 
 function App() {
-    return (
-        <>
-            <Routes />
-            <GlobalStyle />
-        </>
-    );
+  return (
+    <>
+      <Routes />
+      <GlobalStyle />
+    </>
+  );
 }
 
 export default App;

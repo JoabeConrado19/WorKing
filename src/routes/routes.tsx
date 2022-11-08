@@ -4,7 +4,10 @@ import { LandingPage } from "../Pages/LandingPage";
 import { Register } from "../Pages/registerPage";
 import { RegisterProfessional } from "../Pages/registerProfessional";
 import { LoginPage } from "../Pages/LoginPage";
-import { Profile } from "../Pages/ProfilePage";
+import { AboutUsPage } from "../Pages/AboutUsPage";
+import { Location } from "../Pages/LocationPage";
+import { DashboardWorker } from "../Pages/DashboardWorker";
+import { ProfilePage } from "../Pages/ProfilePage";
 
 const RoutesMain = () => {
   return (
@@ -14,9 +17,11 @@ const RoutesMain = () => {
       <Route path="/worker-register" element={<RegisterProfessional />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/dashboard" element={<DashboardClient />} />
-      <Route path="/profile" element={<Profile />} />
+      <Route path="/dashboard-worker" element={<DashboardWorker />} />
+      <Route path="/profile" element={<ProfilePage />} />
+      <Route path="/location" element={<Location />} />
       <Route path="/contacts" element={<h1>Fale conosco</h1>} />
-      <Route path="/about-us" element={<h1>Sobre nós</h1>} />
+      <Route path="/about-us" element={<AboutUsPage />} />
       <Route path="/register" element={<h1>Register</h1>} />
       <Route path="*" element={<h2>Not Found</h2>} />
     </Routes>
