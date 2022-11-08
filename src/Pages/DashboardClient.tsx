@@ -6,6 +6,7 @@ import { FiEdit2 } from "react-icons/fi";
 import { AsideComponent } from "../Components/AboutUsPage/aside";
 import api from "../services/api";
 
+import { InputSearch } from "../Components/InputSearch";
 import { DashboardContext } from "../contexts/dashboard";
 import {
     StyledBody,
@@ -45,7 +46,7 @@ interface IJobsUser {
 }
 
 export const DashboardClient = () => {
-    const { setMapLocation, lat, lng }: any = useContext(DashboardContext)
+    const { setMapLocation, lat, lng, searchResult }: any = useContext(DashboardContext)
 
     const [jobsUser, setJobsUser] = useState<IJobsUser[]>([] as IJobsUser[]);
 
@@ -54,7 +55,7 @@ export const DashboardClient = () => {
     const getJobsUser = async (id: any) => {
         await api(`jobs?userId=${id}`)
             .then((resp) => {
-                console.log(resp.data);
+
                 resp.data.length > 1 && setJobsUser(resp.data);
             })
             .catch((err) => console.log(err));
@@ -111,10 +112,7 @@ export const DashboardClient = () => {
                         <h1>Home</h1>
                     </header>
                     <main>
-                        <div className="input-div">
-                            <input placeholder="Digite aqui sua pesquisa" />
-                            <h2>Lista de oportunidades </h2>
-                        </div>
+                        <InputSearch />
                         <section>
                             <StyledForm onSubmit={handleSubmit(createJob)}>
                                 <div>
@@ -179,6 +177,8 @@ export const DashboardClient = () => {
                             </StyledForm>
                         </section>
                         <ul>
+
+                            { }
                             {!jobsUser ? (
                                 <>
                                     <h2>

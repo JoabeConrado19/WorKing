@@ -1,59 +1,19 @@
-import { useState } from "react";
+import { useContext, useEffect } from "react";
+import { DashboardContext } from "../../contexts/dashboard";
 import api from "../../services/api";
 
-export interface iData {
-    userId: string;
-    Job: {
-        Job_Name: string;
-        Category: string
-        Description: string
-        lat: number
-        lnt: number
-    };
-    id: string;
-
-}
-
-// export interface iSearch {
-//     InputSearch: (data: iData) => Promise<void>
-// }
-
-export interface iSearch {
-
-
-}
-
-
 export const InputSearch = () => {
+    const { setWorkers, workers, setFilteredProducts, search, setSearch, searchResult }: any = useContext(DashboardContext)
 
-    const [products, setProducts] = useState<iData[]>([] as iData[])
-    const [search, setSearch] = useState('')
-    const [filteredProducts, setFilteredProducts] = useState<iData[]>([] as iData[])
-
-
-    async function renderize() {
-
-        await api.get('jobs')
-            .then(res => setProducts(res.data))
-            .then(res => console.log(products))
+    useEffect(() => {
+        api.get('jobs')
+            .then(res => setWorkers(res.data))
             .catch(error => console.error(error));
-    }
-    renderize()
+    }, [])
 
-    // function pesquisa(event: string) {
 
-    //     // let array = []
-    //     // products.forEach(element => {
 
-    //     //     if (element.name.toUpperCase().includes(event.toUpperCase())) {
-    //     //         array.push(element)
-    //     //     }
-    //     //     setFilteredProducts(array)
-    //     // })
-    // }
-    const searchResult = products.filter((element) => element.Job.Category === search)
-
-    searchResult.length > 0 && setFilteredProducts(searchResult)
+    searchResult?.length > 0 && setFilteredProducts(searchResult)
 
     return (
         <div className='input-div'>

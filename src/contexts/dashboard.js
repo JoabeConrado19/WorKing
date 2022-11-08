@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import api from "../services/api";
 
 export const DashboardContext = createContext({})
@@ -7,13 +7,9 @@ export const DashboardProvider = ({ children }) => {
 
     const Token = window.localStorage.getItem('@WorkingUser_Token');
     const Id = window.localStorage.getItem('@WorkingUser_Id');
-
-
-
-    const [products, setProducts] = useState < iData[] > ([] as iData[])
+    const [workers, setWorkers] = useState([])
     const [search, setSearch] = useState('')
-    const [filteredProducts, setFilteredProducts] = useState < iData[] > ([] as iData[])
-
+    const [filteredProducts, setFilteredProducts] = useState([])
     const [lat, setLat] = useState(-3.0306345);
     const [lng, setLng] = useState(-59.93555);
     const [zoom, setZoom] = useState(15);
@@ -34,6 +30,14 @@ export const DashboardProvider = ({ children }) => {
         navigator.geolocation.getCurrentPosition(success, error)
     }
 
+    useEffect(() => {
+        const searchResult = () => workers.includes((element) => element.Job.Category === search)
+        searchResult()
+    }, [search])
+
+
+
+
     const setMapLocation = () => {
         const success = (position) => {
             const latitude = position.coords.latitude;
@@ -48,6 +52,7 @@ export const DashboardProvider = ({ children }) => {
     }
 
     const getUserInfo = () => {
+
         api
             .get(`/users/${Id}`, {
 
@@ -58,7 +63,7 @@ export const DashboardProvider = ({ children }) => {
             })
             .then((response) => {
 
-                if (response.status == 200) {
+                if (response.status === 200) {
                     console.log(response)
                     setUserImg(`${response.data.profile_pic}`)
                     setUserName(`${response.data.name}`)
@@ -70,7 +75,7 @@ export const DashboardProvider = ({ children }) => {
 
 
     return (
-        <DashboardContext.Provider value={{ findMyLat, setMapLocation, lat, lng, zoom, getUserInfo, userImg, userName }}>
+        <DashboardContext.Provider value={{ findMyLat, setMapLocation, lat, lng, zoom, getUserInfo, userImg, userName, setWorkers, workers, setFilteredProducts, filteredProducts, search, setSearch }}>
             {children}
         </DashboardContext.Provider>
     )
