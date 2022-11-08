@@ -7,6 +7,7 @@ import { LoginPage } from '../Pages/LoginPage';
 import { AboutUsPage } from '../Pages/AboutUsPage';
 import { Location } from '../Pages/LocationPage';
 import { DashboardWorker } from '../Pages/DashboardWorker';
+import { Wallet } from '../Pages/Wallet';
 
 
 const RoutesMain = () => {
@@ -21,6 +22,7 @@ const RoutesMain = () => {
       <Route path="/location" element={<Location />} />
       <Route path="/contacts" element={<h1>Fale conosco</h1>} />
       <Route path="/about-us" element={<AboutUsPage />} />
+      <Route path="/wallet" element={<Wallet />} /> 
       <Route path="/register" element={<h1>Register</h1>} />
       <Route path="*" element={<h2>Not Found</h2>} />
     </Routes>
