@@ -1,13 +1,15 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { AiFillDelete, AiOutlineMenu } from "react-icons/ai";
-import { BsPinMapFill } from "react-icons/bs";
-import { FiEdit2 } from "react-icons/fi";
+import { AiOutlineMenu } from "react-icons/ai";
 import { AsideComponent } from "../Components/AboutUsPage/aside";
+
+import { DashboardContext } from "../contexts/dashboard";
+
+
 import api from "../services/api";
 
+import { ClientList } from "../Components/ClientList";
 import { InputSearch } from "../Components/InputSearch";
-import { DashboardContext } from "../contexts/dashboard";
 import {
     StyledBody,
     StyledClientDash,
@@ -46,9 +48,9 @@ interface IJobsUser {
 }
 
 export const DashboardClient = () => {
-    const { setMapLocation, lat, lng, searchResult }: any = useContext(DashboardContext)
+    const { setMapLocation, lat, lng, searchResult, setJobsUser, jobsUser, setNewJobsUser }: any = useContext(DashboardContext)
 
-    const [jobsUser, setJobsUser] = useState<IJobsUser[]>([] as IJobsUser[]);
+    // const [jobsUser, setJobsUser] = useState<IJobsUser[]>([] as IJobsUser[]);
 
     const { register, handleSubmit, reset } = useForm<iJobForm>();
 
@@ -61,16 +63,7 @@ export const DashboardClient = () => {
             .catch((err) => console.log(err));
     };
 
-    // {
-    // 	"userId": 4,
-    // 	"Job": {
-    // 		"Job_Name": "Consertar pc",
-    // 		"Description": "pc quebrou hj de manha e preciso de alguem para arrumar ele, pago 100 pila moro?",
-    // 		"lat": "-3.0264",
-    // 		"lnt": "-60.0149",
-    // 		"Categoty": "Tech"
-    // 	}
-    // }
+
     const createJob = async (job: iJobForm) => {
         setMapLocation()
         try {
@@ -82,15 +75,15 @@ export const DashboardClient = () => {
                     lnt: lng,
                 },
             };
-            console.log(dataCorrectFormat);
-            // api.defaults.headers.authorization = `Bearer ${localStorage.getItem('@WorkingUser_Token')}`;
+
+
             const { data } = await api.post("jobs", dataCorrectFormat, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("@WorkingUser_Token")}`,
                 },
             });
-            console.log(data);
             setJobsUser([...jobsUser, data])
+            setNewJobsUser([...jobsUser, data])
             reset()
         } catch (error) {
             console.log(error);
@@ -176,53 +169,7 @@ export const DashboardClient = () => {
                                 </div>
                             </StyledForm>
                         </section>
-                        <ul>
-
-                            { }
-                            {!jobsUser ? (
-                                <>
-                                    <h2>
-                                        Que pena! Você não solicitou nenhum serviço em nossa
-                                        plataforma.
-                                    </h2>
-                                    <p>
-                                        Não perca tempo e solicite agora mesmo serviço com um de
-                                        nossos profissionais cadastrados!
-                                    </p>
-                                </>
-                            ) : (
-                                jobsUser.map(
-                                    ({
-                                        userId,
-                                        Job: { Job_Name, Description, lat, lnt, Category },
-                                        id,
-                                    }: IJobsUser) => {
-                                        return (
-                                            <li key={id} className="conteiner">
-                                                <div className="top-conteiner">
-                                                    <h3>{Job_Name}</h3>
-                                                    <span>{Category}</span>
-                                                </div>
-                                                <div className="conteudo">
-                                                    <p>{Description}</p>
-                                                    <BsPinMapFill />
-                                                    <div className="div-categoria">
-                                                        <button>
-                                                            <FiEdit2 />
-                                                            Editar
-                                                        </button>
-                                                        <button className="delete">
-                                                            <AiFillDelete />
-                                                            Deletar
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        );
-                                    }
-                                )
-                            )}
-                        </ul>
+                        <ClientList />
                     </main>
                 </StyledClientDash>
             </StyledBody>

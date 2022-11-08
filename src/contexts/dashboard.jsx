@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import api from "../services/api";
 
 export const DashboardContext = createContext({})
@@ -12,6 +12,8 @@ export const DashboardProvider = ({ children }) => {
     const [filteredProducts, setFilteredProducts] = useState([])
     const [lat, setLat] = useState(-3.0306345);
     const [lng, setLng] = useState(-59.93555);
+    const [jobsUser, setJobsUser] = useState([]);
+    const [newJobsUser, setNewJobsUser] = useState(jobsUser);
     const [zoom, setZoom] = useState(15);
     const [userImg, setUserImg] = useState("");
     const [userName, setUserName] = useState("");
@@ -29,14 +31,6 @@ export const DashboardProvider = ({ children }) => {
         }
         navigator.geolocation.getCurrentPosition(success, error)
     }
-
-    useEffect(() => {
-        const searchResult = () => workers.includes((element) => element.Job.Category === search)
-        searchResult()
-    }, [search])
-
-
-
 
     const setMapLocation = () => {
         const success = (position) => {
@@ -73,9 +67,30 @@ export const DashboardProvider = ({ children }) => {
 
     }
 
+    function SearchFilter() {
+        // const searchResult = () => workers.find((element) => element.Job.Category === search)
+        // // setJobsUser(searchResult)
+        // console.log(searchResult());
+
+
+        search === '' ? setJobsUser(newJobsUser) : setJobsUser(newJobsUser.filter((elem) => elem.Job.Category.includes(search)
+        ))
+
+
+
+
+
+    }
+
+
+
+
+
+
+
 
     return (
-        <DashboardContext.Provider value={{ findMyLat, setMapLocation, lat, lng, zoom, getUserInfo, userImg, userName, setWorkers, workers, setFilteredProducts, filteredProducts, search, setSearch }}>
+        <DashboardContext.Provider value={{ findMyLat, setMapLocation, lat, lng, zoom, getUserInfo, userImg, userName, setWorkers, workers, setFilteredProducts, filteredProducts, search, setSearch, jobsUser, setJobsUser, setNewJobsUser, newJobsUser, SearchFilter }}>
             {children}
         </DashboardContext.Provider>
     )

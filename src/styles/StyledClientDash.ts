@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import backgroundOne from "../assets/1.png"
 
 export const StyledBody = styled.div`
   display: flex;
@@ -11,7 +12,7 @@ export const StyledBody = styled.div`
 `;
 
 export const StyledClientDash = styled.div`
-  background-color: #a1a1a1;
+  background-image: url(${backgroundOne});
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -188,15 +189,30 @@ export const StyledClientDash = styled.div`
             justify-content: space-around;
             margin-top: 10px;
 
-            button {
+            .btedit {
               padding: 5px;
               border-radius: 8px;
               background-color: #ffa800;
             }
 
+            .btedit:hover{
+              background-color: transparent;
+              color: #ffa800;
+              border: 1px solid  #ffa800;
+              transition: 0.5s;
+            }
+
             .delete {
               background-color: red;
+              border: 1px solid transparent;
             }
+
+            .delete:hover {
+            color: red;
+            transition: 0.5s;
+            border: 1px solid red;
+            background-color: transparent;
+           }
           }
         }
       }
@@ -229,7 +245,7 @@ export const StyledAside = styled.aside`
   @media (min-width: 768px) {
     display: flex;
     position: fixed;
-    background-color: #ffa800;
+    background-color: #ffa220;
     width: 60px;
     height: 100vh;
     flex-direction: column;
@@ -237,7 +253,7 @@ export const StyledAside = styled.aside`
     justify-content: space-around;
 
     svg {
-      font-size: 40px;
+      font-size: 35px;
     }
   }
 `;
@@ -259,7 +275,7 @@ export const StyledForm = styled.form`
     margin: 0 auto;
     border-radius: 8px;
     text-align: left;
-    background-color: #a1a1a1;
+    background-color: #f5f5f5;
     color: black;
     font-weight: 700;
     outline: 0;
@@ -274,33 +290,41 @@ export const StyledForm = styled.form`
     select {
       width: 40%;
       border-radius: 8px;
-      background-color: #a1a1a1;
+      background-color: #f5f5f5;
       color: black;
       font-size: 16px;
       font-weight: 700;
     }
 
     input {
-      width: 50%;
+      width: 100%;
+      height: 30px;
       padding: 5px;
       border-radius: 8px;
       color: black;
       font-size: 16px;
       font-weight: 700;
-      background-color: #a1a1a1;
+      background-color: #f5f5f5;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
     .publish {
-      border: 1px solid #3b925f;
-      background-color: #3b925f;
+      border: 1px solid #38c958;
+      background-color: #38c958;
       color: white;
       border-radius: 10px;
       width: 100px;
       margin: 0px 3px 4px 0px;
       align-self: flex-end;
       padding: 4px;
+    }
+
+    .publish:hover {
+      color: #38c958;
+      transition: 0.5s;
+      border: 1px solid #38c958;
+      background-color: transparent;
     }
 
     .description {
@@ -310,11 +334,7 @@ export const StyledForm = styled.form`
       font-size: 16px;
       display: flex;
       flex-direction: column;
-      background-color: #a1a1a1;
-
-      textarea {
-        background-color: red;
-      }
+      background-color: transparent;
     }
   }
 `;
