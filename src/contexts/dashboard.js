@@ -58,7 +58,7 @@ export const DashboardProvider = ({ children }) => {
             .then((response) => {
 
                 if (response.status === 200) {
-                    console.log(response)
+
                     setUserImg(`${response.data.profile_pic}`)
                     setUserName(`${response.data.name}`)
 
@@ -67,36 +67,25 @@ export const DashboardProvider = ({ children }) => {
 
     }
 
-    const getJobsUser = async (id) => {
-        await api(`jobs?userId=${id}`)
-            .then((resp) => {
-                resp.data.length > 1 && setJobsUser(resp.data);
-                setFilteredProducts(resp.data);
-
-
-            })
-            .catch((err) => console.log(err));
-
-    };
 
     function searchFilter() {
-        // const searchResult = () => workers.find((element) => element.Job.Category === search)
-        // // setJobsUser(searchResult)
-        // console.log(searchResult());
-
-        //  ? setFilteredProducts(jobsUser) : setFilteredProducts(filteredProducts.filter((elem) => elem.Job.Category.includes(search))
-        // )
 
         if (search.length > 0) {
-            setFilteredProducts(filteredProducts.filter((elem) => elem.Job.Category.includes(search)))
+            setFilteredProducts(filteredProducts.filter((elem) => elem.Job.Category.toLowerCase().includes(search.toLowerCase())))
         } else {
             setFilteredProducts(jobsUser)
         }
+
+        console.log(filteredProducts);
+        console.log(jobsUser)
+
+
+
     }
 
 
     return (
-        <DashboardContext.Provider value={{ findMyLat, setMapLocation, lat, lng, zoom, getUserInfo, userImg, userName, openModal, setOpenModal, setMenu, menu, getJobsUser, searchFilter, workers, setWorkers, search, setSearch, jobsUser, setJobsUser, filteredProducts, setFilteredProducts }}>
+        <DashboardContext.Provider value={{ findMyLat, setMapLocation, lat, lng, zoom, getUserInfo, userImg, userName, openModal, setOpenModal, setMenu, menu, searchFilter, workers, setWorkers, search, setSearch, jobsUser, setJobsUser, filteredProducts, setFilteredProducts }}>
             {children}
         </DashboardContext.Provider>
     )

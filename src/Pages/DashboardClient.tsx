@@ -49,9 +49,8 @@ interface IJobsUser {
 
 export const DashboardClient = () => {
 
-  const { setMapLocation, lat, lng, setOpenModal, menu, setMenu, workers, jobsUsers, search }: any = useContext(DashboardContext)
+  const { setMapLocation, lat, lng, setOpenModal, menu, setMenu, workers, jobsUser, search, setFilteredProducts, filteredProducts, setJobsUser, searchFilter }: any = useContext(DashboardContext)
 
-  const [jobsUser, setJobsUser] = useState<IJobsUser[]>([] as IJobsUser[]);
   const [jobId, setJobId] = useState<null | number>(null);
 
   const { register, handleSubmit, reset } = useForm<iJobForm>();
@@ -95,7 +94,7 @@ export const DashboardClient = () => {
           }
         }
       )
-      const filteredUserJobs = jobsUser.filter((job) => job.id !== jobId)
+      const filteredUserJobs = jobsUser.filter((job: any) => job.id !== jobId)
       setJobsUser(filteredUserJobs)
     } catch (error) {
       console.log(error)
@@ -109,17 +108,19 @@ export const DashboardClient = () => {
     const getJobsUser = async (id: any) => {
       await api(`jobs?userId=${id}`)
         .then((resp) => {
-          console.log(resp.data);
+
           resp.data?.length > 0 && setJobsUser(resp.data);
+          // setFilteredProducts([...jobsUser])
         })
         .catch((err) => console.log(err));
     };
 
     getJobsUser(localStorage.getItem("@WorkingUser_Id"));
-  }, []);
+  }, [search]);
 
   return (
     <>
+
       <EditJobModal jobId={jobId} />
       <StyledBody>
         <AsideComponent />
@@ -206,49 +207,75 @@ export const DashboardClient = () => {
               </StyledForm>
             </section>
             <ul>
-              {!jobsUser ? (
-                <>
-                  <h2>
-                    Que pena! Você ainda não solicitou nenhum serviço em nossa
-                    plataforma.
-                  </h2>
-                  <p>
-                    Não perca tempo e solicite agora mesmo serviço com um de
-                    nossos profissionais cadastrados!
-                  </p>
-                </>
-              ) : (
-                jobsUser.map(
-                  ({
-                    userId,
-                    Job: { Job_Name, Description, lat, lnt, Category },
-                    id,
-                  }: IJobsUser) => {
-                    return (
-                      <li key={id} className="conteiner">
-                        <div className="top-conteiner">
-                          <h3>{Job_Name}</h3>
-                          <span>{Category}</span>
-                        </div>
-                        <div className="conteudo">
-                          <p>{Description}</p>
 
-                          <div className="div-categoria">
-                            <button onClick={() => { setOpenModal(true); setJobId(id) }} className="btedit">
-                              <FiEdit2 />
-                              Editar
-                            </button>
-                            <button id={`delete${id}`} onClick={(event) => deleteJob(event)} className="delete">
-                              <AiFillDelete />
-                              Deletar
-                            </button>
+              {
+                search ?
+                  filteredProducts.map(
+                    ({
+                      userId,
+                      Job: { Job_Name, Description, lat, lnt, Category },
+                      id,
+                    }: IJobsUser) => {
+                      return (
+                        <li key={id} className="conteiner">
+                          <div className="top-conteiner">
+                            <h3>{Job_Name}</h3>
+                            <span>{Category}</span>
                           </div>
-                        </div>
-                      </li>
-                    );
-                  }
-                )
-              )}
+                          <div className="conteudo">
+                            <p>{Description}</p>
+
+                            <div className="div-categoria">
+                              <button onClick={() => { setOpenModal(true); setJobId(id) }} className="btedit">
+                                <FiEdit2 />
+                                Editar
+                              </button>
+                              <button id={`delete${id}`} onClick={(event) => deleteJob(event)} className="delete">
+                                <AiFillDelete />
+                                Deletar
+                              </button>
+                            </div>
+                          </div>
+                        </li>
+                      );
+                    }
+                  )
+                  :
+                  jobsUser.map(
+                    ({
+                      userId,
+                      Job: { Job_Name, Description, lat, lnt, Category },
+                      id,
+                    }: IJobsUser) => {
+                      return (
+                        <li key={id} className="conteiner">
+                          <div className="top-conteiner">
+                            <h3>{Job_Name}</h3>
+                            <span>{Category}</span>
+                          </div>
+                          <div className="conteudo">
+                            <p>{Description}</p>
+
+                            <div className="div-categoria">
+                              <button onClick={() => { setOpenModal(true); setJobId(id) }} className="btedit">
+                                <FiEdit2 />
+                                Editar
+                              </button>
+                              <button id={`delete${id}`} onClick={(event) => deleteJob(event)} className="delete">
+                                <AiFillDelete />
+                                Deletar
+                              </button>
+                            </div>
+                          </div>
+                        </li>
+                      );
+                    }
+                  )
+
+
+
+
+              }
             </ul>
           </main>
         </StyledClientDash>
