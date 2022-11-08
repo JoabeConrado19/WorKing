@@ -3,7 +3,7 @@ import { AiFillDelete, AiOutlineMenu } from "react-icons/ai";
 import { BsPinMapFill } from "react-icons/bs";
 import { FiEdit2 } from "react-icons/fi";
 // import { number } from "yup/lib/locale";
-import { AsideComponent } from "../Components/AboutUsPage/aside";
+import { AsideComponent} from "../Components/AboutUsPage/aside";
 // import { DashboardContext } from "../contexts/dashboard";
 
 import { useForm } from "react-hook-form";
@@ -22,6 +22,7 @@ import {
     StyledClientDash,
     StyledForm
 } from "../styles/StyledClientDash";
+import { MdMenuOpen } from "react-icons/md";
 
 interface iJobForm {
     Job_Name: string;
@@ -56,7 +57,7 @@ interface IJobsUser {
 
 export const DashboardClient = () => {
     
-  const {setMapLocation, lat, lng, setOpenModal}:any = useContext(DashboardContext)
+  const {setMapLocation, lat, lng, setOpenModal, menu, setMenu}:any = useContext(DashboardContext)
 
   const [jobsUser, setJobsUser] = useState<IJobsUser[]>([] as IJobsUser[]);
   const [jobId, setJobId] = useState<null | number>(null);
@@ -128,7 +129,15 @@ export const DashboardClient = () => {
         <AsideComponent />
         <StyledClientDash>
           <header>
-            <AiOutlineMenu />
+          <button 
+                className="btMenuOpen"
+                onClick={(event) => {
+                  event.preventDefault();
+                  setMenu(!menu);
+                }}
+              >
+                <MdMenuOpen />
+              </button>
             <h1>Home</h1>
           </header>
           <main>
@@ -228,7 +237,7 @@ export const DashboardClient = () => {
                         </div>
                         <div className="conteudo">
                           <p>{Description}</p>
-                          <BsPinMapFill />
+                       
                           <div className="div-categoria">
                             <button onClick={() => {setOpenModal(true); setJobId(id)}} className="btedit">
                               <FiEdit2 />

@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 export const CardStyled = styled.div`
-height: 470px;
+height: 380px;
 width: 40%;
 display: flex;
 flex-direction: column;
@@ -48,19 +48,34 @@ span {
 }
 .btnContact{
     height: 40px;
-width: 150px;
+width: 80px;
 border-radius: 10px;
+border: 1px solid transparent;
 background-color: #FFA800;
 font-weight: bold;
-/* color: #828282; */
+}
+
+.btnContact:hover {
+    transition: 0.5s;
+    background-color: transparent;
+    border: 1px solid #FFA800;
+    color: #FFA800;
+
 }
 
 .btnRoute{
     height: 40px;
-width: 100px;
+    width: 90px;
 border-radius: 10px;
 background-color: #3B925F;
 color: #ffffff;
 font-weight: bold;
+border: 1px solid transparent;
+}
+
+.btnRoute:hover {
+    background-color: transparent;
+    border: 1px solid #3B925F;
+    color: #3B925F;
 }
 `

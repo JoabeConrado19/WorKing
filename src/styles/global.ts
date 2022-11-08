@@ -86,7 +86,12 @@ body{
   background-color: #070C05;
 }
 
-
+.btMenuOpen{
+  font-size: 50px;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+}
 
 `;
 

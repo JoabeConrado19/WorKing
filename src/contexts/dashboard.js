@@ -16,6 +16,7 @@ export const DashboardProvider = ({children}) => {
     const [zoom, setZoom] = useState(15);
     const [userImg, setUserImg] = useState("");
     const [userName, setUserName] = useState("");
+    const [menu, setMenu] = useState(false);
 
     const findMyLat = () =>{
         const success = (position) => {
@@ -69,7 +70,7 @@ export const DashboardProvider = ({children}) => {
 
 
     return(
-        <DashboardContext.Provider value={{findMyLat , setMapLocation, lat, lng, zoom, getUserInfo, userImg, userName, openModal, setOpenModal }}>
+        <DashboardContext.Provider value={{findMyLat , setMapLocation, lat, lng, zoom, getUserInfo, userImg, userName, openModal, setOpenModal, setMenu, menu }}>
             {children}
         </DashboardContext.Provider>
     )

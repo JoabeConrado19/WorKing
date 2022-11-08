@@ -9,13 +9,17 @@ import imgRamon from "../../../assets/team/ramon.png";
 import imgAnibal from "../../../assets/team/anibal.png";
 import imgGabriel from "../../../assets/team/gabriel.png";
 import imgFilipe from "../../../assets/team/filipe.png";
+import { DashboardContext } from "../../../contexts/dashboard";
+import { useContext } from "react";
 
 interface IMain {
   setMenu: any;
   menu: boolean;
 }
 
-export const Main = ({ setMenu, menu }: IMain) => {
+export const Main = () => {
+  const { menu, setMenu}:any = useContext(DashboardContext)
+
   return (
     <>
       <Div>
@@ -38,7 +42,7 @@ export const Main = ({ setMenu, menu }: IMain) => {
             </p>
             <p>
               Voltada para facilitar o dia a dia de quem precisa de serviços
-              domésticos, na contrução civil ou até mesmo uma acessoria.
+              domésticos, na contrução civil entre outros..
             </p>
           </div>
           <div className="container__lista__criadores">
