@@ -64,7 +64,7 @@ export const AsideComponent = ({ setMenu, menu }: IAsideComponent) => {
             </li>
             <li>
               {/* Alterar redirecionamento */}
-              <Link to="/dashboard">
+              <Link to="/wallet">
                 <FaWallet />
                 <p>Carteira</p>
               </Link>

@@ -5,47 +5,53 @@ import { FiEdit2 } from "react-icons/fi";
 // import { number } from "yup/lib/locale";
 import { AsideComponent } from "../Components/AboutUsPage/aside";
 // import { DashboardContext } from "../contexts/dashboard";
-import api from "../services/api";
+
 import { useForm } from "react-hook-form";
 
-import {
-  StyledBody,
-  StyledClientDash,
-  StyledForm,
-} from "../styles/StyledClientDash";
 import { DashboardContext } from "../contexts/dashboard";
 import EditJobModal from "../Components/EditJobModal";
 import { number } from "yup/lib/locale";
 
+
+import api from "../services/api";
+
+import { ClientList } from "../Components/ClientList";
+import { InputSearch } from "../Components/InputSearch";
+import {
+    StyledBody,
+    StyledClientDash,
+    StyledForm
+} from "../styles/StyledClientDash";
+
 interface iJobForm {
-  Job_Name: string;
-  Description: string;
-  Category: string;
-  lat?: number | undefined;
-  lnt?: number | undefined;
+    Job_Name: string;
+    Description: string;
+    Category: string;
+    lat?: number | undefined;
+    lnt?: number | undefined;
 }
 interface iDataCreateJob {
-  userId: number;
-  Job: iJobForm;
+    userId: number;
+    Job: iJobForm;
 }
 
 interface IJobsUser {
-  map<T>(
-    arg0: ({
-      userId,
-      Job: { Job_Name, Description, lat, lnt, Category },
-      id,
-    }: IJobsUser) => JSX.Element
-  ): import("react").ReactNode;
-  userId: number;
-  Job: {
-    Job_Name: string;
-    Description: string;
-    lat: number;
-    lnt: number;
-    Category: string;
-  };
-  id: number;
+    map<T>(
+        arg0: ({
+            userId,
+            Job: { Job_Name, Description, lat, lnt, Category },
+            id,
+        }: IJobsUser) => JSX.Element
+    ): import("react").ReactNode;
+    userId: number;
+    Job: {
+        Job_Name: string;
+        Description: string;
+        lat: number;
+        lnt: number;
+        Category: string;
+    };
+    id: number;
 }
 
 export const DashboardClient = () => {

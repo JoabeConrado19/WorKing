@@ -1,17 +1,17 @@
-import { RegisterStyles } from "../styles/register";
-import RegisterLogo from "../assets/RegisterLogo.svg";
-import RegisterBtnIco from "../assets/RegisterBtnIco.svg";
-import * as yup from "yup";
-import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import api from "../services/api";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import * as yup from "yup";
+import RegisterBtnIco from "../assets/RegisterBtnIco.svg";
+import RegisterLogo from "../assets/RegisterLogo.svg";
+import api from "../services/api";
+import { RegisterStyles } from "../styles/register";
 
 
 
 export const Register = () => {
-  
+
   const navigate = useNavigate();
 
   const formSchema = yup.object().shape({
@@ -28,8 +28,8 @@ export const Register = () => {
       .matches(
         /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
         "A senha precisa ter no mínimo 8 caracteres, " +
-          "uma letra maiúscula e uma letra minúscula, " +
-          "um número e um caracter especial"
+        "uma letra maiúscula e uma letra minúscula, " +
+        "um número e um caracter especial"
       ),
     password2: yup
       .string()
@@ -64,7 +64,7 @@ export const Register = () => {
           navigate("/login");
         }
       })
-      .catch( (error) => console.log(error));
+      .catch((error) => console.log(error));
   };
   console.log(errors);
 
