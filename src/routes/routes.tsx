@@ -5,6 +5,7 @@ import { RegisterProfessional } from '../Pages/registerProfessional';
 import { LandingPage } from '../Pages/LandingPage';
 import { DashboardWorker } from '../Pages/DashboardWorker';
 import { Historic } from '../Pages/Historic';
+import { NotFound } from '../Pages/NotFound';
 
 
 const RoutesMain = () => {
@@ -25,7 +26,7 @@ const RoutesMain = () => {
     <Route path='/contacts' element={<h1>Fale conosco</h1>} />
     <Route path='/about-us' element={<h1>Sobre nós</h1>} />
     
-    <Route path='*' element={<h2>Not Found</h2>} />
+    <Route path='*' element={<NotFound />} />
 
   </Routes>)
 

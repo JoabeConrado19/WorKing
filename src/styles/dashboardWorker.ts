@@ -9,15 +9,12 @@ flex-direction: column ;
 padding: 10px 30px;
 margin-left: 70px;
 
-
 .headerMain {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     margin: 0 90px;
-    
-    
     
 }
  h3 {

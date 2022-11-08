@@ -114,7 +114,7 @@ export const Aside = styled.aside<IAside>`
     }
     :hover {
       width: 200px;
-      position: absolute;
+      position: fixed;
       z-index: 2;
       .userName {
         width: 100%;
