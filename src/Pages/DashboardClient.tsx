@@ -1,69 +1,61 @@
-import { MouseEvent, useContext, useEffect, useState } from "react";
-import { AiFillDelete, AiOutlineMenu } from "react-icons/ai";
-import { BsPinMapFill } from "react-icons/bs";
+import { useContext, useEffect, useState } from "react";
+import { AiFillDelete } from "react-icons/ai";
 import { FiEdit2 } from "react-icons/fi";
 // import { number } from "yup/lib/locale";
-import { AsideComponent} from "../Components/AboutUsPage/aside";
+import { AsideComponent } from "../Components/AboutUsPage/aside";
 // import { DashboardContext } from "../contexts/dashboard";
-
 import { useForm } from "react-hook-form";
-
-import { DashboardContext } from "../contexts/dashboard";
-import EditJobModal from "../Components/EditJobModal";
-import { number } from "yup/lib/locale";
-
-
-import api from "../services/api";
-
-import { ClientList } from "../Components/ClientList";
-import { InputSearch } from "../Components/InputSearch";
-import {
-    StyledBody,
-    StyledClientDash,
-    StyledForm
-} from "../styles/StyledClientDash";
 import { MdMenuOpen } from "react-icons/md";
+import EditJobModal from "../Components/EditJobModal";
+import { InputSearch } from "../Components/InputSearch";
+import { DashboardContext } from "../contexts/dashboard";
+import api from "../services/api";
+import {
+  StyledBody,
+  StyledClientDash,
+  StyledForm
+} from "../styles/StyledClientDash";
 
 interface iJobForm {
-    Job_Name: string;
-    Description: string;
-    Category: string;
-    lat?: number | undefined;
-    lnt?: number | undefined;
+  Job_Name: string;
+  Description: string;
+  Category: string;
+  lat?: number | undefined;
+  lnt?: number | undefined;
 }
 interface iDataCreateJob {
-    userId: number;
-    Job: iJobForm;
+  userId: number;
+  Job: iJobForm;
 }
 
 interface IJobsUser {
-    map<T>(
-        arg0: ({
-            userId,
-            Job: { Job_Name, Description, lat, lnt, Category },
-            id,
-        }: IJobsUser) => JSX.Element
-    ): import("react").ReactNode;
-    userId: number;
-    Job: {
-        Job_Name: string;
-        Description: string;
-        lat: number;
-        lnt: number;
-        Category: string;
-    };
-    id: number;
+  map<T>(
+    arg0: ({
+      userId,
+      Job: { Job_Name, Description, lat, lnt, Category },
+      id,
+    }: IJobsUser) => JSX.Element
+  ): import("react").ReactNode;
+  userId: number;
+  Job: {
+    Job_Name: string;
+    Description: string;
+    lat: number;
+    lnt: number;
+    Category: string;
+  };
+  id: number;
 }
 
 export const DashboardClient = () => {
-    
-  const {setMapLocation, lat, lng, setOpenModal, menu, setMenu}:any = useContext(DashboardContext)
+
+  const { setMapLocation, lat, lng, setOpenModal, menu, setMenu, workers, jobsUsers, search }: any = useContext(DashboardContext)
 
   const [jobsUser, setJobsUser] = useState<IJobsUser[]>([] as IJobsUser[]);
   const [jobId, setJobId] = useState<null | number>(null);
 
   const { register, handleSubmit, reset } = useForm<iJobForm>();
- 
+
   const createJob = async (job: iJobForm) => {
     setMapLocation()
     try {
@@ -76,7 +68,7 @@ export const DashboardClient = () => {
         },
       };
       console.log(dataCorrectFormat);
-      const {data} = await api.post("jobs", dataCorrectFormat, {
+      const { data } = await api.post("jobs", dataCorrectFormat, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("@WorkingUser_Token")}`,
         },
@@ -86,64 +78,67 @@ export const DashboardClient = () => {
       setJobsUser([...jobsUser, data]);
     } catch (error) {
       console.log(error);
-    } finally { 
-       
+    } finally {
+
     }
   };
 
-  const deleteJob = async (event:any) => {
+  const deleteJob = async (event: any) => {
     try {
-        const jobId = Number(event.target.id.slice(6))
+      const jobId = Number(event.target.id.slice(6))
 
-        await api.delete(`jobs/${jobId}`,
-            {  headers: 
-                {
-                    Authorization: `Bearer ${localStorage.getItem("@WorkingUser_Token")}`
-                }
-            }
-        )
-        const filteredUserJobs = jobsUser.filter((job) => job.id !== jobId )
-        setJobsUser(filteredUserJobs)
+      await api.delete(`jobs/${jobId}`,
+        {
+          headers:
+          {
+            Authorization: `Bearer ${localStorage.getItem("@WorkingUser_Token")}`
+          }
+        }
+      )
+      const filteredUserJobs = jobsUser.filter((job) => job.id !== jobId)
+      setJobsUser(filteredUserJobs)
     } catch (error) {
-        console.log(error)
+      console.log(error)
     }
-}
+  }
+
+
+
 
   useEffect(() => {
     const getJobsUser = async (id: any) => {
-        await api(`jobs?userId=${id}`)
-          .then((resp) => {
-            console.log(resp.data);
-            resp.data?.length > 0 && setJobsUser(resp.data);
-          })
-          .catch((err) => console.log(err));
-      };
+      await api(`jobs?userId=${id}`)
+        .then((resp) => {
+          console.log(resp.data);
+          resp.data?.length > 0 && setJobsUser(resp.data);
+        })
+        .catch((err) => console.log(err));
+    };
 
     getJobsUser(localStorage.getItem("@WorkingUser_Id"));
   }, []);
 
   return (
     <>
-    <EditJobModal jobId={jobId}/>
+      <EditJobModal jobId={jobId} />
       <StyledBody>
         <AsideComponent />
         <StyledClientDash>
           <header>
-          <button 
-                className="btMenuOpen"
-                onClick={(event) => {
-                  event.preventDefault();
-                  setMenu(!menu);
-                }}
-              >
-                <MdMenuOpen />
-              </button>
+            <button
+              className="btMenuOpen"
+              onClick={(event) => {
+                event.preventDefault();
+                setMenu(!menu);
+              }}
+            >
+              <MdMenuOpen />
+            </button>
             <h1>Home</h1>
           </header>
           <main>
             <div className="input-div">
-              <input placeholder="Digite aqui sua pesquisa" />
-              <h2>Lista de oportunidades </h2>
+              <InputSearch />
             </div>
             <section>
               <StyledForm onSubmit={handleSubmit(createJob)}>
@@ -237,9 +232,9 @@ export const DashboardClient = () => {
                         </div>
                         <div className="conteudo">
                           <p>{Description}</p>
-                       
+
                           <div className="div-categoria">
-                            <button onClick={() => {setOpenModal(true); setJobId(id)}} className="btedit">
+                            <button onClick={() => { setOpenModal(true); setJobId(id) }} className="btedit">
                               <FiEdit2 />
                               Editar
                             </button>
