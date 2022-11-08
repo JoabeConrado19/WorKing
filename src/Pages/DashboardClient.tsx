@@ -96,6 +96,8 @@ export const DashboardClient = () => {
     } catch (error) {
       console.log(error);
     } finally {
+      getJobsUser(localStorage.getItem("@WorkingUser_Id"));
+
     }
   };
 
