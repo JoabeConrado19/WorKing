@@ -1,13 +1,10 @@
-import { useContext, useEffect, useState } from "react";
+import { MouseEvent, useContext, useEffect, useState } from "react";
 import { AiFillDelete, AiOutlineMenu } from "react-icons/ai";
 import { BsPinMapFill } from "react-icons/bs";
 import { FiEdit2 } from "react-icons/fi";
 // import { number } from "yup/lib/locale";
 import { AsideComponent } from "../Components/AboutUsPage/aside";
-<<<<<<< HEAD
 // import { DashboardContext } from "../contexts/dashboard";
-=======
->>>>>>> fd4a5544274f297515ccea7b61c678e2809586c9
 import api from "../services/api";
 import { useForm } from "react-hook-form";
 
@@ -17,6 +14,8 @@ import {
   StyledForm,
 } from "../styles/StyledClientDash";
 import { DashboardContext } from "../contexts/dashboard";
+import EditJobModal from "../Components/EditJobModal";
+import { number } from "yup/lib/locale";
 
 interface iJobForm {
   Job_Name: string;
@@ -50,31 +49,14 @@ interface IJobsUser {
 }
 
 export const DashboardClient = () => {
-  const {setMapLocation, lat, lng }:any = useContext(DashboardContext)
+    
+  const {setMapLocation, lat, lng, setOpenModal}:any = useContext(DashboardContext)
 
   const [jobsUser, setJobsUser] = useState<IJobsUser[]>([] as IJobsUser[]);
+  const [jobId, setJobId] = useState<null | number>(null);
 
   const { register, handleSubmit, reset } = useForm<iJobForm>();
-
-  const getJobsUser = async (id: any) => {
-    await api(`jobs?userId=${id}`)
-      .then((resp) => {
-        console.log(resp.data);
-        resp.data.length > 1 && setJobsUser(resp.data);
-      })
-      .catch((err) => console.log(err));
-  };
-
-  // {
-  // 	"userId": 4,
-  // 	"Job": {
-  // 		"Job_Name": "Consertar pc",
-  // 		"Description": "pc quebrou hj de manha e preciso de alguem para arrumar ele, pago 100 pila moro?",
-  // 		"lat": "-3.0264",
-  // 		"lnt": "-60.0149",
-  // 		"Categoty": "Tech"
-  // 	}
-  // }
+ 
   const createJob = async (job: iJobForm) => {
     setMapLocation()
     try {
@@ -87,27 +69,55 @@ export const DashboardClient = () => {
         },
       };
       console.log(dataCorrectFormat);
-      // api.defaults.headers.authorization = `Bearer ${localStorage.getItem('@WorkingUser_Token')}`;
       const {data} = await api.post("jobs", dataCorrectFormat, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("@WorkingUser_Token")}`,
         },
       });
       console.log(data);
-      // setJobsUser([...jobsUser, data])
       reset()
+      setJobsUser([...jobsUser, data]);
     } catch (error) {
       console.log(error);
-    } finally {
+    } finally { 
+       
     }
   };
 
+  const deleteJob = async (event:any) => {
+    try {
+        const jobId = Number(event.target.id.slice(6))
+
+        await api.delete(`jobs/${jobId}`,
+            {  headers: 
+                {
+                    Authorization: `Bearer ${localStorage.getItem("@WorkingUser_Token")}`
+                }
+            }
+        )
+        const filteredUserJobs = jobsUser.filter((job) => job.id !== jobId )
+        setJobsUser(filteredUserJobs)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
   useEffect(() => {
+    const getJobsUser = async (id: any) => {
+        await api(`jobs?userId=${id}`)
+          .then((resp) => {
+            console.log(resp.data);
+            resp.data?.length > 0 && setJobsUser(resp.data);
+          })
+          .catch((err) => console.log(err));
+      };
+
     getJobsUser(localStorage.getItem("@WorkingUser_Id"));
   }, []);
 
   return (
     <>
+    <EditJobModal jobId={jobId}/>
       <StyledBody>
         <AsideComponent />
         <StyledClientDash>
@@ -189,7 +199,7 @@ export const DashboardClient = () => {
               {!jobsUser ? (
                 <>
                   <h2>
-                    Que pena! Você não solicitou nenhum serviço em nossa
+                    Que pena! Você ainda não solicitou nenhum serviço em nossa
                     plataforma.
                   </h2>
                   <p>
@@ -214,11 +224,11 @@ export const DashboardClient = () => {
                           <p>{Description}</p>
                           <BsPinMapFill />
                           <div className="div-categoria">
-                            <button className="btedit">
+                            <button onClick={() => {setOpenModal(true); setJobId(id)}} className="btedit">
                               <FiEdit2 />
                               Editar
                             </button>
-                            <button className="delete">
+                            <button id={`delete${id}`} onClick={(event) => deleteJob(event)} className="delete">
                               <AiFillDelete />
                               Deletar
                             </button>

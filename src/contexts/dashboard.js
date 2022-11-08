@@ -10,7 +10,7 @@ export const DashboardProvider = ({children}) => {
 
 
 
-
+    const [openModal, setOpenModal] = useState(false)
     const [lat, setLat] = useState(-3.0306345);
     const [lng, setLng] = useState(-59.93555);
     const [zoom, setZoom] = useState(15);
@@ -49,7 +49,7 @@ export const DashboardProvider = ({children}) => {
         .get(`/users/${Id}`, {
 
             headers: {
-                "Authorization": `Bearer ${Token}`
+                Authorization: `Bearer ${Token}`
               }
 
         })
@@ -65,9 +65,11 @@ export const DashboardProvider = ({children}) => {
       
     }
 
+    
+
 
     return(
-        <DashboardContext.Provider value={{findMyLat , setMapLocation, lat, lng, zoom, getUserInfo, userImg, userName }}>
+        <DashboardContext.Provider value={{findMyLat , setMapLocation, lat, lng, zoom, getUserInfo, userImg, userName, openModal, setOpenModal }}>
             {children}
         </DashboardContext.Provider>
     )
