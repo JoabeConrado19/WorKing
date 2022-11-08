@@ -1,20 +1,31 @@
 import { Body } from "../Components/AboutUsPage/body";
 import { AsideComponent } from "../Components/AboutUsPage/aside";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { StyledWallet } from "../styles/StyledWallet";
 import { BiTransfer } from "react-icons/bi"
+import { DashboardContext } from "../contexts/dashboard";
+import { MdMenuOpen } from "react-icons/md";
 
 
 
 export const Wallet = () => {
-  const [menu, setMenu] = useState(false);
+  const { menu, setMenu}:any = useContext(DashboardContext)
 
   return (
     <Body>
-      <AsideComponent setMenu={setMenu} menu={menu} />
+      <AsideComponent />
     
       <StyledWallet>
             <div className="containerWallet">
+            <button
+                className="btMenuOpen"
+                onClick={(event) => {
+                  event.preventDefault();
+                  setMenu(!menu);
+                }}
+              >
+                <MdMenuOpen  />
+              </button>
               <h1>Carteira</h1>
               <div className="divSaldo_Transferencia">
                   <h3>Saldo: Em breve</h3>

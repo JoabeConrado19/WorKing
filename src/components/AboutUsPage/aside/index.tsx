@@ -12,14 +12,14 @@ import { Aside } from "./style";
 import { useContext, useEffect } from "react";
 import { DashboardContext } from "../../../contexts/dashboard";
 
-interface IAsideComponent {
+export interface IAsideComponent {
   setMenu?: any;
   menu?: boolean;
 }
 
-export const AsideComponent = ({ setMenu, menu }: IAsideComponent) => {
+export const AsideComponent = () => {
 
-  const { getUserInfo, userImg, userName}:any = useContext(DashboardContext)
+  const { getUserInfo, userImg, userName, menu, setMenu}:any = useContext(DashboardContext)
 
   useEffect(()=>{
     getUserInfo()

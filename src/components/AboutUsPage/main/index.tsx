@@ -9,13 +9,17 @@ import imgRamon from "../../../assets/team/ramon.png";
 import imgAnibal from "../../../assets/team/anibal.png";
 import imgGabriel from "../../../assets/team/gabriel.png";
 import imgFilipe from "../../../assets/team/filipe.png";
+import { DashboardContext } from "../../../contexts/dashboard";
+import { useContext } from "react";
 
 interface IMain {
   setMenu: any;
   menu: boolean;
 }
 
-export const Main = ({ setMenu, menu }: IMain) => {
+export const Main = () => {
+  const { menu, setMenu}:any = useContext(DashboardContext)
+
   return (
     <>
       <Div>

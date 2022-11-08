@@ -12,8 +12,8 @@ export const Aside = styled.aside<IAside>`
   right: ${({ rigth }) => rigth};
   z-index: 2;
   cursor: default;
-  border-radius: 15px;
-  animation: bounceInLeft 1s;
+  border-radius: 0px 10px 10px 0px;
+  animation: bounceInLeft 2s;
 
 
   .userName {
@@ -80,9 +80,9 @@ export const Aside = styled.aside<IAside>`
     li {
       padding: 10px;
       margin: 10px;
-      /* border: 1px solid #ffffff; */
+
       border-radius: 10px;
-      /* background-color: #ffffff; */
+
       display: flex;
       flex-direction: row;
       align-items: center;
