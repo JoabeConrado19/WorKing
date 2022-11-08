@@ -6,7 +6,7 @@ import { DashboardContext } from "../../contexts/dashboard";
 
 export const ClientList = () => {
 
-    const { setJobsUser, jobsUser, workers, newJobsUser, setNewJobsUser }: any = useContext(DashboardContext)
+    const { setJobsUser, jobsUser, workers, newJobsUser, setNewJobsUser, getJobsUser, filteredProducts }: any = useContext(DashboardContext)
 
     interface IJobsUser {
         map<T>(
@@ -27,16 +27,13 @@ export const ClientList = () => {
         id: number;
     }
 
-
-
-
-
     return (
         <ul>
 
             {
 
-                jobsUser.map(
+
+                filteredProducts.map(
                     ({
                         userId,
                         Job: { Job_Name, Description, Category },

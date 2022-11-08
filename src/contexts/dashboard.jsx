@@ -9,10 +9,10 @@ export const DashboardProvider = ({ children }) => {
     const Id = window.localStorage.getItem('@WorkingUser_Id');
     const [workers, setWorkers] = useState([])
     const [search, setSearch] = useState('')
-    const [filteredProducts, setFilteredProducts] = useState([])
     const [lat, setLat] = useState(-3.0306345);
     const [lng, setLng] = useState(-59.93555);
     const [jobsUser, setJobsUser] = useState([]);
+    const [filteredProducts, setFilteredProducts] = useState([...jobsUser])
     const [newJobsUser, setNewJobsUser] = useState(jobsUser);
     const [zoom, setZoom] = useState(15);
     const [userImg, setUserImg] = useState("");
@@ -67,31 +67,53 @@ export const DashboardProvider = ({ children }) => {
 
     }
 
-    function SearchFilter() {
+    const getJobsUser = async (id) => {
+        await api(`jobs?userId=${id}`)
+            .then((resp) => {
+                resp.data.length > 1 && setJobsUser(resp.data);
+                setFilteredProducts(resp.data);
+
+
+            })
+            .catch((err) => console.log(err));
+
+    };
+
+    function searchFilter() {
         // const searchResult = () => workers.find((element) => element.Job.Category === search)
         // // setJobsUser(searchResult)
         // console.log(searchResult());
 
-
-        search === '' ? setJobsUser(newJobsUser) : setJobsUser(newJobsUser.filter((elem) => elem.Job.Category.includes(search)
-        ))
+        //  ? setFilteredProducts(jobsUser) : setFilteredProducts(filteredProducts.filter((elem) => elem.Job.Category.includes(search))
 
 
 
 
 
+
+        // )
+
+        if (search.length > 0) {
+            setFilteredProducts(filteredProducts.filter((elem) => elem.Job.Category.includes(search)))
+        } else {
+            setFilteredProducts(jobsUser)
+        }
     }
 
 
-
-
-
-
-
-
     return (
-        <DashboardContext.Provider value={{ findMyLat, setMapLocation, lat, lng, zoom, getUserInfo, userImg, userName, setWorkers, workers, setFilteredProducts, filteredProducts, search, setSearch, jobsUser, setJobsUser, setNewJobsUser, newJobsUser, SearchFilter }}>
+        <DashboardContext.Provider value={{ findMyLat, setMapLocation, lat, lng, zoom, getUserInfo, userImg, userName, setWorkers, workers, setFilteredProducts, filteredProducts, search, setSearch, jobsUser, setJobsUser, setNewJobsUser, newJobsUser, searchFilter, getJobsUser }}>
             {children}
-        </DashboardContext.Provider>
-    )
+        </DashboardContext.Provider>)
 }
+
+
+
+
+
+
+
+
+
+
+

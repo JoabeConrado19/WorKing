@@ -3,7 +3,7 @@ import { DashboardContext } from "../../contexts/dashboard";
 import api from "../../services/api";
 
 export const InputSearch = () => {
-    const { setWorkers, setFilteredProducts, search, setSearch, searchResult, SearchFilter }: any = useContext(DashboardContext)
+    const { setWorkers, setSearch, searchFilter, search }: any = useContext(DashboardContext)
 
     useEffect(() => {
         api.get('jobs')
@@ -19,10 +19,11 @@ export const InputSearch = () => {
         <div className='input-div'>
             <input onChange={(event) => {
                 setSearch(event.target.value)
+                searchFilter(event.target.value)
+            }
 
-                SearchFilter()
-
-            }}
+            }
+                value={search}
                 placeholder='Digite aqui sua pesquisa' />
             <h2>Lista de oportunidades </h2>
         </div>

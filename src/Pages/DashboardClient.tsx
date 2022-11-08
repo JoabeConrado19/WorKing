@@ -1,6 +1,10 @@
 import { useContext, useEffect } from "react";
-import { useForm } from "react-hook-form";
 import { AiOutlineMenu } from "react-icons/ai";
+// import { number } from "yup/lib/locale";
+
+
+import { useForm } from "react-hook-form";
+
 import { AsideComponent } from "../Components/AboutUsPage/aside";
 
 import { DashboardContext } from "../contexts/dashboard";
@@ -48,20 +52,12 @@ interface IJobsUser {
 }
 
 export const DashboardClient = () => {
-    const { setMapLocation, lat, lng, searchResult, setJobsUser, jobsUser, setNewJobsUser }: any = useContext(DashboardContext)
+    const { setMapLocation, lat, lng, setJobsUser, jobsUser, setNewJobsUser, getJobsUser, filteredProducts }: any = useContext(DashboardContext)
 
     // const [jobsUser, setJobsUser] = useState<IJobsUser[]>([] as IJobsUser[]);
 
     const { register, handleSubmit, reset } = useForm<iJobForm>();
 
-    const getJobsUser = async (id: any) => {
-        await api(`jobs?userId=${id}`)
-            .then((resp) => {
-
-                resp.data.length > 1 && setJobsUser(resp.data);
-            })
-            .catch((err) => console.log(err));
-    };
 
 
     const createJob = async (job: iJobForm) => {
@@ -94,6 +90,8 @@ export const DashboardClient = () => {
     useEffect(() => {
         getJobsUser(localStorage.getItem("@WorkingUser_Id"));
     }, []);
+
+
 
     return (
         <>
