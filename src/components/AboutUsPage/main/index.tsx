@@ -18,7 +18,7 @@ interface IMain {
 }
 
 export const Main = () => {
-  const { menu, setMenu}:any = useContext(DashboardContext)
+  const { menu, setMenu }: any = useContext(DashboardContext);
 
   return (
     <>
@@ -181,7 +181,7 @@ export const Main = () => {
                   <div>
                     <img src={imgFilipe} alt="Foto de perfil do Filipe" />
                     <a
-                      href="www.linkedin.com/in/filipe-de-lucena-paiva"
+                      href="https://www.linkedin.com/in/filipe-de-lucena-paiva/"
                       target="_blank"
                       rel="noreferrer"
                     >
