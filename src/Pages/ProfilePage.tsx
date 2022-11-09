@@ -8,14 +8,27 @@ import {
   StyledInput,
   StyledProfile,
 } from "../styles/StyledProfilePage";
-import proifle from "../assets/Group123.png";
+import api from "../services/api";
+import { useContext, useState } from "react";
+import { DashboardContext } from "../contexts/dashboard";
+import { toast } from "react-toastify";
+
+interface IUser {
+  name?: string;
+  profile_pic?: string;
+  age?: number;
+  password?: string;
+  contact?: number;
+}
 
 export const ProfilePage = () => {
+  const { userImg, userName, email, userAge, userContact }: any =
+    useContext(DashboardContext);
   const schema = yup.object().shape({
-    name: yup.string(),
-    date: yup.date(),
-    email: yup.string().email(),
-    tel: yup.number().min(11, "Seu número precisa ter 11 digitos"),
+    name: yup.string().required(),
+    date: yup.date().required(),
+    email: yup.string().email().required(),
+    tel: yup.number().min(11, "Seu número precisa ter 11 digitos").required(),
     password: yup
       .string()
       .min(8, "a senha precisa pelo menos 8 caracteres")
@@ -24,41 +37,65 @@ export const ProfilePage = () => {
         "A senha precisa ter no mínimo 8 caracteres, " +
           "uma letra maiúscula e uma letra minúscula, " +
           "um número e um caracter especial"
-      ),
+      )
+      .required(),
   });
 
-  const { register, handleSubmit } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     resolver: yupResolver(schema),
   });
+
+  const token = localStorage.getItem("@WorkingUser_Token");
+  const id = window.localStorage.getItem("@WorkingUser_Id");
+
+  const editUserInfo = async (data: IUser) => {
+    api
+      .patch(`users/${id}`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((resp) => {
+        if (resp.status == 200) {
+          toast.success("Dados atualizados com sucesso", { autoClose: 3000 });
+          console.log(resp);
+        }
+      })
+      .catch((err) => console.error(err));
+  };
 
   return (
     <>
       <AsideComponent />
 
       <StyledProfile>
-        <form>
+        <form onSubmit={handleSubmit(editUserInfo)}>
           <div className="containerUsuario">
             <div className="containerImage">
-              <h2>Alterar foto de perfil</h2>
-              <img src={proifle} alt="imagem Usuario" />
-              <ProfileButton>
-                <FiEdit2 />
-                Editar
-              </ProfileButton>
+              <h2>Foto de perfil</h2>
+              <img src={userImg} alt="imagem Usuario" />
             </div>
             <div className="infos">
               <div className="input-name">
                 <label>Nome:</label>
                 <StyledInput
                   type="text"
-                  placeholder="Nome do cliente"
+                  placeholder={userName}
                   {...register("name")}
                 />
               </div>
               <div className="date-sex">
                 <div className="input-date">
-                  <label className="date">Data de nascimento:</label>
-                  <StyledInput type="date" {...register("date")} />
+                  <label className="date">Idade:</label>
+                  <StyledInput
+                    type="number"
+                    placeholder={userAge}
+                    {...register("idade")}
+                  />
                 </div>
                 <div className="input-sex">
                   <label>Sexo:</label>
@@ -87,13 +124,9 @@ export const ProfilePage = () => {
               <div className="button-email">
                 <StyledInput
                   type="email"
-                  placeholder="emaildocliente@email.com"
+                  placeholder={email}
                   {...register("email")}
                 />
-                <ProfileButton>
-                  <FiEdit2 />
-                  Editar
-                </ProfileButton>
               </div>
             </div>
             <div className="input-tel">
@@ -101,13 +134,9 @@ export const ProfilePage = () => {
               <div className="button-tel">
                 <StyledInput
                   type="tel"
-                  placeholder="(xx) xxxx-xxxx"
+                  placeholder={userContact}
                   {...register("tel")}
                 />
-                <ProfileButton>
-                  <FiEdit2 />
-                  Editar
-                </ProfileButton>
               </div>
             </div>
             <div className="input-password">
@@ -118,10 +147,10 @@ export const ProfilePage = () => {
                   placeholder="senho do usuario"
                   {...register("password")}
                 />
-                <ProfileButton>
+                <button type="submit">
                   <FiEdit2 />
-                  Editar
-                </ProfileButton>
+                  Editar dados
+                </button>
               </div>
             </div>
           </div>

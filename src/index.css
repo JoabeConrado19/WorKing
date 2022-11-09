@@ -15,9 +15,9 @@ button {
 .description {
   display: flex;
   height: 60%;
-  width: 95% !important;
-  margin: 0 auto;
+  width: 100% !important;
+  /* margin: 0 auto; */
   border-radius: 8px;
-  background-color: #A1A1A1;
+  background-color: transparent;
   flex-direction: column;
 }

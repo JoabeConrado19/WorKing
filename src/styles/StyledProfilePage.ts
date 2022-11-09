@@ -36,6 +36,7 @@ export const StyledProfile = styled.div`
         width: 90%;
         height: 70%;
         align-self: center;
+        border-radius: 50%;
       }
 
       *:not(:first-child) {
@@ -123,6 +124,23 @@ export const StyledProfile = styled.div`
         display: flex;
         justify-content: space-between;
         align-items: center;
+
+        button {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          background-color: #ffa800;
+          width: 170px;
+          height: 30px;
+          border-radius: 10px;
+          align-self: center;
+
+          font-size: 15px;
+          font-weight: 600;
+          align-items: center;
+          padding: 1.5em;
+        }
       }
       input {
         width: 70%;
