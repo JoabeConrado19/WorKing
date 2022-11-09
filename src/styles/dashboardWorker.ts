@@ -41,6 +41,8 @@ margin-left: 60px;
 
  .card {
    width: 100%;
+   display: flex;
+   flex-direction: column;
  }
 
 

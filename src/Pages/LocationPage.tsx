@@ -55,7 +55,7 @@ export const Location = () => {
               {jobsMarkers?.map(
                 (element: {
                   id: any;
-
+                  
                   Job: { lat: any; lnt: any; Job_Name: any; id: any };
                 }) => (
                   <Marker
@@ -68,9 +68,9 @@ export const Location = () => {
                       label: {
                         text: element.Job.Job_Name,
                         className: "map-marker",
-                        color: "yellow"
-                        
+                        color: "orange"
                       },
+                      
                     }}
                   />
                 )
