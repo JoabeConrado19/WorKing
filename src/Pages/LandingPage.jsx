@@ -8,6 +8,7 @@ export const LandingPage = () => {
 
 
   return (
+    
     <StyledLandingPage>
         <div className='divMobile'>
             <figure>

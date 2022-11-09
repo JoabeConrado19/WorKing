@@ -1,10 +1,12 @@
 import styled from "styled-components";
 
+
 export const StyledLandingPage = styled.div`
     width: 100%;
     min-height: 100vh;
 
-    background-color: #D9D9D9;
+    background-color: #F4F4F4;
+
     .divMobile{
         display: none;
     }
@@ -77,7 +79,7 @@ export const StyledLandingPage = styled.div`
         }
         
         figure{
-            height: 60%;
+            height: 50%;
             display: flex;
             align-items: flex-end;
             img{

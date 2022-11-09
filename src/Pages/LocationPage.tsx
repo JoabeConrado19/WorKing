@@ -4,10 +4,10 @@ import { useContext, useEffect, useState } from "react";
 import { AsideComponent } from "../Components/AboutUsPage/aside";
 import { DashboardContext } from "../contexts/dashboard";
 import api from "../services/api";
+import { MdMenuOpen } from "react-icons/md";
 
 export const Location = () => {
-  const { findMyLat, setMapLocation, lat, lng, zoom }: any =
-    useContext(DashboardContext);
+  const { setMapLocation, lat, lng, menu, setMenu, findMyLat }: any = useContext(DashboardContext)
 
   const [jobsMarkers, setJobsMarkers] = useState<any>([]);
 
@@ -37,9 +37,18 @@ export const Location = () => {
     <LocationMain>
       <StyledLocation>
         <main className="MapContainer">
+        <button
+              className="btMenuOpen"
+              onClick={(event) => {
+                event.preventDefault();
+                setMenu(!menu);
+              }}
+            >
+              <MdMenuOpen />
+            </button>
           {isLoaded ? (
             <GoogleMap
-              mapContainerStyle={{ width: "100%", height: "100%" }}
+              mapContainerStyle={{ width: "100%", height: "100vh" }}
               center={position}
               zoom={12}
             >

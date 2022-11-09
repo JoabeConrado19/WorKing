@@ -46,7 +46,7 @@ table {
 	border-spacing: 0;
 }
 body{
-    background-color: #D9D9D9;
+    background-color: transparent;
     font-family: 'Inter', sans-serif;
 }
 
