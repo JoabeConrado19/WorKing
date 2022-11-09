@@ -1,9 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { AiFillDelete } from "react-icons/ai";
 import { FiEdit2 } from "react-icons/fi";
-// import { number } from "yup/lib/locale";
 import { AsideComponent } from "../Components/AboutUsPage/aside";
-// import { DashboardContext } from "../contexts/dashboard";
 import { useForm } from "react-hook-form";
 import { MdMenuOpen } from "react-icons/md";
 import EditJobModal from "../Components/EditJobModal";
@@ -49,7 +47,7 @@ interface IJobsUser {
 
 export const DashboardClient = () => {
 
-  const { setMapLocation, lat, lng, setOpenModal, menu, setMenu, workers, jobsUser, search, setFilteredProducts, filteredProducts, setJobsUser, searchFilter }: any = useContext(DashboardContext)
+  const { setMapLocation, lat, lng, setOpenModal, menu, setMenu, jobsUser, search, filteredProducts, setJobsUser }: any = useContext(DashboardContext)
 
   const [jobId, setJobId] = useState<null | number>(null);
 
@@ -271,10 +269,6 @@ export const DashboardClient = () => {
                       );
                     }
                   )
-
-
-
-
               }
             </ul>
           </main>
