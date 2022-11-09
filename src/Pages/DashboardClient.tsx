@@ -105,12 +105,12 @@ export const DashboardClient = () => {
   useEffect(() => {
     const getJobsUser = async (id: any) => {
       await api(`jobs?userId=${id}`)
-        .then((resp) => {
+        .then((resp: any) => {
 
           resp.data?.length > 0 && setJobsUser(resp.data);
           // setFilteredProducts([...jobsUser])
         })
-        .catch((err) => console.log(err));
+        .catch((err: any) => console.log(err));
     };
 
     getJobsUser(localStorage.getItem("@WorkingUser_Id"));
