@@ -22,7 +22,6 @@ const RoutesMain = () => {
       <Route path="/location" element={<Location />} />
       <Route path="/about-us" element={<AboutUsPage />} />
       <Route path="/wallet" element={<Wallet />} />
-
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
