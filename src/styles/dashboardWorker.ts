@@ -15,8 +15,10 @@ height: 100vh;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    
-    
+    margin: 0 90px;
+
+
+
 }
  h3 {
     font-size: 20px;
@@ -37,7 +39,8 @@ height: 100vh;
     justify-content: space-between;
     margin: 10px 0;
     animation: bounce-top 1s;
-    
+
+    margin: 0 90px;
  }
 
 
