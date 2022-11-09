@@ -16,25 +16,25 @@ export default function EditJobModal({jobId}:any){
         handleSubmit,
     } = useForm();
 
-    const editJob = async (data:any) => {
-        console.log(data)
+    const editJob = async (inputs:any) => {
         try {
             const correctFormatData = {
                 userId: localStorage.getItem("@WorkingUser_Id"),
                 Job: {
-                    ...data,
+                    ...inputs,
                     lat: lat,
                     lnt: lnt
                 },
                 id: Number(jobId)
         }
-            const response = await api.patch(`job/${Number(jobId)}`, correctFormatData, {  
+            const {data} = await api.patch(`jobs/${Number(jobId)}`, correctFormatData, {  
                 headers:
                     {
                         Authorization: `Bearer ${localStorage.getItem("@WorkingUser_Token")}`
                     }
                 }
             )
+            console.log(data)
         } catch (error) {
             console.log(error)
         }
