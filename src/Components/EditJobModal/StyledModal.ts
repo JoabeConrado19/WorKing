@@ -43,7 +43,6 @@ export const StyledModal = styled.div<iStyledProps>`
         border: none;
         font-size: 20px;
         background-color: #FFA800;
-        animation: bounce-in-left 1s;
     }
     label{
         margin: 0 5px;
