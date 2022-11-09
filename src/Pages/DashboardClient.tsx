@@ -10,11 +10,13 @@ import EditJobModal from "../Components/EditJobModal";
 import { InputSearch } from "../Components/InputSearch";
 import { DashboardContext } from "../contexts/dashboard";
 import api from "../services/api";
+import { toast } from "react-toastify";
 import {
   StyledBody,
   StyledClientDash,
   StyledForm
 } from "../styles/StyledClientDash";
+import { useNavigate } from "react-router-dom";
 
 interface iJobForm {
   Job_Name: string;
@@ -48,6 +50,8 @@ interface IJobsUser {
 }
 
 export const DashboardClient = () => {
+
+  const Navigate = useNavigate()
 
  
 
@@ -85,7 +89,29 @@ export const DashboardClient = () => {
   };
 
   useEffect(()=>{
-    verifyToken()
+    let Token = window.localStorage.getItem("@WorkingUser_Token")
+    let Id = window.localStorage.getItem("@WorkingUser_Id")
+    api
+    .get(`/users/${Id}`, {
+
+        headers: {
+            Authorization: `Bearer ${Token}`
+        }
+
+    })
+    .then((response) => {
+        if(response.status !== 200){
+            toast.error("Limite de tempo expirado, faça o login novamente!", { autoClose: 3000 })
+            Navigate("/login")
+        }
+        else if(response.data.user_type === "worker"){
+          Navigate("/dashboard-worker")
+
+
+        }
+        
+    })
+    .catch((err) => Navigate("/login"));
   },[])
 
   const deleteJob = async (event: any) => {

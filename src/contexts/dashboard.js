@@ -22,6 +22,7 @@ export const DashboardProvider = ({ children }) => {
     const [search, setSearch] = useState('')
     const [jobsUser, setJobsUser] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([...jobsUser])
+    const [clientId, setClientId] = useState(null)
 
     const findMyLat = () => {
         const success = (position) => {
@@ -107,7 +108,7 @@ export const DashboardProvider = ({ children }) => {
 
 
     return (
-        <DashboardContext.Provider value={{ findMyLat, setMapLocation, lat, lng, zoom, getUserInfo, userImg, userName, openModal, setOpenModal, setMenu, menu, searchFilter, workers, setWorkers, search, setSearch, jobsUser, setJobsUser, filteredProducts, setFilteredProducts, verifyToken, }}>
+        <DashboardContext.Provider value={{ findMyLat, setMapLocation, lat, lng, zoom, getUserInfo, userImg, userName, openModal, setOpenModal, setMenu, menu, searchFilter, workers, setWorkers, search, setSearch, jobsUser, setJobsUser, filteredProducts, setFilteredProducts, verifyToken, clientId, setClientId }}>
             {children}
         </DashboardContext.Provider>
     )
