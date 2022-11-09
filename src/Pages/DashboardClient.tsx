@@ -49,7 +49,7 @@ interface IJobsUser {
 
 export const DashboardClient = () => {
 
-  const { setMapLocation, lat, lng, setOpenModal, menu, setMenu, workers, jobsUser, search, setFilteredProducts, filteredProducts, setJobsUser, searchFilter }: any = useContext(DashboardContext)
+  const { setMapLocation, lat, lng, setOpenModal, menu, setMenu, jobsUser, search, filteredProducts, setJobsUser }: any = useContext(DashboardContext)
 
   const [jobId, setJobId] = useState<null | number>(null);
 
@@ -107,12 +107,12 @@ export const DashboardClient = () => {
   useEffect(() => {
     const getJobsUser = async (id: any) => {
       await api(`jobs?userId=${id}`)
-        .then((resp) => {
+        .then((resp: any) => {
 
           resp.data?.length > 0 && setJobsUser(resp.data);
           // setFilteredProducts([...jobsUser])
         })
-        .catch((err) => console.log(err));
+        .catch((err: any) => console.log(err));
     };
 
     getJobsUser(localStorage.getItem("@WorkingUser_Id"));
@@ -272,10 +272,6 @@ export const DashboardClient = () => {
                       );
                     }
                   )
-
-
-
-
               }
             </ul>
           </main>

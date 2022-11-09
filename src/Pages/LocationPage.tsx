@@ -12,7 +12,7 @@ export const Location = () => {
   const [jobsMarkers, setJobsMarkers] = useState<any>([]);
 
   useEffect(() => {
-    api.get("/jobs").then((response) => {
+    api.get("/jobs").then((response: any) => {
       setJobsMarkers(response.data);
     });
   }, []);

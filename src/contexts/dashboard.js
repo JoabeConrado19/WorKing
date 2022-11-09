@@ -56,14 +56,10 @@ export const DashboardProvider = ({ children }) => {
 
             })
             .then((response) => {
-
-                if (response.status === 200) {
-
-                    setUserImg(`${response.data.profile_pic}`)
-                    setUserName(`${response.data.name}`)
-
-                }
+                setUserImg(`${response.data.profile_pic}`)
+                setUserName(`${response.data.name}`)
             })
+            .catch((err) => console.log(err));
 
     }
 

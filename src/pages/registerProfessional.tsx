@@ -62,7 +62,7 @@ export const RegisterProfessional = () => {
           navigate("/login");
         }
       })
-      .catch(function (error) {
+      .catch(function (error: any) {
         console.log(error);
       });
   };
