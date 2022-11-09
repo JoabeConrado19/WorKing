@@ -1,17 +1,16 @@
-import { HiOutlineUserCircle } from "react-icons/hi";
+import { useContext, useEffect } from "react";
 import {
   AiOutlineClockCircle,
   AiOutlineHome,
-  AiOutlineUser,
+  AiOutlineUser
 } from "react-icons/ai";
-import { FiMapPin, FiUsers } from "react-icons/fi";
 import { FaWallet, FaWindowClose } from "react-icons/fa";
+import { FiMapPin, FiUsers } from "react-icons/fi";
 import { ImExit } from "react-icons/im";
-import { Link, Navigate, useNavigate } from "react-router-dom";
-import { Aside } from "./style";
-import { useContext, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { DashboardContext } from "../../../contexts/dashboard";
 import api from "../../../services/api";
+import { Aside } from "./style";
 
 export interface IAsideComponent {
   setMenu?: any;
@@ -20,9 +19,9 @@ export interface IAsideComponent {
 
 export const AsideComponent = () => {
 
-  const { getUserInfo, userImg, userName, menu, setMenu}:any = useContext(DashboardContext)
+  const { getUserInfo, userImg, userName, menu, setMenu }: any = useContext(DashboardContext)
 
-  useEffect(()=>{
+  useEffect(() => {
     getUserInfo()
   }, [])
 
@@ -46,28 +45,28 @@ export const AsideComponent = () => {
         <div className="container__menu">
           <ul className="menu">
             <li>
-              <button onClick={async ()=>{
-                 let Token = window.localStorage.getItem("@WorkingUser_Token")
-                 let Id = window.localStorage.getItem("@WorkingUser_Id")
-                 api
-                 .get(`/users/${Id}`, {
-         
-                     headers: {
-                         Authorization: `Bearer ${Token}`
-                     }
-         
-                 })
-                 .then((response) => {
-                     if(response.data.user_type === "worker"){
+              <button onClick={async () => {
+                let Token = window.localStorage.getItem("@WorkingUser_Token")
+                let Id = window.localStorage.getItem("@WorkingUser_Id")
+                api
+                  .get(`/users/${Id}`, {
+
+                    headers: {
+                      Authorization: `Bearer ${Token}`
+                    }
+
+                  })
+                  .then((response) => {
+                    if (response.data.user_type === "worker") {
                       navigate("/dashboard-worker")
-                     }
-                     else{
+                    }
+                    else {
                       navigate("/dashboard")
-                     }
-                     
-                 })
+                    }
+
+                  })
               }}>
-                <AiOutlineHome className="iconMenu"/>
+                <AiOutlineHome className="iconMenu" />
                 <p>Home</p>
               </button>
             </li>
@@ -95,13 +94,13 @@ export const AsideComponent = () => {
 
             <li>
               {/* Alterar redirecionamento */}
-              <Link to="/dashboard">
+              <Link to="/historic">
                 <AiOutlineClockCircle />
                 <p>Histórico</p>
               </Link>
             </li>
             <li>
-              <button onClick={()=>{
+              <button onClick={() => {
                 window.localStorage.clear()
                 navigate("/")
 

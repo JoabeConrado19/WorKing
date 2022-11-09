@@ -6,6 +6,7 @@ import { Historic } from '../Pages/Historic';
 import { LandingPage } from '../Pages/LandingPage';
 import { Location } from '../Pages/LocationPage';
 import { LoginPage } from '../Pages/LoginPage';
+import { NotFound } from '../Pages/NotFound';
 import { Register } from '../Pages/registerPage';
 import { RegisterProfessional } from '../Pages/registerProfessional';
 import { Wallet } from '../Pages/Wallet';
@@ -24,7 +25,7 @@ const RoutesMain = () => {
       <Route path="/manual" element={<h1>Manual aqui</h1>} />
       <Route path="/about-us" element={<AboutUsPage />} />
       <Route path="/wallet" element={<Wallet />} />
-      <Route path="*" element={<h2>Not Found</h2>} />
+      <Route path='*' element={<NotFound />} />
       <Route path='/historic' element={<Historic />} />
     </Routes>
   );
