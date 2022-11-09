@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react";
 import {
   AiOutlineClockCircle,
   AiOutlineHome,
-  AiOutlineUser
+  AiOutlineUser,
 } from "react-icons/ai";
 import { FaWallet, FaWindowClose } from "react-icons/fa";
 import { FiMapPin, FiUsers } from "react-icons/fi";
@@ -18,14 +18,14 @@ export interface IAsideComponent {
 }
 
 export const AsideComponent = () => {
-
-  const { getUserInfo, userImg, userName, menu, setMenu }: any = useContext(DashboardContext)
+  const { getUserInfo, userImg, userName, menu, setMenu }: any =
+    useContext(DashboardContext);
 
   useEffect(() => {
-    getUserInfo()
-  }, [])
+    getUserInfo();
+  }, []);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   return (
     <>
@@ -45,34 +45,32 @@ export const AsideComponent = () => {
         <div className="container__menu">
           <ul className="menu">
             <li>
-              <button onClick={async () => {
-                let Token = window.localStorage.getItem("@WorkingUser_Token")
-                let Id = window.localStorage.getItem("@WorkingUser_Id")
-                api
-                  .get(`/users/${Id}`, {
-
-                    headers: {
-                      Authorization: `Bearer ${Token}`
-                    }
-
-                  })
-                  .then((response) => {
-                    if (response.data.user_type === "worker") {
-                      navigate("/dashboard-worker")
-                    }
-                    else {
-                      navigate("/dashboard")
-                    }
-
-                  })
-              }}>
+              <button
+                onClick={async () => {
+                  let Token = window.localStorage.getItem("@WorkingUser_Token");
+                  let Id = window.localStorage.getItem("@WorkingUser_Id");
+                  api
+                    .get(`/users/${Id}`, {
+                      headers: {
+                        Authorization: `Bearer ${Token}`,
+                      },
+                    })
+                    .then((response) => {
+                      if (response.data.user_type === "worker") {
+                        navigate("/dashboard-worker");
+                      } else {
+                        navigate("/dashboard");
+                      }
+                    });
+                }}
+              >
                 <AiOutlineHome className="iconMenu" />
                 <p>Home</p>
               </button>
             </li>
             <li>
               {/* Alterar redirecionamento */}
-              <Link to="/dashboard">
+              <Link to="/profile">
                 <AiOutlineUser />
                 <p>Perfil</p>
               </Link>
@@ -100,11 +98,12 @@ export const AsideComponent = () => {
               </Link>
             </li>
             <li>
-              <button onClick={() => {
-                window.localStorage.clear()
-                navigate("/")
-
-              }}>
+              <button
+                onClick={() => {
+                  window.localStorage.clear();
+                  navigate("/");
+                }}
+              >
                 <ImExit />
                 <p>Logout</p>
               </button>

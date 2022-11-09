@@ -8,15 +8,15 @@ import { useForm } from "react-hook-form";
 import { MdMenuOpen } from "react-icons/md";
 import EditJobModal from "../Components/EditJobModal";
 import { InputSearch } from "../Components/InputSearch";
-import { DashboardContext } from "../contexts/dashboard";
 import api from "../services/api";
 import { toast } from "react-toastify";
 import {
   StyledBody,
   StyledClientDash,
-  StyledForm
+  StyledForm,
 } from "../styles/StyledClientDash";
 import { useNavigate } from "react-router-dom";
+import { DashboardContext } from "../contexts/dashboard";
 
 interface iJobForm {
   Job_Name: string;
@@ -50,19 +50,28 @@ interface IJobsUser {
 }
 
 export const DashboardClient = () => {
+  const Navigate = useNavigate();
 
-  const Navigate = useNavigate()
-
- 
-
-  const { setMapLocation, lat, lng, setOpenModal, menu, setMenu, jobsUser, search, filteredProducts, setJobsUser, verifyToken }: any = useContext(DashboardContext)
+  const {
+    setMapLocation,
+    lat,
+    lng,
+    setOpenModal,
+    menu,
+    setMenu,
+    jobsUser,
+    search,
+    filteredProducts,
+    setJobsUser,
+    verifyToken,
+  }: any = useContext(DashboardContext);
 
   const [jobId, setJobId] = useState<null | number>(null);
 
   const { register, handleSubmit, reset } = useForm<iJobForm>();
 
   const createJob = async (job: iJobForm) => {
-    setMapLocation()
+    setMapLocation();
     try {
       const dataCorrectFormat: iDataCreateJob = {
         userId: Number(localStorage.getItem("@WorkingUser_Id")),
@@ -79,72 +88,57 @@ export const DashboardClient = () => {
         },
       });
       console.log(data);
-      reset()
-      setJobsUser([data, ...jobsUser ]);
+      reset();
+      setJobsUser([data, ...jobsUser]);
     } catch (error) {
       console.log(error);
     } finally {
-
     }
   };
 
-  useEffect(()=>{
-    let Token = window.localStorage.getItem("@WorkingUser_Token")
-    let Id = window.localStorage.getItem("@WorkingUser_Id")
+  useEffect(() => {
+    let Token = window.localStorage.getItem("@WorkingUser_Token");
+    let Id = window.localStorage.getItem("@WorkingUser_Id");
     api
-    .get(`/users/${Id}`, {
-
+      .get(`/users/${Id}`, {
         headers: {
-            Authorization: `Bearer ${Token}`
+          Authorization: `Bearer ${Token}`,
+        },
+      })
+      .then((response) => {
+        if (response.status !== 200) {
+          toast.error("Limite de tempo expirado, faça o login novamente!", {
+            autoClose: 3000,
+          });
+          Navigate("/login");
+        } else if (response.data.user_type === "worker") {
+          Navigate("/dashboard-worker");
         }
-
-    })
-    .then((response) => {
-        if(response.status !== 200){
-            toast.error("Limite de tempo expirado, faça o login novamente!", { autoClose: 3000 })
-            Navigate("/login")
-        }
-        else if(response.data.user_type === "worker"){
-          Navigate("/dashboard-worker")
-
-
-        }
-        
-    })
-    .catch((err) => Navigate("/login"));
-  },[])
+      })
+      .catch((err) => Navigate("/login"));
+  }, []);
 
   const deleteJob = async (event: any) => {
     try {
-      const jobId = Number(event.target.id.slice(6))
+      const jobId = Number(event.target.id.slice(6));
 
-      await api.delete(`jobs/${jobId}`,
-        {
-          headers:
-          {
-            Authorization: `Bearer ${localStorage.getItem("@WorkingUser_Token")}`
-          }
-        }
-      )
-      const filteredUserJobs = jobsUser.filter((job: any) => job.id !== jobId)
-      setJobsUser(filteredUserJobs)
+      await api.delete(`jobs/${jobId}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("@WorkingUser_Token")}`,
+        },
+      });
+      const filteredUserJobs = jobsUser.filter((job: any) => job.id !== jobId);
+      setJobsUser(filteredUserJobs);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
-
-  
-
-
-
+  };
 
   useEffect(() => {
     const getJobsUser = async (id: any) => {
       await api(`jobs?userId=${id}`)
         .then((resp: any) => {
-
           resp.data?.length > 0 && setJobsUser(resp.data);
-
         })
         .catch((err: any) => console.log(err));
     };
@@ -154,7 +148,6 @@ export const DashboardClient = () => {
 
   return (
     <>
-
       <EditJobModal jobId={jobId} />
       <StyledBody>
         <AsideComponent />
@@ -172,7 +165,6 @@ export const DashboardClient = () => {
             <h1>Home</h1>
           </header>
           <main>
-
             <div className="input-div">
               <InputSearch />
             </div>
@@ -242,10 +234,8 @@ export const DashboardClient = () => {
               </StyledForm>
             </section>
             <ul>
-
-              {
-                search ?
-                  filteredProducts.map(
+              {search
+                ? filteredProducts.map(
                     ({
                       userId,
                       Job: { Job_Name, Description, lat, lnt, Category },
@@ -261,11 +251,21 @@ export const DashboardClient = () => {
                             <p>{Description}</p>
 
                             <div className="div-categoria">
-                              <button onClick={() => { setOpenModal(true); setJobId(id) }} className="btedit">
+                              <button
+                                onClick={() => {
+                                  setOpenModal(true);
+                                  setJobId(id);
+                                }}
+                                className="btedit"
+                              >
                                 <FiEdit2 />
                                 Editar
                               </button>
-                              <button id={`delete${id}`} onClick={(event) => deleteJob(event)} className="delete">
+                              <button
+                                id={`delete${id}`}
+                                onClick={(event) => deleteJob(event)}
+                                className="delete"
+                              >
                                 <AiFillDelete />
                                 Deletar
                               </button>
@@ -275,8 +275,7 @@ export const DashboardClient = () => {
                       );
                     }
                   )
-                  :
-                  jobsUser.map(
+                : jobsUser.map(
                     ({
                       userId,
                       Job: { Job_Name, Description, lat, lnt, Category },
@@ -292,11 +291,21 @@ export const DashboardClient = () => {
                             <p>{Description}</p>
 
                             <div className="div-categoria">
-                              <button onClick={() => { setOpenModal(true); setJobId(id) }} className="btedit">
+                              <button
+                                onClick={() => {
+                                  setOpenModal(true);
+                                  setJobId(id);
+                                }}
+                                className="btedit"
+                              >
                                 <FiEdit2 />
                                 Editar
                               </button>
-                              <button id={`delete${id}`} onClick={(event) => deleteJob(event)} className="delete">
+                              <button
+                                id={`delete${id}`}
+                                onClick={(event) => deleteJob(event)}
+                                className="delete"
+                              >
                                 <AiFillDelete />
                                 Deletar
                               </button>
@@ -305,8 +314,7 @@ export const DashboardClient = () => {
                         </li>
                       );
                     }
-                  )
-              }
+                  )}
             </ul>
           </main>
         </StyledClientDash>

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import backgroundOne from "../assets/1.png"
+import backgroundOne from "../assets/1.png";
 
 export const StyledBody = styled.div`
   display: flex;
@@ -327,10 +327,10 @@ export const StyledClientDash = styled.div`
               background-color: #ffa800;
             }
 
-            .btedit:hover{
+            .btedit:hover {
               background-color: transparent;
               color: #ffa800;
-              border: 1px solid  #ffa800;
+              border: 1px solid #ffa800;
               transition: 0.5s;
             }
 
@@ -340,11 +340,11 @@ export const StyledClientDash = styled.div`
             }
 
             .delete:hover {
-            color: red;
-            transition: 0.5s;
-            border: 1px solid red;
-            background-color: transparent;
-           }
+              color: red;
+              transition: 0.5s;
+              border: 1px solid red;
+              background-color: transparent;
+            }
           }
         }
       }
@@ -379,6 +379,7 @@ export const StyledAside = styled.aside`
     position: fixed;
     background-color: #ffa220;
     width: 60px;
+
     height: 100vh;
     flex-direction: column;
     align-items: center;

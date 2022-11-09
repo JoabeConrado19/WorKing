@@ -16,13 +16,13 @@ export const StyledHeader = styled.div`
     width: 35vw;
     border: none;
     border-radius: 8px;
-    background-color: #D9D9D9;
+    background-color: #d9d9d9;
     justify-content: space-around;
     align-items: center;
     opacity: 50%;
   }
   input {
-    background-color: #D9D9D9;
+    background-color: #d9d9d9;
     width: 80%;
     border: none;
     padding: 5px;
@@ -30,7 +30,7 @@ export const StyledHeader = styled.div`
   }
   button {
     display: flex;
-    background-color: #D9D9D9;
+    background-color: #d9d9d9;
     font-size: 25px;
     align-items: center;
   }
