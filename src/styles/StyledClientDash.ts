@@ -66,6 +66,9 @@ export const StyledClientDash = styled.div`
       border-radius: 8px;
       width: 90%;
       margin: 0 auto;
+      ::placeholder{
+                        color: #FFA800;
+                }
     }
   }
 
