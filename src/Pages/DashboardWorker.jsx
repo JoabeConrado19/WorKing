@@ -3,11 +3,16 @@ import { StyledDashboard } from "../styles/dashboardWorker";
 import { Header } from "../Components/Header/index";
 import { AsideComponent } from "../Components/AboutUsPage/aside";
 import api from "../services/api";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { CardStyled } from "../Components/CardClient/style";
+import ContactModal from "../Components/ContactModal";
+import { DashboardContext } from "../contexts/dashboard";
 
 export const DashboardWorker = () => {
   const [jobs, setJobs] = useState([]);
+
+  const { clientId} = useContext(DashboardContext)
+
 
   useEffect( () => {
      api.get("/jobs").then((response) => {
@@ -21,20 +26,15 @@ export const DashboardWorker = () => {
       <AsideComponent />
       <Header />
       <StyledDashboard>
+        <ContactModal clientId={clientId}/>
         <div className="headerMain">
           <h3>Lista de oportunidades</h3>
         </div>
         <div className="listCard">
-          
-
           {
-           
-
-           
             jobs.map(element => (
-              <CardClient Id={element.id} key={element.id} Name = {element.Job.Job_Name} Description={element.Job.Description} Categoty = {element.Job.Categoty} lat = {element.Job.lat} lng = {element.Job.lnt}/>
+              <CardClient clientId={element.userId} key={element.id} Name = {element.Job.Job_Name} Description={element.Job.Description} Categoty = {element.Job.Categoty} lat = {element.Job.lat} lng = {element.Job.lnt}/>
             ))
-
           }
 
         </div>

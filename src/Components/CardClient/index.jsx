@@ -7,15 +7,13 @@ import { CardStyled } from "./style";
 import { GoogleMap, useJsApiLoader, Marker, DirectionsService, DirectionsRenderer  } from "@react-google-maps/api";
 import { DashboardContext } from "../../contexts/dashboard";
 
-
 export const CardClient = (props) => {
 
-  const { findMyLat, setMapLocation , zoom, lat, lng } = useContext(DashboardContext)
+
+  const { findMyLat, setMapLocation , zoom, lat, lng, setOpenModal, setClientId } = useContext(DashboardContext)
+  
   const [directionsResponse, setdirectionsResponse] = useState(null)
 
-
-
-  
   useEffect(()=>{
     findMyLat()
   
@@ -112,8 +110,9 @@ export const CardClient = (props) => {
                 <ButtomRoute /> */}
           <button
             className="btnContact"
-            onClick={(event) => {
-              event.preventDefault();
+            onClick={() => {
+              setOpenModal(true);
+              setClientId(props.clientId);
             }}
           >
            Contato
