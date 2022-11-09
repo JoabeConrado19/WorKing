@@ -1,10 +1,36 @@
 import { StyledLandingPage } from '../styles/StyledLandingPage'
 import { StyledButton } from '../styles/StyledButton'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
+import api from '../services/api'
 
 
 
 export const LandingPage = () => {
+
+    const Navigate = useNavigate()
+
+
+    useEffect(()=>{
+        let Token = window.localStorage.getItem("@WorkingUser_Token")
+        let Id = window.localStorage.getItem("@WorkingUser_Id")
+        api
+        .get(`/users/${Id}`, {
+
+            headers: {
+                Authorization: `Bearer ${Token}`
+            }
+
+        })
+        .then((response) => {
+            if(response.status === 200){
+                Navigate("/dashboard")
+            }
+            
+        })
+
+
+    },[])
 
 
   return (

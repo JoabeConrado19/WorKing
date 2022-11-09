@@ -1,20 +1,22 @@
 import { useContext, useEffect, useState } from "react";
 import { AiFillDelete } from "react-icons/ai";
 import { FiEdit2 } from "react-icons/fi";
-// import { number } from "yup/lib/locale";
+
 import { AsideComponent } from "../Components/AboutUsPage/aside";
-// import { DashboardContext } from "../contexts/dashboard";
+
 import { useForm } from "react-hook-form";
 import { MdMenuOpen } from "react-icons/md";
 import EditJobModal from "../Components/EditJobModal";
 import { InputSearch } from "../Components/InputSearch";
 import { DashboardContext } from "../contexts/dashboard";
 import api from "../services/api";
+import { toast } from "react-toastify";
 import {
   StyledBody,
   StyledClientDash,
   StyledForm
 } from "../styles/StyledClientDash";
+import { useNavigate } from "react-router-dom";
 
 interface iJobForm {
   Job_Name: string;
@@ -49,7 +51,11 @@ interface IJobsUser {
 
 export const DashboardClient = () => {
 
-  const { setMapLocation, lat, lng, setOpenModal, menu, setMenu, workers, jobsUser, search, setFilteredProducts, filteredProducts, setJobsUser, searchFilter }: any = useContext(DashboardContext)
+  const Navigate = useNavigate()
+
+ 
+
+  const { setMapLocation, lat, lng, setOpenModal, menu, setMenu, jobsUser, search, filteredProducts, setJobsUser, verifyToken }: any = useContext(DashboardContext)
 
   const [jobId, setJobId] = useState<null | number>(null);
 
@@ -74,13 +80,39 @@ export const DashboardClient = () => {
       });
       console.log(data);
       reset()
-      setJobsUser([...jobsUser, data]);
+      setJobsUser([data, ...jobsUser ]);
     } catch (error) {
       console.log(error);
     } finally {
 
     }
   };
+
+  useEffect(()=>{
+    let Token = window.localStorage.getItem("@WorkingUser_Token")
+    let Id = window.localStorage.getItem("@WorkingUser_Id")
+    api
+    .get(`/users/${Id}`, {
+
+        headers: {
+            Authorization: `Bearer ${Token}`
+        }
+
+    })
+    .then((response) => {
+        if(response.status !== 200){
+            toast.error("Limite de tempo expirado, faça o login novamente!", { autoClose: 3000 })
+            Navigate("/login")
+        }
+        else if(response.data.user_type === "worker"){
+          Navigate("/dashboard-worker")
+
+
+        }
+        
+    })
+    .catch((err) => Navigate("/login"));
+  },[])
 
   const deleteJob = async (event: any) => {
     try {
@@ -101,18 +133,20 @@ export const DashboardClient = () => {
     }
   }
 
+  
+
 
 
 
   useEffect(() => {
     const getJobsUser = async (id: any) => {
       await api(`jobs?userId=${id}`)
-        .then((resp) => {
+        .then((resp: any) => {
 
           resp.data?.length > 0 && setJobsUser(resp.data);
 
         })
-        .catch((err) => console.log(err));
+        .catch((err: any) => console.log(err));
     };
 
     getJobsUser(localStorage.getItem("@WorkingUser_Id"));
@@ -138,6 +172,7 @@ export const DashboardClient = () => {
             <h1>Home</h1>
           </header>
           <main>
+
             <div className="input-div">
               <InputSearch />
             </div>
@@ -271,10 +306,6 @@ export const DashboardClient = () => {
                       );
                     }
                   )
-
-
-
-
               }
             </ul>
           </main>

@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { StyledForm } from "../../styles/StyledClientDash";
 import { StyledModal } from "./StyledModal";
 import { DashboardContext } from "../../contexts/dashboard";
@@ -8,33 +8,33 @@ import api from "../../services/api";
 
 export default function EditJobModal({jobId}:any){
 
-    const {openModal, setOpenModal, lat, lnt}:any = useContext(DashboardContext)
-    
+    const {openModal, setOpenModal, lat, lnt, jobsUser, setJobsUser}:any = useContext(DashboardContext)
 
     const {
         register,
         handleSubmit,
     } = useForm();
 
-    const editJob = async (data:any) => {
-        console.log(data)
+    const editJob = async (inputs:any) => {
         try {
             const correctFormatData = {
                 userId: localStorage.getItem("@WorkingUser_Id"),
                 Job: {
-                    ...data,
+                    ...inputs,
                     lat: lat,
                     lnt: lnt
                 },
                 id: Number(jobId)
         }
-            const response = await api.patch(`job/${Number(jobId)}`, correctFormatData, {  
+            const {data} = await api.patch(`jobs/${Number(jobId)}`, correctFormatData, {  
                 headers:
                     {
                         Authorization: `Bearer ${localStorage.getItem("@WorkingUser_Token")}`
                     }
                 }
             )
+            setJobsUser(jobsUser.map((job:any) => {return job.id === data.id ? data : job}))
+            setOpenModal(false);
         } catch (error) {
             console.log(error)
         }

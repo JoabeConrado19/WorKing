@@ -7,15 +7,19 @@ import api from "../services/api";
 import { MdMenuOpen } from "react-icons/md";
 
 export const Location = () => {
-  const { setMapLocation, lat, lng, menu, setMenu, findMyLat }: any = useContext(DashboardContext)
+  const { setMapLocation, lat, lng, menu, setMenu, findMyLat, verifyToken }: any = useContext(DashboardContext)
 
   const [jobsMarkers, setJobsMarkers] = useState<any>([]);
 
   useEffect(() => {
-    api.get("/jobs").then((response) => {
+    api.get("/jobs").then((response: any) => {
       setJobsMarkers(response.data);
     });
   }, []);
+
+  useEffect(()=>{
+    verifyToken()
+  },[])
 
   useEffect(() => {
     setMapLocation();
@@ -55,7 +59,7 @@ export const Location = () => {
               {jobsMarkers?.map(
                 (element: {
                   id: any;
-
+                  
                   Job: { lat: any; lnt: any; Job_Name: any; id: any };
                 }) => (
                   <Marker
@@ -68,9 +72,9 @@ export const Location = () => {
                       label: {
                         text: element.Job.Job_Name,
                         className: "map-marker",
-                        color: "yellow"
-                        
+                        color: "orange"
                       },
+                      
                     }}
                   />
                 )

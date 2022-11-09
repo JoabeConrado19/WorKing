@@ -1,9 +1,13 @@
 import { createContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import api from "../services/api";
+
 
 export const DashboardContext = createContext({})
 
 export const DashboardProvider = ({ children }) => {
+    const Navigate = useNavigate()
 
     const Token = window.localStorage.getItem('@WorkingUser_Token');
     const Id = window.localStorage.getItem('@WorkingUser_Id');
@@ -22,6 +26,7 @@ export const DashboardProvider = ({ children }) => {
     const [filteredWorkProducts, setFilteredWorkProducts] = useState([...workers])
 
 
+    const [clientId, setClientId] = useState(null)
 
     const findMyLat = () => {
         const success = (position) => {
@@ -60,14 +65,32 @@ export const DashboardProvider = ({ children }) => {
 
             })
             .then((response) => {
-
-                if (response.status === 200) {
-
-                    setUserImg(`${response.data.profile_pic}`)
-                    setUserName(`${response.data.name}`)
-
-                }
+                setUserImg(`${response.data.profile_pic}`)
+                setUserName(`${response.data.name}`)
             })
+            .catch((err) => console.log(err));
+
+    }
+
+    const verifyToken = async () => {
+        api
+            .get(`/users/${Id}`, {
+
+                headers: {
+                    Authorization: `Bearer ${Token}`
+                }
+
+            })
+            .then((response) => {
+                if (response.status !== 200) {
+                    toast.error("Limite de tempo expirado, faça o login novamente!", { autoClose: 3000 })
+                    Navigate("/login")
+                }
+
+            })
+            .catch((err) => Navigate("/login"));
+
+
 
     }
 
@@ -113,7 +136,7 @@ export const DashboardProvider = ({ children }) => {
 
 
     return (
-        <DashboardContext.Provider value={{ findMyLat, setMapLocation, lat, lng, zoom, getUserInfo, userImg, userName, openModal, setOpenModal, setMenu, menu, searchFilter, workers, setWorkers, search, setSearch, jobsUser, setJobsUser, filteredProducts, setFilteredProducts, workerSearch, setWorkerSearch, searchWorkFilter, filteredWorkProducts, setFilteredWorkProducts, getWorkInfo }}>
+        <DashboardContext.Provider value={{ findMyLat, setMapLocation, lat, lng, zoom, getUserInfo, userImg, userName, openModal, setOpenModal, setMenu, menu, searchFilter, workers, setWorkers, search, setSearch, jobsUser, setJobsUser, filteredProducts, setFilteredProducts, verifyToken, clientId, setClientId, workerSearch, setWorkerSearch, searchWorkFilter, filteredWorkProducts, setFilteredWorkProducts, getWorkInfo }}>
             {children}
         </DashboardContext.Provider>
     )

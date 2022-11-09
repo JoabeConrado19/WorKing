@@ -13,11 +13,23 @@ export const StyledWallet = styled.div`
         cursor: pointer;
     }
 
+    .btMenuOpen{
+                display: none;
+        }
+
     @media (max-width: 720px) {
         margin: 0;
         width: 100%;
+        .btMenuOpen{
+                display: block;
+        }
     }
 
+    button {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
 
     h1{
         text-align: center;
@@ -34,6 +46,7 @@ export const StyledWallet = styled.div`
         align-items: center;
         justify-content: space-around;
     }
+    
 
     .btTransferir {
         background-color: #1ab34a;
