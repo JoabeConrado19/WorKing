@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 export const CardStyled = styled.div`
-height: 380px;
+height: 80%;
 width: 40%;
 display: flex;
 flex-direction: column;

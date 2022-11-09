@@ -8,12 +8,13 @@ import { Header } from "../Components/Header";
 import { DashboardContext } from "../contexts/dashboard";
 import api from "../services/api";
 import { StyledDashboard } from "../styles/dashboardWorker";
+import { MdMenuOpen } from "react-icons/md";
 
 
 export const DashboardWorker = () => {
   const Navigate = useNavigate()
   const [jobs, setJobs] = useState([]);
-  const { setWorkers, workers, workerSearch, setWorkerSearch, searchWorkFilter, filteredWorkProducts, setFilteredWorkProducts, getWorkInfo } = useContext(DashboardContext)
+  const { setWorkers, workers, workerSearch, setWorkerSearch, searchWorkFilter, setMenu, menu, filteredWorkProducts, setFilteredWorkProducts, getWorkInfo } = useContext(DashboardContext)
 
 
 
@@ -70,6 +71,15 @@ export const DashboardWorker = () => {
     <>
       <AsideComponent />
       <StyledDashboard>
+      <button
+              className="btMenuOpen"
+              onClick={(event) => {
+                event.preventDefault();
+                setMenu(!menu);
+              }}
+            >
+              <MdMenuOpen />
+            </button>
         <Header />
         <ContactModal clientId={clientId} />
         <div className="headerMain">

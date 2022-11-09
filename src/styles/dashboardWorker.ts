@@ -10,19 +10,29 @@ padding: 10px 30px;
 margin-left: 60px;
 background-image: url(${backgroundOne});
 height: 100vh;
+
+
+.btMenuOpen{
+        display: none;
+}
 .headerMain {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    margin: 0 90px;
-
-
-
-
+    margin-bottom:  20px;
 }
  h3 {
-    font-size: 20px;
+    font-size: 18px;
+    overflow-y: none;
+ }
+
+ p {
+        font-weight: 200;
+ }
+
+ span {
+        display: none;
  }
  .btnFilter {
     padding: 15px;
@@ -40,7 +50,7 @@ height: 100vh;
     justify-content: space-between;
     margin: 10px 0;
     animation: bounce-top 1s;
-
+    overflow-y: scroll;
     margin: 0 90px;
  }
 
@@ -92,6 +102,48 @@ height: 100vh;
                 }
         }
 }
+
+@media (max-width: 700px) {
+        margin: 0;
+        padding: 0;
+
+        .search {
+                width: 100%;
+                input {
+                        width: 100%;
+                }
+        }
+
+        .listCard {
+                margin: 0;
+                display: flex;
+                flex-direction: column;
+                flex-wrap: nowrap;
+                gap: 20px;
+                div{
+                        width: 90%;
+                        margin: 0 auto;
+                        gap: 10px;
+                }
+
+        }
+
+        .modalHeader {
+                width: 90%;
+                max-width: 300px;
+        }
+        
+        main {
+                width: 90%;
+                max-width: 300px;
+                height: 40%;
+        }
+
+.btMenuOpen{
+        display: flex;
+}
+}
+
 
 @keyframes bounce-top {
   0% {

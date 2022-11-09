@@ -3,35 +3,34 @@ export const StyledHeader = styled.div`
   height: 70px;
   width: 100%;
   display: flex;
-  background-color: #ffff;
-  box-shadow: 0 0 20px 3px;
+  background-color: transparent;
   gap: 5px;
   align-items: center;
   justify-items: center;
-  justify-content: space-around;
+  justify-content: center;
 
   .search {
     display: flex;
     padding: 5px 10px;
-    width: 35vw;
+    width: 50vw;
     border: none;
     border-radius: 8px;
-    background-color: #d9d9d9;
-    justify-content: space-around;
+    background-color: #ffff;
+    justify-content: center;
     align-items: center;
     opacity: 50%;
   }
   input {
-    background-color: #d9d9d9;
-    width: 80%;
+    background-color: transparent;
+    width: 100px;
     border: none;
     padding: 5px;
     font-size: 18px;
   }
   button {
     display: flex;
-    background-color: #d9d9d9;
-    font-size: 25px;
+    background-color: transparent;
+    font-size: 20px;
     align-items: center;
   }
 `;
