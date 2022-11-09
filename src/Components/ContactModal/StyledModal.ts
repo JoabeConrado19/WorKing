@@ -55,7 +55,7 @@ export const StyledContactModal = styled.div<iStyledProps>`
             height: 120px;
             margin: 15px 20px 10px 10px;
             img{
-                max-height: 100%;
+                height: 100%;
                 border: solid 2px black;
                 border-radius: 8px;
             }
