@@ -1,5 +1,5 @@
 import styled from "styled-components"
-
+import backgroundOne from "../assets/1.png"
 
 
 export const StyledDashboard = styled.div`
@@ -8,20 +8,25 @@ display: flex;
 flex-direction: column ;
 padding: 10px 30px;
 margin-left: 60px;
+background-image: url(${backgroundOne});
+height: 100vh;
 .headerMain {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    
-    
+    margin: 0 90px;
+
+
+
+
 }
  h3 {
     font-size: 20px;
  }
  .btnFilter {
     padding: 15px;
-    background-color: #ffff;
+    background-color: transparent;
     border-radius: 8px;
     font-size: 18px;
     font-weight: bold;
@@ -35,7 +40,8 @@ margin-left: 60px;
     justify-content: space-between;
     margin: 10px 0;
     animation: bounce-top 1s;
-    
+
+    margin: 0 90px;
  }
 
 
@@ -49,6 +55,42 @@ margin-left: 60px;
  .bounce-top {
 	-webkit-animation: bounce-top 0.9s both;
 	        animation: bounce-top 0.9s both;
+}
+.input-div {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        input {
+                width: 70%;
+                border-radius: 10px;
+                height: 35px;
+                ::placeholder{
+                        color: #FFA800;
+                }
+        }
+        gap: 10px;
+}
+
+.search{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 15px;
+
+        button{
+                width: 50px;
+                height: 30px;
+                border-radius: 10px 0px 0px 10px;
+        }
+        input {
+                width: 50%;
+                height: 30px;
+                border-radius: 0px 10px 10px 0px;
+                ::placeholder{
+                        color: orange;
+                }
+        }
 }
 
 @keyframes bounce-top {

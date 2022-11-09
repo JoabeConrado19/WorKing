@@ -7,7 +7,15 @@ import api from "../services/api";
 import { MdMenuOpen } from "react-icons/md";
 
 export const Location = () => {
-  const { setMapLocation, lat, lng, menu, setMenu, findMyLat, verifyToken }: any = useContext(DashboardContext)
+  const {
+    setMapLocation,
+    lat,
+    lng,
+    menu,
+    setMenu,
+    findMyLat,
+    verifyToken,
+  }: any = useContext(DashboardContext);
 
   const [jobsMarkers, setJobsMarkers] = useState<any>([]);
 
@@ -17,9 +25,9 @@ export const Location = () => {
     });
   }, []);
 
-  useEffect(()=>{
-    verifyToken()
-  },[])
+  useEffect(() => {
+    verifyToken();
+  }, []);
 
   useEffect(() => {
     setMapLocation();
@@ -41,15 +49,15 @@ export const Location = () => {
     <LocationMain>
       <StyledLocation>
         <main className="MapContainer">
-        <button
-              className="btMenuOpen"
-              onClick={(event) => {
-                event.preventDefault();
-                setMenu(!menu);
-              }}
-            >
-              <MdMenuOpen />
-            </button>
+          <button
+            className="btMenuOpen"
+            onClick={(event) => {
+              event.preventDefault();
+              setMenu(!menu);
+            }}
+          >
+            <MdMenuOpen />
+          </button>
           {isLoaded ? (
             <GoogleMap
               mapContainerStyle={{ width: "100%", height: "100vh" }}
@@ -59,7 +67,7 @@ export const Location = () => {
               {jobsMarkers?.map(
                 (element: {
                   id: any;
-                  
+
                   Job: { lat: any; lnt: any; Job_Name: any; id: any };
                 }) => (
                   <Marker
@@ -72,9 +80,8 @@ export const Location = () => {
                       label: {
                         text: element.Job.Job_Name,
                         className: "map-marker",
-                        color: "orange"
+                        color: "orange",
                       },
-                      
                     }}
                   />
                 )

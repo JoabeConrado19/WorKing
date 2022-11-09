@@ -72,8 +72,5 @@ export const StyledForm = styled.form`
             background-color: #A1A1A1;
             flex-direction: column;
 }
-
-
-
     }
     `
