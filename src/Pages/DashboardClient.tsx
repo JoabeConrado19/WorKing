@@ -110,7 +110,7 @@ export const DashboardClient = () => {
         .then((resp) => {
 
           resp.data?.length > 0 && setJobsUser(resp.data);
-          // setFilteredProducts([...jobsUser])
+
         })
         .catch((err) => console.log(err));
     };

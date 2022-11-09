@@ -14,10 +14,14 @@ export const DashboardProvider = ({ children }) => {
     const [userImg, setUserImg] = useState("");
     const [userName, setUserName] = useState("");
     const [menu, setMenu] = useState(false);
-    const [workers, setWorkers] = useState([])
     const [search, setSearch] = useState('')
     const [jobsUser, setJobsUser] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([...jobsUser])
+    const [workers, setWorkers] = useState([])
+    const [workerSearch, setWorkerSearch] = useState('')
+    const [filteredWorkProducts, setFilteredWorkProducts] = useState([...workers])
+
+
 
     const findMyLat = () => {
         const success = (position) => {
@@ -67,7 +71,6 @@ export const DashboardProvider = ({ children }) => {
 
     }
 
-
     function searchFilter() {
 
         if (search.length > 0) {
@@ -78,14 +81,39 @@ export const DashboardProvider = ({ children }) => {
 
         console.log(filteredProducts);
         console.log(jobsUser)
+    }
+
+    function getWorkInfo() {
+
+        try {
+            api.get("jobs").then((response) => {
+                setWorkers(response.data);
+                setFilteredWorkProducts(response.data);
+                // setJobs(response.data);
+                console.log('setFiltered:', filteredWorkProducts, ' workers:', workers)
+            })
+        } catch (error) {
+            console.error(error)
+        }
+    }
 
 
+
+
+
+
+
+    function searchWorkFilter() {
+        if (workerSearch.length > 0) {
+            setFilteredWorkProducts(filteredWorkProducts.filter((elem) => elem.Job.Job_Name.toLowerCase().includes(workerSearch.toLowerCase())))
+        } else (setFilteredWorkProducts(workers))
 
     }
 
 
+
     return (
-        <DashboardContext.Provider value={{ findMyLat, setMapLocation, lat, lng, zoom, getUserInfo, userImg, userName, openModal, setOpenModal, setMenu, menu, searchFilter, workers, setWorkers, search, setSearch, jobsUser, setJobsUser, filteredProducts, setFilteredProducts }}>
+        <DashboardContext.Provider value={{ findMyLat, setMapLocation, lat, lng, zoom, getUserInfo, userImg, userName, openModal, setOpenModal, setMenu, menu, searchFilter, workers, setWorkers, search, setSearch, jobsUser, setJobsUser, filteredProducts, setFilteredProducts, workerSearch, setWorkerSearch, searchWorkFilter, filteredWorkProducts, setFilteredWorkProducts, getWorkInfo }}>
             {children}
         </DashboardContext.Provider>
     )
