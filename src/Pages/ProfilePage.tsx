@@ -32,12 +32,6 @@ export const ProfilePage = () => {
     password: yup
       .string()
       .min(8, "a senha precisa pelo menos 8 caracteres")
-      .matches(
-        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-        "A senha precisa ter no mínimo 8 caracteres, " +
-          "uma letra maiúscula e uma letra minúscula, " +
-          "um número e um caracter especial"
-      )
       .required(),
   });
 
@@ -45,9 +39,7 @@ export const ProfilePage = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
-  });
+  } = useForm({});
 
   const token = localStorage.getItem("@WorkingUser_Token");
   const id = window.localStorage.getItem("@WorkingUser_Id");

@@ -46,7 +46,7 @@ table {
 	border-spacing: 0;
 }
 body{
-    background-color: #D9D9D9;
+    background-color: transparent;
     font-family: 'Inter', sans-serif;
 }
 
@@ -86,7 +86,12 @@ body{
   background-color: #070C05;
 }
 
-
+.btMenuOpen{
+  font-size: 50px;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+}
 
 `;
 

@@ -9,13 +9,17 @@ import imgRamon from "../../../assets/team/ramon.png";
 import imgAnibal from "../../../assets/team/anibal.png";
 import imgGabriel from "../../../assets/team/gabriel.png";
 import imgFilipe from "../../../assets/team/filipe.png";
+import { DashboardContext } from "../../../contexts/dashboard";
+import { useContext } from "react";
 
 interface IMain {
   setMenu: any;
   menu: boolean;
 }
 
-export const Main = ({ setMenu, menu }: IMain) => {
+export const Main = () => {
+  const { menu, setMenu }: any = useContext(DashboardContext);
+
   return (
     <>
       <Div>
@@ -38,7 +42,7 @@ export const Main = ({ setMenu, menu }: IMain) => {
             </p>
             <p>
               Voltada para facilitar o dia a dia de quem precisa de serviços
-              domésticos, na contrução civil ou até mesmo uma acessoria.
+              domésticos, na contrução civil entre outros..
             </p>
           </div>
           <div className="container__lista__criadores">
@@ -50,7 +54,7 @@ export const Main = ({ setMenu, menu }: IMain) => {
                     <img src={imgEduardo} alt="Foto de perfil do Eduardo" />
                     <a
                       className="icone"
-                      href="https://br.linkedin.com/?src=go-pa&trk=sem-ga_campid=12619604099_asid=122510712920_crid=509739556235_kw=linked_d=c_tid=kwd-103941963_n=g_mt=e_geo=1031947_slid=&mcid=6821526239111716925&cid=&gclid=CjwKCAjwzY2bBhB6EiwAPpUpZu_-1p71n1luHJsp1yagudOlujNBOvm2HlYK5lNiQEH7WoGkcc4r5xoCwE4QAvD_BwE&gclsrc=aw.ds"
+                      href="https://www.linkedin.com/in/eduardo-henrique-9b4a911a6/"
                       target="_blank"
                       rel="noreferrer"
                     >
@@ -58,7 +62,7 @@ export const Main = ({ setMenu, menu }: IMain) => {
                     </a>
                     <a
                       className="icone"
-                      href="https://github.com/"
+                      href="https://github.com/eduardohenri22"
                       target="_blank"
                       rel="noreferrer"
                     >
@@ -72,14 +76,14 @@ export const Main = ({ setMenu, menu }: IMain) => {
                   <div>
                     <img src={imgLeonardo} alt="Foto de perfil do Leonardo" />
                     <a
-                      href="https://br.linkedin.com/?src=go-pa&trk=sem-ga_campid=12619604099_asid=122510712920_crid=509739556235_kw=linked_d=c_tid=kwd-103941963_n=g_mt=e_geo=1031947_slid=&mcid=6821526239111716925&cid=&gclid=CjwKCAjwzY2bBhB6EiwAPpUpZu_-1p71n1luHJsp1yagudOlujNBOvm2HlYK5lNiQEH7WoGkcc4r5xoCwE4QAvD_BwE&gclsrc=aw.ds"
+                      href="https://www.linkedin.com/in/leonardo-miranda-do-nascimento/"
                       target="_blank"
                       rel="noreferrer"
                     >
                       <AiFillLinkedin />
                     </a>
                     <a
-                      href="https://github.com/"
+                      href="https://github.com/miranda-Leonardo"
                       target="_blank"
                       rel="noreferrer"
                     >
@@ -93,14 +97,14 @@ export const Main = ({ setMenu, menu }: IMain) => {
                   <div>
                     <img src={imgJoabe} alt="Foto de perfil do Joabe" />
                     <a
-                      href="https://br.linkedin.com/?src=go-pa&trk=sem-ga_campid=12619604099_asid=122510712920_crid=509739556235_kw=linked_d=c_tid=kwd-103941963_n=g_mt=e_geo=1031947_slid=&mcid=6821526239111716925&cid=&gclid=CjwKCAjwzY2bBhB6EiwAPpUpZu_-1p71n1luHJsp1yagudOlujNBOvm2HlYK5lNiQEH7WoGkcc4r5xoCwE4QAvD_BwE&gclsrc=aw.ds"
+                      href="https://www.linkedin.com/in/joabe-conrado-borges-cavalcante-b77919218/"
                       target="_blank"
                       rel="noreferrer"
                     >
                       <AiFillLinkedin />
                     </a>
                     <a
-                      href="https://github.com/"
+                      href="https://github.com/JoabeConrado19"
                       target="_blank"
                       rel="noreferrer"
                     >
@@ -114,14 +118,14 @@ export const Main = ({ setMenu, menu }: IMain) => {
                   <div>
                     <img src={imgRamon} alt="Foto de perfil do Ramon" />
                     <a
-                      href="https://br.linkedin.com/?src=go-pa&trk=sem-ga_campid=12619604099_asid=122510712920_crid=509739556235_kw=linked_d=c_tid=kwd-103941963_n=g_mt=e_geo=1031947_slid=&mcid=6821526239111716925&cid=&gclid=CjwKCAjwzY2bBhB6EiwAPpUpZu_-1p71n1luHJsp1yagudOlujNBOvm2HlYK5lNiQEH7WoGkcc4r5xoCwE4QAvD_BwE&gclsrc=aw.ds"
+                      href="https://www.linkedin.com/in/ramon-gato/"
                       target="_blank"
                       rel="noreferrer"
                     >
                       <AiFillLinkedin />
                     </a>
                     <a
-                      href="https://github.com/"
+                      href="https://github.com/ramon-gato"
                       target="_blank"
                       rel="noreferrer"
                     >
@@ -135,14 +139,14 @@ export const Main = ({ setMenu, menu }: IMain) => {
                   <div>
                     <img src={imgAnibal} alt="Foto de perfil do Anibal" />
                     <a
-                      href="https://br.linkedin.com/?src=go-pa&trk=sem-ga_campid=12619604099_asid=122510712920_crid=509739556235_kw=linked_d=c_tid=kwd-103941963_n=g_mt=e_geo=1031947_slid=&mcid=6821526239111716925&cid=&gclid=CjwKCAjwzY2bBhB6EiwAPpUpZu_-1p71n1luHJsp1yagudOlujNBOvm2HlYK5lNiQEH7WoGkcc4r5xoCwE4QAvD_BwE&gclsrc=aw.ds"
+                      href="https://www.linkedin.com/in/anibal-farias-28a25a163/"
                       target="_blank"
                       rel="noreferrer"
                     >
                       <AiFillLinkedin />
                     </a>
                     <a
-                      href="https://github.com/"
+                      href="https://github.com/anibalmoraes"
                       target="_blank"
                       rel="noreferrer"
                     >
@@ -156,14 +160,14 @@ export const Main = ({ setMenu, menu }: IMain) => {
                   <div>
                     <img src={imgGabriel} alt="Foto de perfil do Gabriel" />
                     <a
-                      href="https://br.linkedin.com/?src=go-pa&trk=sem-ga_campid=12619604099_asid=122510712920_crid=509739556235_kw=linked_d=c_tid=kwd-103941963_n=g_mt=e_geo=1031947_slid=&mcid=6821526239111716925&cid=&gclid=CjwKCAjwzY2bBhB6EiwAPpUpZu_-1p71n1luHJsp1yagudOlujNBOvm2HlYK5lNiQEH7WoGkcc4r5xoCwE4QAvD_BwE&gclsrc=aw.ds"
+                      href="https://www.linkedin.com/in/gabrielmelo98dev/"
                       target="_blank"
                       rel="noreferrer"
                     >
                       <AiFillLinkedin />
                     </a>
                     <a
-                      href="https://github.com/"
+                      href="https://github.com/g4br1elm3l0"
                       target="_blank"
                       rel="noreferrer"
                     >
@@ -177,14 +181,14 @@ export const Main = ({ setMenu, menu }: IMain) => {
                   <div>
                     <img src={imgFilipe} alt="Foto de perfil do Filipe" />
                     <a
-                      href="https://br.linkedin.com/?src=go-pa&trk=sem-ga_campid=12619604099_asid=122510712920_crid=509739556235_kw=linked_d=c_tid=kwd-103941963_n=g_mt=e_geo=1031947_slid=&mcid=6821526239111716925&cid=&gclid=CjwKCAjwzY2bBhB6EiwAPpUpZu_-1p71n1luHJsp1yagudOlujNBOvm2HlYK5lNiQEH7WoGkcc4r5xoCwE4QAvD_BwE&gclsrc=aw.ds"
+                      href="https://www.linkedin.com/in/filipe-de-lucena-paiva/"
                       target="_blank"
                       rel="noreferrer"
                     >
                       <AiFillLinkedin />
                     </a>
                     <a
-                      href="https://github.com/"
+                      href="https://github.com/filipelucena1"
                       target="_blank"
                       rel="noreferrer"
                     >

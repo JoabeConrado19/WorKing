@@ -1,38 +1,27 @@
-import { useContext, useEffect } from "react";
+import { Aside } from "./style";
+import { HiOutlineUserCircle } from "react-icons/hi";
 import {
   AiOutlineClockCircle,
   AiOutlineHome,
   AiOutlineUser,
 } from "react-icons/ai";
-import { FaWallet, FaWindowClose } from "react-icons/fa";
 import { FiMapPin, FiUsers } from "react-icons/fi";
+import { FaWallet, FaWindowClose } from "react-icons/fa";
 import { ImExit } from "react-icons/im";
-import { Link, useNavigate } from "react-router-dom";
-import { DashboardContext } from "../../../contexts/dashboard";
-import api from "../../../services/api";
-import { Aside } from "./style";
+import { Link } from "react-router-dom";
 
-export interface IAsideComponent {
+interface IAsideComponent {
   setMenu?: any;
   menu?: boolean;
 }
 
-export const AsideComponent = () => {
-  const { getUserInfo, userImg, userName, menu, setMenu }: any =
-    useContext(DashboardContext);
-
-  useEffect(() => {
-    getUserInfo();
-  }, []);
-
-  const navigate = useNavigate();
-
+export const AsideComponent = ({ setMenu, menu }: IAsideComponent) => {
   return (
     <>
       <Aside rigth={menu ? "auto" : "-300px"}>
         <div className="userName">
-          <img src={userImg} alt="" />
-          <h2>{userName}</h2>
+          <HiOutlineUserCircle />
+          <h2>Name</h2>
           <button
             onClick={(event) => {
               event.preventDefault();
@@ -45,32 +34,14 @@ export const AsideComponent = () => {
         <div className="container__menu">
           <ul className="menu">
             <li>
-              <button
-                onClick={async () => {
-                  let Token = window.localStorage.getItem("@WorkingUser_Token");
-                  let Id = window.localStorage.getItem("@WorkingUser_Id");
-                  api
-                    .get(`/users/${Id}`, {
-                      headers: {
-                        Authorization: `Bearer ${Token}`,
-                      },
-                    })
-                    .then((response) => {
-                      if (response.data.user_type === "worker") {
-                        navigate("/dashboard-worker");
-                      } else {
-                        navigate("/dashboard");
-                      }
-                    });
-                }}
-              >
-                <AiOutlineHome className="iconMenu" />
+              <Link to="/dashboard">
+                <AiOutlineHome />
                 <p>Home</p>
-              </button>
+              </Link>
             </li>
             <li>
               {/* Alterar redirecionamento */}
-              <Link to="/profile">
+              <Link to="/dashboard">
                 <AiOutlineUser />
                 <p>Perfil</p>
               </Link>
@@ -84,7 +55,7 @@ export const AsideComponent = () => {
             </li>
             <li>
               {/* Alterar redirecionamento */}
-              <Link to="/wallet">
+              <Link to="/dashboard">
                 <FaWallet />
                 <p>Carteira</p>
               </Link>
@@ -98,15 +69,10 @@ export const AsideComponent = () => {
               </Link>
             </li>
             <li>
-              <button
-                onClick={() => {
-                  window.localStorage.clear();
-                  navigate("/");
-                }}
-              >
+              <Link to="/">
                 <ImExit />
                 <p>Logout</p>
-              </button>
+              </Link>
             </li>
             <li>
               <Link to="/about-us">

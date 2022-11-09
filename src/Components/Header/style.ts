@@ -1,5 +1,4 @@
 import styled from "styled-components";
-
 export const StyledHeader = styled.div`
   height: 70px;
   width: 100%;
@@ -22,7 +21,6 @@ export const StyledHeader = styled.div`
     align-items: center;
     opacity: 50%;
   }
-
   input {
     background-color: #d9d9d9;
     width: 80%;

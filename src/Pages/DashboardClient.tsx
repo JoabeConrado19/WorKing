@@ -1,17 +1,21 @@
 import { useContext, useEffect, useState } from "react";
-import { AiFillDelete, AiOutlineMenu } from "react-icons/ai";
-import { BsPinMapFill } from "react-icons/bs";
+import { AiFillDelete } from "react-icons/ai";
 import { FiEdit2 } from "react-icons/fi";
-// import { number } from "yup/lib/locale";
-import { AsideComponent } from "../Components/AboutUsPage/aside";
-import api from "../services/api";
-import { useForm } from "react-hook-form";
 
+import { AsideComponent } from "../Components/AboutUsPage/aside";
+
+import { useForm } from "react-hook-form";
+import { MdMenuOpen } from "react-icons/md";
+import EditJobModal from "../Components/EditJobModal";
+import { InputSearch } from "../Components/InputSearch";
+import api from "../services/api";
+import { toast } from "react-toastify";
 import {
   StyledBody,
   StyledClientDash,
   StyledForm,
 } from "../styles/StyledClientDash";
+import { useNavigate } from "react-router-dom";
 import { DashboardContext } from "../contexts/dashboard";
 
 interface iJobForm {
@@ -46,31 +50,26 @@ interface IJobsUser {
 }
 
 export const DashboardClient = () => {
-  const { setMapLocation, lat, lng }: any = useContext(DashboardContext);
+  const Navigate = useNavigate();
 
-  const [jobsUser, setJobsUser] = useState<IJobsUser[]>([] as IJobsUser[]);
+  const {
+    setMapLocation,
+    lat,
+    lng,
+    setOpenModal,
+    menu,
+    setMenu,
+    jobsUser,
+    search,
+    filteredProducts,
+    setJobsUser,
+    verifyToken,
+  }: any = useContext(DashboardContext);
+
+  const [jobId, setJobId] = useState<null | number>(null);
 
   const { register, handleSubmit, reset } = useForm<iJobForm>();
 
-  const getJobsUser = async (id: any) => {
-    await api(`jobs?userId=${id}`)
-      .then((resp) => {
-        console.log(resp.data);
-        resp.data.length > 1 && setJobsUser(resp.data);
-      })
-      .catch((err) => console.log(err));
-  };
-
-  // {
-  // 	"userId": 4,
-  // 	"Job": {
-  // 		"Job_Name": "Consertar pc",
-  // 		"Description": "pc quebrou hj de manha e preciso de alguem para arrumar ele, pago 100 pila moro?",
-  // 		"lat": "-3.0264",
-  // 		"lnt": "-60.0149",
-  // 		"Categoty": "Tech"
-  // 	}
-  // }
   const createJob = async (job: iJobForm) => {
     setMapLocation();
     try {
@@ -83,15 +82,14 @@ export const DashboardClient = () => {
         },
       };
       console.log(dataCorrectFormat);
-      // api.defaults.headers.authorization = `Bearer ${localStorage.getItem('@WorkingUser_Token')}`;
       const { data } = await api.post("jobs", dataCorrectFormat, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("@WorkingUser_Token")}`,
         },
       });
       console.log(data);
-      // setJobsUser([...jobsUser, data])
       reset();
+      setJobsUser([data, ...jobsUser]);
     } catch (error) {
       console.log(error);
     } finally {
@@ -99,22 +97,76 @@ export const DashboardClient = () => {
   };
 
   useEffect(() => {
-    getJobsUser(localStorage.getItem("@WorkingUser_Id"));
+    let Token = window.localStorage.getItem("@WorkingUser_Token");
+    let Id = window.localStorage.getItem("@WorkingUser_Id");
+    api
+      .get(`/users/${Id}`, {
+        headers: {
+          Authorization: `Bearer ${Token}`,
+        },
+      })
+      .then((response) => {
+        if (response.status !== 200) {
+          toast.error("Limite de tempo expirado, faça o login novamente!", {
+            autoClose: 3000,
+          });
+          Navigate("/login");
+        } else if (response.data.user_type === "worker") {
+          Navigate("/dashboard-worker");
+        }
+      })
+      .catch((err) => Navigate("/login"));
   }, []);
+
+  const deleteJob = async (event: any) => {
+    try {
+      const jobId = Number(event.target.id.slice(6));
+
+      await api.delete(`jobs/${jobId}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("@WorkingUser_Token")}`,
+        },
+      });
+      const filteredUserJobs = jobsUser.filter((job: any) => job.id !== jobId);
+      setJobsUser(filteredUserJobs);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    const getJobsUser = async (id: any) => {
+      await api(`jobs?userId=${id}`)
+        .then((resp: any) => {
+          resp.data?.length > 0 && setJobsUser(resp.data);
+        })
+        .catch((err: any) => console.log(err));
+    };
+
+    getJobsUser(localStorage.getItem("@WorkingUser_Id"));
+  }, [search]);
 
   return (
     <>
+      <EditJobModal jobId={jobId} />
       <StyledBody>
         <AsideComponent />
         <StyledClientDash>
           <header>
-            <AiOutlineMenu />
+            <button
+              className="btMenuOpen"
+              onClick={(event) => {
+                event.preventDefault();
+                setMenu(!menu);
+              }}
+            >
+              <MdMenuOpen />
+            </button>
             <h1>Home</h1>
           </header>
           <main>
             <div className="input-div">
-              <input placeholder="Digite aqui sua pesquisa" />
-              <h2>Lista de oportunidades </h2>
+              <InputSearch />
             </div>
             <section>
               <StyledForm onSubmit={handleSubmit(createJob)}>
@@ -182,49 +234,87 @@ export const DashboardClient = () => {
               </StyledForm>
             </section>
             <ul>
-              {!jobsUser ? (
-                <>
-                  <h2>
-                    Que pena! Você não solicitou nenhum serviço em nossa
-                    plataforma.
-                  </h2>
-                  <p>
-                    Não perca tempo e solicite agora mesmo serviço com um de
-                    nossos profissionais cadastrados!
-                  </p>
-                </>
-              ) : (
-                jobsUser.map(
-                  ({
-                    userId,
-                    Job: { Job_Name, Description, lat, lnt, Category },
-                    id,
-                  }: IJobsUser) => {
-                    return (
-                      <li key={id} className="conteiner">
-                        <div className="top-conteiner">
-                          <h3>{Job_Name}</h3>
-                          <span>{Category}</span>
-                        </div>
-                        <div className="conteudo">
-                          <p>{Description}</p>
-                          <BsPinMapFill />
-                          <div className="div-categoria">
-                            <button className="btedit">
-                              <FiEdit2 />
-                              Editar
-                            </button>
-                            <button className="delete">
-                              <AiFillDelete />
-                              Deletar
-                            </button>
+              {search
+                ? filteredProducts.map(
+                    ({
+                      userId,
+                      Job: { Job_Name, Description, lat, lnt, Category },
+                      id,
+                    }: IJobsUser) => {
+                      return (
+                        <li key={id} className="conteiner">
+                          <div className="top-conteiner">
+                            <h3>{Job_Name}</h3>
+                            <span>{Category}</span>
                           </div>
-                        </div>
-                      </li>
-                    );
-                  }
-                )
-              )}
+                          <div className="conteudo">
+                            <p>{Description}</p>
+
+                            <div className="div-categoria">
+                              <button
+                                onClick={() => {
+                                  setOpenModal(true);
+                                  setJobId(id);
+                                }}
+                                className="btedit"
+                              >
+                                <FiEdit2 />
+                                Editar
+                              </button>
+                              <button
+                                id={`delete${id}`}
+                                onClick={(event) => deleteJob(event)}
+                                className="delete"
+                              >
+                                <AiFillDelete />
+                                Deletar
+                              </button>
+                            </div>
+                          </div>
+                        </li>
+                      );
+                    }
+                  )
+                : jobsUser.map(
+                    ({
+                      userId,
+                      Job: { Job_Name, Description, lat, lnt, Category },
+                      id,
+                    }: IJobsUser) => {
+                      return (
+                        <li key={id} className="conteiner">
+                          <div className="top-conteiner">
+                            <h3>{Job_Name}</h3>
+                            <span>{Category}</span>
+                          </div>
+                          <div className="conteudo">
+                            <p>{Description}</p>
+
+                            <div className="div-categoria">
+                              <button
+                                onClick={() => {
+                                  setOpenModal(true);
+                                  setJobId(id);
+                                }}
+                                className="btedit"
+                              >
+                                <FiEdit2 />
+                                Editar
+                              </button>
+                              <button
+                                id={`delete${id}`}
+                                onClick={(event) => deleteJob(event)}
+                                className="delete"
+                              >
+                                <AiFillDelete />
+                                Deletar
+                              </button>
+                            </div>
+                          </div>
+                        </li>
+                      );
+                    }
+                  )}
             </ul>
           </main>
         </StyledClientDash>

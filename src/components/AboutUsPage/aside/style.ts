@@ -12,7 +12,7 @@ export const Aside = styled.aside<IAside>`
   right: ${({ rigth }) => rigth};
   z-index: 2;
   cursor: default;
-  border-radius: 15px;
+  border-radius: 0px 10px 10px 0px;
   animation: bounceInLeft 2s;
 
 
@@ -35,6 +35,9 @@ export const Aside = styled.aside<IAside>`
       font-size: 30px;
       height: 100%;
     }
+
+
+       
 
     img {
       width: 60px;
@@ -77,9 +80,9 @@ export const Aside = styled.aside<IAside>`
     li {
       padding: 10px;
       margin: 10px;
-      border: 1px solid #ffffff;
+
       border-radius: 10px;
-      background-color: #ffffff;
+
       display: flex;
       flex-direction: row;
       align-items: center;
@@ -96,6 +99,14 @@ export const Aside = styled.aside<IAside>`
         font-size: 30px;
       }
 
+      button{
+        background-color: transparent;
+        display: flex;
+        align-items: center;
+        font-size: 18px;
+        text-align: start;
+      }
+
       p {
         width: 0px;
         margin-left: 10px;
@@ -103,9 +114,18 @@ export const Aside = styled.aside<IAside>`
       }
 
       :hover {
-        transition: 1s;
-        background-color: #ffffff;
-        animation: slide-right 1.8s;
+        transition: 0.5s;
+        background-color: black;
+        animation: slide-right 1.0s;
+        border-radius: 5px;
+
+        svg{
+          fill: #ffa800;
+        }
+
+        p {
+          color: #ffffff;
+        }
       }
     }
   }
@@ -136,7 +156,7 @@ export const Aside = styled.aside<IAside>`
 
     .menu {
       li {
-        padding: 10px 10px 10px 30px;
+        padding: 10px 10px 10px 20px;
         margin: 0;
         border: none;
         border-radius: 0;
@@ -166,7 +186,7 @@ export const Aside = styled.aside<IAside>`
         svg {
           width: 100%;
           height: 50%;
-          font-size: 70px;
+          font-size: 80px;
         }
 
         h2 {

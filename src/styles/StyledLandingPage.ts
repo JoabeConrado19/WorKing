@@ -1,10 +1,12 @@
 import styled from "styled-components";
 
+
 export const StyledLandingPage = styled.div`
     width: 100%;
     min-height: 100vh;
 
-    background-color: #D9D9D9;
+    background-color: #F4F4F4;
+
     .divMobile{
         display: none;
     }
@@ -60,7 +62,15 @@ export const StyledLandingPage = styled.div`
                 font-size: 40px;
                 span{
                     color: #FFA800;
-                }  
+                }
+                animation: typing 2s, blink-caret .75s step-end infinite;
+                overflow: hidden;
+                border-right: 0.15em solid orange;
+                white-space: nowrap;
+
+                height: 45px;
+                margin-left: 0px;
+
             }
             
 
@@ -77,7 +87,7 @@ export const StyledLandingPage = styled.div`
         }
         
         figure{
-            height: 60%;
+            height: 50%;
             display: flex;
             align-items: flex-end;
             img{
@@ -153,4 +163,7 @@ export const StyledLandingPage = styled.div`
             }
         }
     }
+
+    @keyframes typing {    from { width: 0 }    to { width: 57.8% }  }
+  @keyframes blink-caret {    from, to { border-color: transparent }    10% { border-color: #FFA800; }  }
 ` 
