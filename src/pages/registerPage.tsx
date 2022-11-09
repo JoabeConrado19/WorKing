@@ -64,7 +64,7 @@ export const Register = () => {
           navigate("/login");
         }
       })
-      .catch((error) => console.log(error));
+      .catch((error) =>  toast.error("Email já existente", { autoClose: 3000 }));
   };
   console.log(errors);
 
