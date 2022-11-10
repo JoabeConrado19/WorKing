@@ -1,4 +1,4 @@
-import { AsideComponent } from "../Components/Aside"
+import { AsideComponent } from "../Components/AboutUsPage/aside"
 import { CardHistoric } from "../Components/CardHistoric"
 import { Header } from "../Components/Header"
 import { StyledHistoric } from "../styles/historic"
