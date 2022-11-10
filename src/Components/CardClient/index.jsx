@@ -1,16 +1,16 @@
 /* eslint-disable */
 
 
-import React, { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { CardStyled } from "./style";
-import { GoogleMap, useJsApiLoader, Marker, DirectionsService, DirectionsRenderer  } from "@react-google-maps/api";
+import { GoogleMap, useJsApiLoader, Marker} from "@react-google-maps/api";
 import { DashboardContext } from "../../contexts/dashboard";
 
 export const CardClient = (props) => {
 
 
-  const { findMyLat, setMapLocation , zoom, lat, lng, setOpenModal, setClientId } = useContext(DashboardContext)
+  const { findMyLat , lat, lng, setOpenModal, setClientId } = useContext(DashboardContext)
   
   const [directionsResponse, setdirectionsResponse] = useState(null)
 

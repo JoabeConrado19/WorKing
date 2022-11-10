@@ -6,7 +6,7 @@ import { StyledHeader } from "../Header/style";
 
 export const Header = () => {
 
-  const { setWorkers, workers, workerSearch, setWorkerSearch, searchWorkFilter }: any = useContext(DashboardContext)
+  const { setWorkerSearch, searchWorkFilter }: any = useContext(DashboardContext)
 
 
 
