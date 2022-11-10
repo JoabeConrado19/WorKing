@@ -14,42 +14,28 @@ import { MdMenuOpen } from "react-icons/md";
 export const DashboardWorker = () => {
   const Navigate = useNavigate()
   const [jobs, setJobs] = useState([]);
-  const { setWorkers, workers, workerSearch, setWorkerSearch, searchWorkFilter, setMenu, menu, filteredWorkProducts, setFilteredWorkProducts, getWorkInfo } = useContext(DashboardContext)
-
-
-
+  const { workers, workerSearch, setMenu, menu, filteredWorkProducts, getWorkInfo } = useContext(DashboardContext)
 
   useEffect(() => {
     getWorkInfo()
   }, [])
 
-
-
-
-
   const { clientId } = useContext(DashboardContext)
-
 
   useEffect(() => {
     api.get("/jobs").then((response) => {
-
       setJobs(response.data);
-      console.log(response.data)
     });
   }, []);
-
-
 
   useEffect(() => {
     let Token = window.localStorage.getItem("@WorkingUser_Token")
     let Id = window.localStorage.getItem("@WorkingUser_Id")
     api
       .get(`/users/${Id}`, {
-
         headers: {
           Authorization: `Bearer ${Token}`
         }
-
       })
       .then((response) => {
         if (response.status !== 200) {
@@ -58,36 +44,30 @@ export const DashboardWorker = () => {
         }
         else if (response.data.user_type === "client") {
           Navigate("/dashboard")
-
-
         }
-
       })
       .catch((err) => Navigate("/login"));
   }, [])
-
 
   return (
     <>
       <AsideComponent />
       <StyledDashboard>
-      <button
-              className="btMenuOpen"
-              onClick={(event) => {
-                event.preventDefault();
-                setMenu(!menu);
-              }}
-            >
-              <MdMenuOpen />
-            </button>
+        <button
+          className="btMenuOpen"
+          onClick={(event) => {
+            event.preventDefault();
+            setMenu(!menu);
+          }}
+        >
+        <MdMenuOpen />
+        </button>
         <Header />
         <ContactModal clientId={clientId} />
         <div className="headerMain">
           <h3>Lista de oportunidades</h3>
         </div>
         <div className="listCard">
-
-
           {
             workerSearch.length > 0 ?
               filteredWorkProducts.map(element => (
@@ -98,7 +78,6 @@ export const DashboardWorker = () => {
                 <CardClient Id={element.id} clientId={element.userId} key={element.id} Name={element.Job.Job_Name} Description={element.Job.Description} Category={element.Job.Category} lat={element.Job.lat} lng={element.Job.lnt} />
               ))
           }
-
         </div >
       </StyledDashboard >
     </>

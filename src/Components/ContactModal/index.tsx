@@ -10,14 +10,11 @@ export default function ContactModal({clientId}:any){
     const {openModal, setOpenModal}:any = useContext(DashboardContext)
     const [clientData, setClientData]:any = useState(null)
 
-    console.log(clientId)
     useEffect(() => {
       const getUsers = async () => {
         const {data} = await api.get(`users/${clientId}`);
         setClientData(data)
-          console.log(data)
       }
-
       
       try {
         if(clientId){

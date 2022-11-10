@@ -58,7 +58,6 @@ export const Register = () => {
     await api
       .post("/users", data)
       .then((response: any) => {
-        console.log(response);
         if (response.status === 201) {
           toast.success("Sucesso, Redirecionando!", { autoClose: 3000 });
           navigate("/login");

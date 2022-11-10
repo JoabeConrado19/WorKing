@@ -1,15 +1,12 @@
 import { AsideComponent } from "../Components/AboutUsPage/aside";
 import { FiEdit2 } from "react-icons/fi";
 import { useForm } from "react-hook-form";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
 import {
-  ProfileButton,
   StyledInput,
   StyledProfile,
 } from "../styles/StyledProfilePage";
 import api from "../services/api";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { DashboardContext } from "../contexts/dashboard";
 import { toast } from "react-toastify";
 
@@ -24,22 +21,12 @@ interface IUser {
 export const ProfilePage = () => {
   const { userImg, userName, email, userAge, userContact }: any =
     useContext(DashboardContext);
-  const schema = yup.object().shape({
-    name: yup.string().required(),
-    date: yup.date().required(),
-    email: yup.string().email().required(),
-    tel: yup.number().min(11, "Seu número precisa ter 11 digitos").required(),
-    password: yup
-      .string()
-      .min(8, "a senha precisa pelo menos 8 caracteres")
-      .required(),
-  });
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm({});
+  } = useForm({
+  });
 
   const token = localStorage.getItem("@WorkingUser_Token");
   const id = window.localStorage.getItem("@WorkingUser_Id");
@@ -54,7 +41,6 @@ export const ProfilePage = () => {
       .then((resp) => {
         if (resp.status == 200) {
           toast.success("Dados atualizados com sucesso", { autoClose: 3000 });
-          console.log(resp);
         }
       })
       .catch((err) => console.error(err));
@@ -86,7 +72,7 @@ export const ProfilePage = () => {
                   <StyledInput
                     type="number"
                     placeholder={userAge}
-                    {...register("idade")}
+                    {...register("age")}
                   />
                 </div>
                 <div className="input-sex">
@@ -95,13 +81,13 @@ export const ProfilePage = () => {
                     <input
                       type="radio"
                       value="masculino"
-                      {...register("sexo")}
+                      {...register("male")}
                     />{" "}
                     Masculino
                     <input
                       type="radio"
                       value="feminino"
-                      {...register("sexo")}
+                      {...register("female")}
                     />{" "}
                     Feminino
                   </div>
@@ -127,7 +113,7 @@ export const ProfilePage = () => {
                 <StyledInput
                   type="tel"
                   placeholder={userContact}
-                  {...register("tel")}
+                  {...register("contact")}
                 />
               </div>
             </div>

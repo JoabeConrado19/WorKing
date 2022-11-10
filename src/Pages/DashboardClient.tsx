@@ -81,13 +81,11 @@ export const DashboardClient = () => {
           lnt: lng,
         },
       };
-      console.log(dataCorrectFormat);
       const { data } = await api.post("jobs", dataCorrectFormat, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("@WorkingUser_Token")}`,
         },
       });
-      console.log(data);
       reset();
       setJobsUser([data, ...jobsUser]);
     } catch (error) {

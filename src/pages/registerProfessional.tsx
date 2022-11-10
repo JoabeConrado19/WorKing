@@ -56,7 +56,6 @@ export const RegisterProfessional = () => {
     await api
       .post("/users", data)
       .then((response: any) => {
-        console.log(response);
         if (response.status === 201) {
           toast.success("Sucesso, Redirecionando!", { autoClose: 3000 });
           navigate("/login");
@@ -66,8 +65,7 @@ export const RegisterProfessional = () => {
         console.log(error);
       });
   };
-  console.log(errors);
-
+  
   return (
     <RegisterStyles>
       <main>

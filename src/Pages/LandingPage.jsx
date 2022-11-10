@@ -10,31 +10,23 @@ export const LandingPage = () => {
 
     const Navigate = useNavigate()
 
-
     useEffect(()=>{
         let Token = window.localStorage.getItem("@WorkingUser_Token")
         let Id = window.localStorage.getItem("@WorkingUser_Id")
         api
         .get(`/users/${Id}`, {
-
             headers: {
                 Authorization: `Bearer ${Token}`
             }
-
         })
         .then((response) => {
             if(response.status === 200){
                 Navigate("/dashboard")
-            }
-            
+            } 
         })
-
-
     },[])
 
-
   return (
-    
     <StyledLandingPage>
         <div className='divMobile'>
             <figure>
@@ -49,7 +41,6 @@ export const LandingPage = () => {
             <Link to={'/about-us'}>Sobre Nós</Link>
         </div>
         <header>
-        
             <figure>
                 <img src={require("../assets/WorKing-logo.png")} alt="WorKing logo" />
             </figure>
@@ -57,7 +48,6 @@ export const LandingPage = () => {
                 <Link to={'/about-us'}>Sobre Nós</Link>
             </div>
             <Link to='/login'><StyledButton>Entrar</StyledButton></Link>
-           
         </header>
         <main>
             <div className='landingPageTexts'>

@@ -4,7 +4,7 @@ const token = localStorage.getItem('token')
 
 const api = axios.create({
   baseURL: "https://workingapi.herokuapp.com/",
-  timeout: 5000,
+  timeout: 10000,
   headers: {
     'Authorization': `Bearer ${token}`
   }

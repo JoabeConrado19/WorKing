@@ -36,7 +36,6 @@ export const DashboardProvider = ({ children }) => {
       const latitude = position.coords.latitude;
       const longitude = position.coords.longitude;
       const positionlat = latitude + " " + longitude;
-      console.log(positionlat);
       return positionlat;
     };
 
@@ -101,9 +100,6 @@ export const DashboardProvider = ({ children }) => {
     } else {
       setFilteredProducts(jobsUser);
     }
-
-    console.log(filteredProducts);
-    console.log(jobsUser);
   }
 
   function getWorkInfo() {
@@ -111,8 +107,6 @@ export const DashboardProvider = ({ children }) => {
       api.get("jobs").then((response) => {
         setWorkers(response.data);
         setFilteredWorkProducts(response.data);
-        // setJobs(response.data);
-        console.log("setFiltered:", filteredWorkProducts, " workers:", workers);
       });
     } catch (error) {
       console.error(error);

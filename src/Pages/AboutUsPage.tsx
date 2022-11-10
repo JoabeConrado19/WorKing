@@ -4,11 +4,6 @@ import { Main } from "../Components/AboutUsPage/main";
 
 export const AboutUsPage = () => {
 
-
-
-
-  
-
   return (
     <Body>
       <AsideComponent />

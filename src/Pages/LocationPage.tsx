@@ -32,7 +32,6 @@ export const Location = () => {
   useEffect(() => {
     setMapLocation();
     findMyLat();
-    console.log(jobsMarkers);
   }, []);
 
   const { isLoaded } = useJsApiLoader({
@@ -92,7 +91,6 @@ export const Location = () => {
           )}
         </main>
       </StyledLocation>
-
       <AsideComponent />
     </LocationMain>
   );
